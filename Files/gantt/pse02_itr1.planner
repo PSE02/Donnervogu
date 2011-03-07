@@ -48,46 +48,50 @@
     <task id="10" name="Vortragsfolientemplate" note="" work="3600" start="20110301T000000Z" end="20110301T090000Z" work-start="20110301T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110301T000000Z"/>
     </task>
-    <task id="11" name="Recherche: ServerGUI" note="" work="28800" start="20110308T000000Z" end="20110308T170000Z" work-start="20110308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="11" name="Recherche: ServerGUI" note="" work="28800" start="20110308T000000Z" end="20110308T170000Z" work-start="20110308T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110308T000000Z"/>
     </task>
-    <task id="12" name="Recherche: SOGO" note="" work="28800" start="20110308T000000Z" end="20110308T120000Z" work-start="20110308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="12" name="Recherche: SOGO" note="" work="28800" start="20110308T000000Z" end="20110308T120000Z" work-start="20110308T080000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110308T000000Z"/>
     </task>
-    <task id="13" name="Progress Tracking WK 2" note="" work="28800" start="20110308T000000Z" end="20110308T170000Z" work-start="20110308T080000Z" percent-complete="75" priority="0" type="normal" scheduling="fixed-work">
+    <task id="13" name="Progress Tracking WK 2" note="" work="28800" start="20110308T000000Z" end="20110308T170000Z" work-start="20110308T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110308T000000Z"/>
+    </task>
+    <task id="14" name="Recherche: Environment" note="" work="28800" start="20110307T000000Z" end="20110307T170000Z" work-start="20110307T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="must-start-on" time="20110307T000000Z"/>
     </task>
   </tasks>
   <resource-groups>
     <group id="1" name="" admin-name="" admin-phone="" admin-email=""/>
   </resource-groups>
   <resources>
-    <resource id="1" name="Aaron Karper" short-name="Aaron" type="1" units="0" email="akarper@students.unibe.ch " note="" std-rate="0"/>
-    <resource id="2" name="Felix Langenegger" short-name="Felix" type="1" units="0" email="felix.langenegger@gmail.com" note="" std-rate="0"/>
+    <resource id="1" name="Sascha Schw&#xE4;rzler" short-name="Sascha" type="1" units="0" email="sascha.schwaerzler@gmail.com " note="" std-rate="0"/>
+    <resource id="2" name="Jonas Ruef" short-name="Jonas" type="1" units="0" email="jonas.ruef@gmail.com " note="" std-rate="0"/>
     <resource id="3" name="Dominique Rahm" short-name="Dominique" type="1" units="0" email="dominique.rahm@gmail.com" note="" std-rate="0"/>
-    <resource id="4" name="Jonas Ruef" short-name="Jonas" type="1" units="0" email="jonas.ruef@gmail.com " note="" std-rate="0"/>
-    <resource id="5" name="Sascha Schw&#xE4;rzler" short-name="Sascha" type="1" units="0" email="sascha.schwaerzler@gmail.com " note="" std-rate="0"/>
+    <resource id="4" name="Felix Langenegger" short-name="Felix" type="1" units="0" email="felix.langenegger@gmail.com" note="" std-rate="0"/>
+    <resource id="5" name="Aaron Karper" short-name="Aaron" type="1" units="0" email="akarper@students.unibe.ch " note="" std-rate="0"/>
   </resources>
   <allocations>
-    <allocation task-id="8" resource-id="1" units="100"/>
-    <allocation task-id="7" resource-id="1" units="100"/>
-    <allocation task-id="6" resource-id="1" units="100"/>
-    <allocation task-id="3" resource-id="1" units="100"/>
-    <allocation task-id="10" resource-id="2" units="100"/>
-    <allocation task-id="8" resource-id="2" units="100"/>
+    <allocation task-id="5" resource-id="1" units="100"/>
+    <allocation task-id="4" resource-id="1" units="100"/>
+    <allocation task-id="12" resource-id="1" units="100"/>
+    <allocation task-id="14" resource-id="2" units="100"/>
+    <allocation task-id="7" resource-id="2" units="100"/>
+    <allocation task-id="6" resource-id="2" units="100"/>
     <allocation task-id="2" resource-id="2" units="100"/>
-    <allocation task-id="13" resource-id="2" units="100"/>
-    <allocation task-id="11" resource-id="2" units="100"/>
-    <allocation task-id="1" resource-id="2" units="100"/>
     <allocation task-id="9" resource-id="3" units="100"/>
     <allocation task-id="5" resource-id="3" units="100"/>
     <allocation task-id="4" resource-id="3" units="100"/>
     <allocation task-id="12" resource-id="3" units="100"/>
-    <allocation task-id="7" resource-id="4" units="100"/>
-    <allocation task-id="6" resource-id="4" units="100"/>
+    <allocation task-id="10" resource-id="4" units="100"/>
+    <allocation task-id="8" resource-id="4" units="100"/>
     <allocation task-id="2" resource-id="4" units="100"/>
-    <allocation task-id="5" resource-id="5" units="100"/>
-    <allocation task-id="4" resource-id="5" units="100"/>
-    <allocation task-id="12" resource-id="5" units="100"/>
+    <allocation task-id="13" resource-id="4" units="100"/>
+    <allocation task-id="11" resource-id="4" units="100"/>
+    <allocation task-id="1" resource-id="4" units="100"/>
+    <allocation task-id="8" resource-id="5" units="100"/>
+    <allocation task-id="7" resource-id="5" units="100"/>
+    <allocation task-id="6" resource-id="5" units="100"/>
+    <allocation task-id="3" resource-id="5" units="100"/>
   </allocations>
 </project>
