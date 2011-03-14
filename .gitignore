@@ -1,0 +1,13 @@
+# do not commit the zip file created by confChanger.rb
+/server/app/controllers/profile.zip
+
+# do not commit the stuff from mac users
+.DS_Store
+
+# do not commit files that are created while merging
+*.orig
+
+#do not commit temp files
+*~
+*.*~
+*.log
