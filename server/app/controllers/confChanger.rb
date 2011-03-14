@@ -3,9 +3,8 @@
 require 'zip/zip'
 require 'zip/zipfilesystem'
 
-def createNewUserFile
+def createNewZip
 	zipPath = Dir.pwd + "/profile.zip"
-	filePath = Dir.pwd + "/user.js"
 
    Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) {
    	|zipfile|
@@ -13,10 +12,13 @@ def createNewUserFile
 	a first test creating zips with ruby!" }  
    }
 end
-	
+
+def generateUserEntries
+	#We have to read all the important stuff out of the client model!
+end	
 	
 if __FILE__ == $0
-	createNewUserFile
+	createNewZip
 end
 
 
