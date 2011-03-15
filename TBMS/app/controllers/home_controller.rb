@@ -4,11 +4,12 @@ class HomeController < ApplicationController
 	end
 
 	def setHtml
-		set = params[:set] 
+		set = params[:set]
+		@fc = FileCreator.new
 		if set == "true"
-			@fc = FileCreator.new
-			@fc.createNewZip
+			@fc.createNewZip(true)
+		else
+			@fc.createNewZip(false)
 		end
-		render :index
 	end
 end
