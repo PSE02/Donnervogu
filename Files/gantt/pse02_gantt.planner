@@ -22,7 +22,7 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="1. Iteration" note="&#10;" work="432000" start="20110301T000000Z" end="20110325T170000Z" work-start="20110301T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="1. Iteration" note="&#10;" work="349200" start="20110301T000000Z" end="20110317T103000Z" work-start="20110301T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <task id="2" name="Abkl&#xE4;rungen und Konzept" note="" work="259200" start="20110301T000000Z" end="20110309T170000Z" work-start="20110301T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <task id="3" name="Recherche: Environment" note="" work="57600" start="20110307T000000Z" end="20110308T170000Z" work-start="20110307T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20110307T000000Z"/>
@@ -40,7 +40,7 @@
           <constraint type="must-start-on" time="20110301T000000Z"/>
         </task>
       </task>
-      <task id="8" name="1. Prototyp" note="" work="172800" start="20110309T170000Z" end="20110325T170000Z" work-start="20110310T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="8" name="1. Prototyp" note="" work="90000" start="20110309T170000Z" end="20110317T103000Z" work-start="20110310T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="7" type="FS"/>
           <predecessor id="1" predecessor-id="6" type="FS"/>
@@ -48,41 +48,59 @@
           <predecessor id="1" predecessor-id="4" type="FS"/>
           <predecessor id="1" predecessor-id="3" type="FS"/>
         </predecessors>
-        <task id="9" name="Webserver UI" note="" work="144000" start="20110321T000000Z" end="20110325T170000Z" work-start="20110321T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <constraint type="must-start-on" time="20110321T000000Z"/>
+        <task id="9" name="Webserver UI" note="" work="28800" start="20110315T000000Z" end="20110315T170000Z" work-start="20110315T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20110315T000000Z"/>
         </task>
-        <task id="10" name="Kommunikation" note="" work="28800" start="20110309T170000Z" end="20110310T170000Z" work-start="20110310T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="10" name="Server mit Ruby und Rails aufsetzen" note="" work="7200" start="20110315T000000Z" end="20110315T100000Z" work-start="20110315T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20110315T000000Z"/>
+        </task>
+        <task id="11" name="Tutorial Server erstellen" note="" work="7200" start="20110309T170000Z" end="20110310T100000Z" work-start="20110310T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="12" name="FileCreater verbessern" note="" work="18000" start="20110316T000000Z" end="20110316T103000Z" work-start="20110316T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20110316T000000Z"/>
+        </task>
+        <task id="13" name="Codereview" note="" work="14400" start="20110316T103000Z" end="20110316T153000Z" work-start="20110316T103000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="12" type="FS"/>
+            <predecessor id="1" predecessor-id="10" type="FS"/>
+            <predecessor id="1" predecessor-id="9" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="14" name="FileCreator Tests" note="" work="14400" start="20110316T153000Z" end="20110317T103000Z" work-start="20110316T153000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="13" type="FS"/>
+          </predecessors>
+        </task>
       </task>
     </task>
-    <task id="11" name="2. Iteration" note="" work="0" duration="0" start="20110404T000000Z" end="20110404T000000Z" work-start="20110404T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-duration">
+    <task id="15" name="2. Iteration" note="" work="0" duration="0" start="20110404T000000Z" end="20110404T000000Z" work-start="20110404T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-duration">
       <constraint type="must-start-on" time="20110404T000000Z"/>
     </task>
-    <task id="12" name="3. Iteration" note="" work="0" start="20110418T000000Z" end="20110418T000000Z" work-start="20110418T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+    <task id="16" name="3. Iteration" note="" work="0" start="20110418T000000Z" end="20110418T000000Z" work-start="20110418T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110418T000000Z"/>
     </task>
-    <task id="13" name="4. Iteration" note="" work="0" start="20110509T000000Z" end="20110509T000000Z" work-start="20110509T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+    <task id="17" name="4. Iteration" note="" work="0" start="20110509T000000Z" end="20110509T000000Z" work-start="20110509T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20110509T000000Z"/>
     </task>
-    <task id="14" name="Vortr&#xE4;ge" note="" work="349200" start="20110301T000000Z" end="20110418T170000Z" work-start="20110301T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="15" name="Vortragsfolientemplate" note="" work="3600" start="20110301T000000Z" end="20110301T090000Z" work-start="20110301T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+    <task id="18" name="Vortr&#xE4;ge" note="" work="349200" start="20110301T000000Z" end="20110418T170000Z" work-start="20110301T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="19" name="Vortragsfolientemplate" note="" work="3600" start="20110301T000000Z" end="20110301T090000Z" work-start="20110301T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110301T000000Z"/>
       </task>
-      <task id="16" name="Vortrag Requirements" note="" work="57600" start="20110307T000000Z" end="20110307T170000Z" work-start="20110307T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <task id="20" name="Vortrag Requirements" note="" work="57600" start="20110307T000000Z" end="20110307T170000Z" work-start="20110307T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110307T000000Z"/>
       </task>
-      <task id="17" name="Vortrag Risikoanalyse" note="" work="57600" start="20110314T000000Z" end="20110314T170000Z" work-start="20110314T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="21" name="Vortrag Risikoanalyse" note="" work="57600" start="20110314T000000Z" end="20110314T170000Z" work-start="20110314T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110314T000000Z"/>
       </task>
-      <task id="18" name="VortragTestkonzept" note="" work="57600" start="20110328T000000Z" end="20110328T170000Z" work-start="20110328T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="22" name="VortragTestkonzept" note="" work="57600" start="20110328T000000Z" end="20110328T170000Z" work-start="20110328T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110328T000000Z"/>
       </task>
-      <task id="19" name="Vortrag Organisation/Kommunikation" note="" work="57600" start="20110321T000000Z" end="20110321T170000Z" work-start="20110321T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="23" name="Vortrag Organisation/Kommunikation" note="" work="57600" start="20110321T000000Z" end="20110321T170000Z" work-start="20110321T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110321T000000Z"/>
       </task>
-      <task id="20" name="Vortrag Technologie/Architektur" note="" work="57600" start="20110411T000000Z" end="20110411T170000Z" work-start="20110411T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="24" name="Vortrag Technologie/Architektur" note="" work="57600" start="20110411T000000Z" end="20110411T170000Z" work-start="20110411T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110411T000000Z"/>
       </task>
-      <task id="21" name="Vortrag Usability test" note="" work="57600" start="20110418T000000Z" end="20110418T170000Z" work-start="20110418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="25" name="Vortrag Usability test" note="" work="57600" start="20110418T000000Z" end="20110418T170000Z" work-start="20110418T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20110418T000000Z"/>
       </task>
     </task>
@@ -91,41 +109,48 @@
     <group id="1" name="" admin-name="" admin-phone="" admin-email=""/>
   </resource-groups>
   <resources>
-    <resource id="1" name="Aaron Karper" short-name="Aaron" type="1" units="0" email="akarper@students.unibe.ch " note="" std-rate="0"/>
-    <resource id="2" name="Felix Langenegger" short-name="Felix" type="1" units="0" email="felix.langenegger@gmail.com" note="" std-rate="0"/>
+    <resource id="1" name="Sascha Schw&#xE4;rzler" short-name="Sascha" type="1" units="0" email="sascha.schwaerzler@gmail.com " note="" std-rate="0"/>
+    <resource id="2" name="Jonas Ruef" short-name="Jonas" type="1" units="0" email="jonas.ruef@gmail.com " note="" std-rate="0"/>
     <resource id="3" name="Dominique Rahm" short-name="Dominique" type="1" units="0" email="dominique.rahm@gmail.com" note="" std-rate="0"/>
-    <resource id="4" name="Jonas Ruef" short-name="Jonas" type="1" units="0" email="jonas.ruef@gmail.com " note="" std-rate="0"/>
-    <resource id="5" name="Sascha Schw&#xE4;rzler" short-name="Sascha" type="1" units="0" email="sascha.schwaerzler@gmail.com " note="" std-rate="0"/>
+    <resource id="4" name="Felix Langenegger" short-name="Felix" type="1" units="0" email="felix.langenegger@gmail.com" note="" std-rate="0"/>
+    <resource id="5" name="Aaron Karper" short-name="Aaron" type="1" units="0" email="akarper@students.unibe.ch " note="" std-rate="0"/>
   </resources>
   <allocations>
-    <allocation task-id="13" resource-id="1" units="100"/>
-    <allocation task-id="11" resource-id="1" units="20"/>
+    <allocation task-id="12" resource-id="1" units="100"/>
+    <allocation task-id="17" resource-id="1" units="100"/>
+    <allocation task-id="15" resource-id="1" units="20"/>
+    <allocation task-id="23" resource-id="1" units="100"/>
     <allocation task-id="21" resource-id="1" units="100"/>
-    <allocation task-id="20" resource-id="1" units="100"/>
-    <allocation task-id="18" resource-id="1" units="100"/>
-    <allocation task-id="6" resource-id="1" units="100"/>
-    <allocation task-id="13" resource-id="2" units="100"/>
-    <allocation task-id="11" resource-id="2" units="20"/>
-    <allocation task-id="15" resource-id="2" units="100"/>
-    <allocation task-id="21" resource-id="2" units="100"/>
-    <allocation task-id="16" resource-id="2" units="100"/>
-    <allocation task-id="5" resource-id="2" units="100"/>
-    <allocation task-id="7" resource-id="2" units="100"/>
-    <allocation task-id="13" resource-id="3" units="100"/>
-    <allocation task-id="11" resource-id="3" units="20"/>
-    <allocation task-id="19" resource-id="3" units="100"/>
+    <allocation task-id="4" resource-id="1" units="100"/>
+    <allocation task-id="11" resource-id="2" units="100"/>
+    <allocation task-id="17" resource-id="2" units="100"/>
+    <allocation task-id="15" resource-id="2" units="20"/>
+    <allocation task-id="3" resource-id="2" units="100"/>
+    <allocation task-id="24" resource-id="2" units="100"/>
+    <allocation task-id="22" resource-id="2" units="100"/>
+    <allocation task-id="20" resource-id="2" units="100"/>
+    <allocation task-id="12" resource-id="3" units="100"/>
     <allocation task-id="17" resource-id="3" units="100"/>
+    <allocation task-id="15" resource-id="3" units="20"/>
+    <allocation task-id="23" resource-id="3" units="100"/>
+    <allocation task-id="21" resource-id="3" units="100"/>
     <allocation task-id="4" resource-id="3" units="100"/>
-    <allocation task-id="13" resource-id="4" units="100"/>
-    <allocation task-id="11" resource-id="4" units="20"/>
-    <allocation task-id="3" resource-id="4" units="100"/>
+    <allocation task-id="10" resource-id="4" units="100"/>
+    <allocation task-id="9" resource-id="4" units="100"/>
+    <allocation task-id="17" resource-id="4" units="100"/>
+    <allocation task-id="15" resource-id="4" units="20"/>
+    <allocation task-id="19" resource-id="4" units="100"/>
+    <allocation task-id="25" resource-id="4" units="100"/>
     <allocation task-id="20" resource-id="4" units="100"/>
-    <allocation task-id="18" resource-id="4" units="100"/>
-    <allocation task-id="16" resource-id="4" units="100"/>
+    <allocation task-id="5" resource-id="4" units="100"/>
+    <allocation task-id="7" resource-id="4" units="100"/>
+    <allocation task-id="14" resource-id="5" units="100"/>
     <allocation task-id="13" resource-id="5" units="100"/>
-    <allocation task-id="11" resource-id="5" units="20"/>
-    <allocation task-id="19" resource-id="5" units="100"/>
     <allocation task-id="17" resource-id="5" units="100"/>
-    <allocation task-id="4" resource-id="5" units="100"/>
+    <allocation task-id="15" resource-id="5" units="20"/>
+    <allocation task-id="25" resource-id="5" units="100"/>
+    <allocation task-id="24" resource-id="5" units="100"/>
+    <allocation task-id="22" resource-id="5" units="100"/>
+    <allocation task-id="6" resource-id="5" units="100"/>
   </allocations>
 </project>
