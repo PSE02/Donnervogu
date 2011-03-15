@@ -1,0 +1,8 @@
+<!ENTITY pse1test.label "Your localized menuitem">
+<!ENTITY pse1testContext.label "Your Menuitem">
+<!ENTITY pse1testContext.accesskey "Y">
+<!ENTITY pse1testToolbarButton.label "Your Toolbar Button">
+<!ENTITY pse1testToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY pse1testSidebar.label "Your Sidebar">
+<!ENTITY pse1testToolbar.name  "example">
+<!ENTITY pse1testToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &pse1testToolbar.name;">

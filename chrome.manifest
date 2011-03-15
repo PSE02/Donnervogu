@@ -1,0 +1,4 @@
+content     pse1   chrome/content/
+overlay chrome://messenger/content/messenger.xul chrome://pse1/content/test.xul
+
+
