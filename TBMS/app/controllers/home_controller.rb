@@ -6,6 +6,6 @@ class HomeController < ApplicationController
    def setHtml
        set = params[:set]
        @fc = FileCreator.new
-       @fc.createNewZip(Boolean(set))
+       @fc.createNewZip((set))
    end
 end

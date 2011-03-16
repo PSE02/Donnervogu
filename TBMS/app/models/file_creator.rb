@@ -1,22 +1,34 @@
 require 'rubygems'
+require 'hpricot'
 require 'zip/zip' # rubyzip gem
 require 'zip/zipfilesystem'
+include StringstripperHelper
 
 class FileCreator < ActiveRecord::Base
-	def createNewZip(isSet)
+	def createNewZip isSet
 		zipPath = Dir.pwd + "/public/profiles/profile.zip"
-		if isSet == true
-		  	Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) {
-		   	|zipfile|
-		   	zipfile.get_output_stream("user.js") { |f| f.puts "Hallo this is 
-			a first test creating zips with ruby!" }  
-		   }
-		else
-			Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) {
-		   	|zipfile|
-		   	zipfile.get_output_stream("user.js") { |f| f.puts "Hallo this is 
-			a first test creating zips with ruby! --- noooot!" }  
-		   }
+		Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) do
+			|zipfile|
+			zipfile.get_output_stream("user.js") { |f| f.puts getConfig(isSet) }  
 		end
 	end
+
+	def getConfig isSet
+		filecontent = htmlTag(isSet)
+		return filecontent
+	end
+
+	def htmlTag isSet
+		xmlPath = Dir.pwd + "/xmlTemplates/config.xml"
+		fh = File.open(xmlPath, "r")
+		htmlTag = "html" + isSet
+ 
+		doc = Hpricot(fh)
+		htmlContent = (doc/htmlTag).inner_html
+		htmlContent = strip(htmlContent)
+		return htmlContent
+	end
+
 end
+
+

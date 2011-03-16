@@ -1,0 +1,25 @@
+<config>
+
+	<setHTML>
+		<HTMLtrue>
+			/********************** HTML ***************************/
+
+			// 0=ask, 1=plain, 2=html, 3=both
+			pref("mail.default_html_action", 2);
+
+			// true=Messages in HTML false=Messages not in HTML
+			user_pref("mail.identity.id1.compose_html", true);
+		</HTMLtrue>
+
+		<HTMLfalse>
+			/********************** HTML ***************************/
+
+			// 0=ask, 1=plain, 2=html, 3=both
+			pref("mail.default_html_action", 1);
+
+			// true=Messages in HTML false=Messages not in HTML
+			user_pref("mail.identity.id1.compose_html", false);
+		</HTMLfalse>
+	</setHTML>
+
+</config>
