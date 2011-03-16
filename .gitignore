@@ -1,5 +1,5 @@
 # do not commit the zip file created by confChanger.rb
-/server/app/controllers/profile.zip
+/TBMS/public/profiles/profile.zip
 
 # do not commit the stuff from mac users
 .DS_Store
