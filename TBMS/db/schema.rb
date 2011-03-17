@@ -10,10 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110314222844) do
+ActiveRecord::Schema.define(:version => 20110317140515) do
 
   create_table "file_creators", :force => true do |t|
     t.string   "zipPath"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "setups", :force => true do |t|
+    t.string   "name"
+    t.boolean  "enable"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.text     "preferences"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
