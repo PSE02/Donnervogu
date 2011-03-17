@@ -1,26 +1,29 @@
 <h1>Nile: Thunderbird Control Center</h1>
-<!--
-   -<ul>
-   -<% @users.each do |user| %>
-   -        <li><%= link_to user.email, user %>
-   -<%end%>
-   -<li> <%= link_to "New Profile",  
-   -->
-<% form_tag(:action => "setHtml") do %>
-	<table>
-		<tr>
-			<td>Set HTML</td><td></td>
-		</tr>
-		<tr>
-			<td><%= label_tag("ON") %></td><td><%= radio_button_tag("set", true, checked = true) %></td>
-		</tr>
-		<tr>
-			<td><%= label_tag("OFF") %></td><td><%= radio_button_tag("set", false, checked = false) %></td>
-		</tr>
-		<tr>
-			<td><%= submit_tag("Save") %></td><td></td>
-		</tr>
-	</table>
 
-<% end %>
+<ul>
+   <% @users.each do |user| %>
+           <li><%= link_to user.email, edit_user_path(user) %>
+   <%end%>
+   <li> <%= link_to "New Profile", new_user_path %>
+</ul>
+<!--
+   - 
+   -<% form_tag(:action => "setHtml") do %>
+   -        <table>
+   -                <tr>
+   -                        <td>Set HTML</td><td></td>
+   -                </tr>
+   -                <tr>
+   -                        <td><%= label_tag("ON") %></td><td><%= radio_button_tag("set", true, checked = true) %></td>
+   -                </tr>
+   -                <tr>
+   -                        <td><%= label_tag("OFF") %></td><td><%= radio_button_tag("set", false, checked = false) %></td>
+   -                </tr>
+   -                <tr>
+   -                        <td><%= submit_tag("Save") %></td><td></td>
+   -                </tr>
+   -        </table>
+   -
+   -<% end %>
+   -->
 
