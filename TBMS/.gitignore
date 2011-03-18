@@ -3,3 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 hpricot/
+
+#do not commit eclipse project folder
+.metadata/
+.project

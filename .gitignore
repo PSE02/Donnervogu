@@ -11,3 +11,6 @@
 *~
 *.*~
 *.log
+
+#do not commit eclipse project folder
+.metadata/
