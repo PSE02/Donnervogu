@@ -4,6 +4,5 @@ log/*.log
 tmp/
 hpricot/
 
-#do not commit eclipse project folder
+#do not commit eclipse stuff
 .metadata/
-.project
