@@ -1,0 +1,39 @@
+<mockup version="1.0" skin="sketch" measuredW="1297" measuredH="452" mockupW="892" mockupH="363">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="405" y="89" w="597" h="363" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit%20a%20config%20Profile</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="420" y="131" w="-1" h="-1" measuredW="124" measuredH="23" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Send%20Mail%20as%20HTML%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="580" y="131" w="-1" h="-1" measuredW="48" measuredH="46" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28o%29%20ON%0A%28%20%29%20OFF</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="420" y="217" w="-1" h="-1" measuredW="67" measuredH="23" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Signature%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TextArea" x="580" y="217" w="158" h="63" measuredW="200" measuredH="140" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Signature....</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::PointyButton" x="908" y="391" w="-1" h="-1" measuredW="79" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save+Exit</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::StickyNote" x="1021" y="240" w="276" h="164" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ein%20Auto-Save%20nach%20jeder%20%C4nderung%20w%E4re%20noch%20so%20eine%20Idee.%20Aber%20es%20kommt%20darauf%20an%2C%20ob%20das%20erw%FCnscht%20ist%20und%20wie%20aufw%E4ndig%20das%20zu%20implementieren%20ist.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
