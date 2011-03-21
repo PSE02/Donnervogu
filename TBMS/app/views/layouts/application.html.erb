@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TBMS</title>
-  <%= stylesheet_link_tag :all %>
+	<head>
+		<title>TBMS</title>
+	<%= stylesheet_link_tag 'style', :media => 'screen' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+	</head>
+	<body>
+		<div class="global">
+			<div class="header">
+				<h1>Thunderbird Control Center</h1> ver. 1.0
+			</div><!-- end header -->
+			<div class="navigation">
+				Client | Groups | User | Generate Zip | Statistics | Informations
+        <div class="login"> logout </div>
+			</div><!-- end navigation -->
+			<div class="main">
+				<div class="contentOne">
+						<%= yield %>
+				</div><!-- end contentOne -->
+				<div class="contentTwo">
+					<h2>Overview</h2>
+				</div><!-- end contentTwo -->
+			</div><!-- end main -->
+			<div class="footer">
+				ver 1.0 
+			</div><!-- end footer -->
+		</div><!-- end global -->
+	</body>
 </html>
+
+
+
+
