@@ -1,19 +1,25 @@
 <% form_tag(:action => "setHtml") do %>
-	<h2>Configure HTML Settings</h2>
+	<h2>Configure the Mail Settings</h2>
 	<br />
-	<table>
-		<tr>
-			<td>Set HTML</td><td></td>
-		</tr>
-		<tr>
-			<td><%= label_tag("ON") %></td><td><%= radio_button_tag("set", true, checked = true) %></td>
-		</tr>
-		<tr>
-			<td><%= label_tag("OFF") %></td><td><%= radio_button_tag("set", false, checked = false) %></td>
-		</tr>
-		<tr>
-			<td><%= submit_tag("Save") %></td><td></td>
-		</tr>
-	</table>
+	<fieldset>
+		<legend>Send all Mails in HTML</legend>
+		<table>
+			<tr>
+				<td><%= label_tag("ON") %></td><td><%= radio_button_tag("html", true, checked = true) %></td>
+			</tr>
+			<tr>
+				<td><%= label_tag("OFF") %></td><td><%= radio_button_tag("html", false, checked = false) %></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>Configure the Signature</legend>
+		<table>
+			<tr>
+				<td><%= text_area_tag("signatur", content = nil, :rows => 10, :cols => 70 )%>   </td>
+			</tr>
+		</table>
+	</fieldset>
+	<%= submit_tag("Save") %>
 <% end %>
 
