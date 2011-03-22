@@ -1,0 +1,6 @@
+<h1>Register</h1>
+
+<% form_for @user do |f| %>
+  <%= render :partial => "form", :object => f, :locals => { :user => @user } %>
+  <%= f.submit "Register" %>
+<% end %>
