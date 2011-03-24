@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation # there are underscores :-|
   helper_method :current_user_session, :current_user
 
+	def index
+  end
+
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
@@ -41,4 +44,10 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
+
+	def setHtml
+       set = params[:set]
+       @fc = FileCreator.new
+       @fc.createNewZip((set))
+   end
 end
