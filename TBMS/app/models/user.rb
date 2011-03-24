@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+ 
 	acts_as_authentic do |c|
 	end
 
@@ -6,3 +7,4 @@ class User < ActiveRecord::Base
 		find_by_login(login)
 	end
 end
+

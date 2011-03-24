@@ -12,6 +12,14 @@
 
 ActiveRecord::Schema.define(:version => 20110322200712) do
 
+  create_table "emailaccounts", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.text     "preferences"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "file_creators", :force => true do |t|
     t.string   "zipPath"
     t.datetime "created_at"
@@ -27,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20110322200712) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "setups", :force => true do |t|
+    t.string   "name"
+    t.boolean  "enable"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                               :null => false

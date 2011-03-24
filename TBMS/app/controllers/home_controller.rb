@@ -5,11 +5,13 @@ class HomeController < ApplicationController
    before_filter :require_user
 
    def index
+	   @users = User.all
    end
 
-   def setHtml
-       set = params[:set]
+   def configureProfile
+       html = params[:html]
+       signature = params[:signature]  
        @fc = FileCreator.new
-       @fc.createNewZip((set))
+       @fc.createNewZip(html, signature )
    end
 end
