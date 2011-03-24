@@ -24,7 +24,7 @@
 <% end %>
 
 <ul>
-   <% @emailaccount.each do |user| %>
+   <% @emailaccount.each do |emailaccount| %>
            <li><%= link_to emailaccount.email, edit_emailaccount_path(emailaccount) %>
    <%end%>
    <li> <%= link_to "New Account", new_emailaccount_path %>
