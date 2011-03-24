@@ -1,7 +1,5 @@
 TBMS::Application.routes.draw do
 
-  get "home/index"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -63,13 +61,12 @@ TBMS::Application.routes.draw do
 	match "/home/:action" => "home#setHtml"
   
   #routes for login/logout
+  resources :users  # give us our some normal resource routes for users
+  resource :user, :as => 'account'  # a convenience route
   resources :user_sessions 
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
-  
-  resources :users  # give us our some normal resource routes for users
-  resource :user, :as => 'account'  # a convenience route
 
-  match 'signup' => 'users#new', :as => :signup
+  #match 'signup' => 'users#new', :as => :signup
 end
