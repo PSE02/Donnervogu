@@ -7,4 +7,4 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 #load standard admin user on startup
-User.create(:login => "admin", :email => "admin@admin.com", :password => "admin", :password_confirmation => "admin")
+User.create(:login => "admin", :password => "admin", :password_confirmation => "admin")
