@@ -12,7 +12,7 @@
 				<h1>Thunderbird Control Center</h1> ver. 1.0
 			</div><!-- end header -->
 			<div class="navigation">
-				<%= link_to "home", root_url %> | Email Accounts | Groups | Generate Zip | Statistics | <%= link_to "Informations", account_url(:current)  %>
+				<%= link_to "home", root_url %> | <%= link_to "Email Account", "emailaccount#index" %> | Groups | Generate Zip | Statistics | <%= link_to "Informations", account_url(:current)  %>
         <div class="login"><%= link_to "Logout", logout_path %></div>
 			</div><!-- end navigation -->
 			<div class="main">

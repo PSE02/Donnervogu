@@ -1,7 +1,7 @@
-class EmailAccountController < ApplicationController
+class EmailaccountController < ApplicationController
 
   def index
-    @emailaccount = EmailAccount.all
+    @emailaccount = Emailaccount.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +10,7 @@ class EmailAccountController < ApplicationController
   end
 
   def show
-    @emailaccount = EmailAccount.find(params[:id])
+    @emailaccount = Emailaccount.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -20,7 +20,7 @@ class EmailAccountController < ApplicationController
 
   
   def new
-    @user = EmailAccount.new
+    @emailaccount = Emailaccount.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -30,12 +30,12 @@ class EmailAccountController < ApplicationController
 
 
   def edit
-    @user = EmailAccount.find(params[:id])
+    @emailaccount = Emailaccount.find(params[:id])
   end
 
 
   def create
-    @emailaccount = EmailAccount.new(params[:emailaccount])
+    @emailaccount = Emailaccount.new(params[:emailaccount])
     respond_to do |format|
       if @emailaccount.save
         format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully created.') }
@@ -48,11 +48,11 @@ class EmailAccountController < ApplicationController
   end
 
   def update
-    @emailaccount = User.find(params[:id])
+    @emailaccount = Emailaccount.find(params[:id])
 
     respond_to do |format|
-      if @emailaccount.update_attributes(params[:user])
-        format.html { redirect_to(@emailaccount, :notice => 'User was successfully updated.') }
+      if @emailaccount.update_attributes(params[:emailaccount])
+        format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -62,11 +62,11 @@ class EmailAccountController < ApplicationController
   end
 
   def destroy
-    @emailaccount = User.find(params[:id])
+    @emailaccount = Emailaccount.find(params[:id])
     @emailaccount.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(emailaccount_url) }
       format.xml  { head :ok }
     end
   end

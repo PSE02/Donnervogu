@@ -16,12 +16,12 @@
     <td><%= emailaccount.name %></td>
     <td><%= emailaccount.preferences %></td>
     <td><%= link_to 'Show', emailaccount %></td>
-    <td><%= link_to 'Edit', edit_user_path(emailaccount) %></td>
+    <td><%= link_to 'Edit', edit_emailaccount_path(emailaccount) %></td>
     <td><%= link_to 'Destroy', emailaccount, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
 <%= link_to 'New Account', new_emailaccount_path %>
+

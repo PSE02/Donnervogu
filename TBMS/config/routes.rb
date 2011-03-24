@@ -58,11 +58,15 @@ TBMS::Application.routes.draw do
 
   match "/home/index" => "home#index"
   match "/home/:action" => "home#setHtml"
+ #match 'emailaccount' => "emailaccount#index", :as => :emailaccount
+  #match 'new_emailaccount' => "emailaccount#new", :as => :new_emailaccount
   
   #routes for login/logout
   resources :users  # give us our some normal resource routes for users
   resource :user, :as => 'account'  # a convenience route
   resources :user_sessions 
+  
+  resources :emailaccount
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
