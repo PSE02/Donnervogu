@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  before_filter :require_user
+  
   filter_parameter_logging :password, :password_confirmation # there are underscores :-|
   helper_method :current_user_session, :current_user
 
