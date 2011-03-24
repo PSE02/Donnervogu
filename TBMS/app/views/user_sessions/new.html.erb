@@ -1,14 +1,25 @@
-<h1>Login</h1>
-
+<h2>Login</h2>
 <% form_for @user_session, :as => :user_session, :url => { :action => "create" } do |f| %>
-  <%= render "shared/error_messages", :target => @user_session %>
-  <%= f.label :login %><br />
-  <%= f.text_field :login %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
+<br />
+<br />
+<%= render "shared/error_messages", :target => @user_session %>
+<br />
+<table>
+<tr>
+<td><%= f.label :login %></td>
+</tr>
+<tr>
+<td><%= f.text_field :login %></td>
+</tr>
+<tr><td><br /></td></tr>
+<tr>
+<td><%= f.label "Password:" %></td>
+</tr>
+<tr>
+<td><%= f.password_field :password %></td>
+<tr><td><br /></td></tr>
+<tr>
+<td><%= f.submit "Login" %></td>
+</tr>
+</table>
 <% end %>
