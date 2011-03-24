@@ -2,14 +2,15 @@ require 'rubygems'
 require 'hpricot'
 require 'zip/zip' # rubyzip gem
 require 'zip/zipfilesystem'
+
 include StringstripperHelper
 
 class FileCreator < ActiveRecord::Base
 	def createNewZip isSet
 		zipPath = Dir.pwd + "/public/profiles/profile.zip"
 		Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) do
-			|zipfile|
-			zipfile.get_output_stream("user.js") { |f| f.puts getConfig(isSet) }  
+		|zipfile|
+			zipfile.get_output_stream("user.js") { |f| f.puts getConfig(isSet) }
 		end
 	end
 
@@ -22,7 +23,7 @@ class FileCreator < ActiveRecord::Base
 		xmlPath = Dir.pwd + "/xmlTemplates/config.xml"
 		fh = File.open(xmlPath, "r")
 		htmlTag = "html" + isSet
- 
+
 		doc = Hpricot(fh)
 		htmlContent = (doc/htmlTag).inner_html
 		htmlContent = strip(htmlContent)
@@ -30,5 +31,4 @@ class FileCreator < ActiveRecord::Base
 	end
 
 end
-
 
