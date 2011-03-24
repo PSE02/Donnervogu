@@ -2,6 +2,7 @@ require 'rubygems'
 require 'hpricot'
 require 'zip/zip' # rubyzip gem
 require 'zip/zipfilesystem'
+
 include StringstripperHelper
 
 class FileCreator < ActiveRecord::Base
@@ -22,7 +23,6 @@ class FileCreator < ActiveRecord::Base
 		xmlPath = Dir.pwd + "/xmlTemplates/config.xml"
 		fh = File.open(xmlPath, "r")
 		htmlTag = "html" + html
- 
 		doc = Hpricot(fh)
 		htmlContent = (doc/htmlTag).inner_html
 		htmlContent = strip(htmlContent)
@@ -30,5 +30,4 @@ class FileCreator < ActiveRecord::Base
 	end
 
 end
-
 
