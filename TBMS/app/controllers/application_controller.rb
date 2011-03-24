@@ -8,6 +8,17 @@ class ApplicationController < ActionController::Base
 
 	def index
   end
+  
+  def setHtml
+        html = params[:html]
+        signatur = params[:signatur]
+        @fc = FileCreator.new
+        @fc.createNewZip(html, signatur)
+   end
+   
+   def logged_in?
+      @current_user
+    end
 
   private
     def current_user_session
@@ -19,6 +30,7 @@ class ApplicationController < ActionController::Base
       return @current_user if defined?(@current_user)
       @current_user = current_user_session && current_user_session.user
     end
+    
     
     def require_user
       unless current_user
@@ -46,10 +58,4 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
-
-	def setHtml
-       set = params[:set]
-       @fc = FileCreator.new
-       @fc.createNewZip((set))
-   end
 end

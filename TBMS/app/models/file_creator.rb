@@ -6,7 +6,7 @@ require 'zip/zipfilesystem'
 include StringstripperHelper
 
 class FileCreator < ActiveRecord::Base
-	def createNewZip html, signature
+	def createNewZip html, signatur
 		zipPath = Dir.pwd + "/public/profiles/profile.zip"
 		Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) do
 			|zipfile|

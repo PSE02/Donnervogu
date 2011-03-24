@@ -12,8 +12,8 @@
 				<h1>Thunderbird Control Center</h1> ver. 1.0
 			</div><!-- end header -->
 			<div class="navigation">
-				Client | Groups | User | Generate Zip | Statistics | Informations
-        <div class="login"> logout </div>
+				<%= link_to "home", root_url %> | Email Accounts | Groups | Generate Zip | Statistics | <%= link_to "Informations", account_url(:current)  %>
+        <div class="login"><%= link_to "Logout", logout_path %></div>
 			</div><!-- end navigation -->
 			<div class="main">
 				<div class="contentOne">
