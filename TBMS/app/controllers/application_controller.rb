@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
 	def index
   end
   
+  #rename to setParams plix and add routes
   def setHtml
         html = params[:html]
+        quote = params[:quote]
         signatur = params[:signatur]
         @fc = FileCreator.new
         @fc.createNewZip(html, signatur)

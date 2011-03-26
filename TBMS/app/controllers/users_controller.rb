@@ -26,4 +26,8 @@ class UsersController < ApplicationController
   def show
     @user = current_user
   end
+  
+  def getHtml
+    return @user.preferences[:html]
+  end
 end

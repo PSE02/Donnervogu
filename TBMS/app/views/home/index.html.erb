@@ -5,10 +5,31 @@
 		<legend>Send all Mails in HTML</legend>
 		<table>
 			<tr>
-				<td><%= label_tag("ON") %></td><td><%= radio_button_tag("html", true, checked = true) %></td>
+				<td><%= label_tag("ON") %></td><td><%= radio_button_tag("html", true, checked = false) %></td>
 			</tr>
 			<tr>
 				<td><%= label_tag("OFF") %></td><td><%= radio_button_tag("html", false, checked = false) %></td>
+			</tr>
+		</table>
+	</fieldset>
+		<fieldset>
+		<legend>Quote - this stuff does nothing currently! add functionality plix</legend>
+		<table>
+			<tr>
+				<select>
+  					<option>reply above the quote</option>
+  					<option>reply below the quote</option>
+  					<option>select the quote</option>
+				</select>
+			</tr>
+			<tr>
+				<br> </br>
+				<label> If reply above the quote enable this stuff here below </label>
+				<br> </br>
+				<select>
+  					<option>below the quote</option>
+  					<option>below my reply</option>
+				</select>
 			</tr>
 		</table>
 	</fieldset>
