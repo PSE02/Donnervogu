@@ -13,14 +13,14 @@
 		</table>
 	</fieldset>
 		<fieldset>
-		<legend>Quote - this stuff does nothing currently! add functionality plix</legend>
+		<legend>Quote</legend>
 		<table>
 			<tr>
 				<%= select_tag(:quote, options_for_select([['reply above the quote', 0], ['reply below the quote', 1], ['select the quote', 2]])) %>
 			</tr>
 			<tr>
 				<br> </br>
-				<label> If reply above the quote enable this stuff here below </label>
+				<label> If "reply above the quote" is selected enable this stuff here below </label>
 				<br> </br>
 					<%= select_tag(:signatur_style, options_for_select([['below the quote', true], ['below my reply', false]])) %>
 			</tr>
