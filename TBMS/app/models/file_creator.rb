@@ -26,7 +26,7 @@ class FileCreator < ActiveRecord::Base
 	#DR I love string interpolation! we don't need the XML anymore!
 	#DR I think all this stuff will need some refactoring sooner or later!
 	def htmlTag html
-		htmlContent =  "/********************** HTML ***************************/ \n" +
+		htmlContent =  "/************************** HTML *********************************/ \n" +
 		"// 0=ask, 1=plain, 2=html, 3=both \n" +
 		"pref(\"mail.default_html_action\", #{html == "true" ? 2 : 1}); \n" +
 	
@@ -34,9 +34,9 @@ class FileCreator < ActiveRecord::Base
     "user_pref(\"mail.identity.id1.compose_html\", #{html == "true"}); \n"
 		return htmlContent
 	end
-
+  
    def quoteTag quote
-     quoteContent = "\n/********************** Quotes *************************/ \n"+
+     quoteContent = "\n/************************** Quotes *******************************/ \n"+
      "// 0=reply below 1=reply above 2=select the quote \n" +
      "user_pref(\"mail.identity.id1.reply_on_top\", #{quote}); \n" +
      
@@ -44,9 +44,9 @@ class FileCreator < ActiveRecord::Base
      "user_pref(\"mail.identity.id1.auto_quote\", true); \n"
      return quoteContent
    end
-   
+
   def sigTag sig_style
-    sig_styleContent = "\n/********************** Signature Style*************************/ \n"+
+    sig_styleContent = "\n/************************** Signature Style **********************/  \n"+
     "// true=below the quote false=below my reply \n" +
     "user_pref(\"mail.identity.id1.sig_bottom\", #{sig_style == "true"}); \n" +
     "// add signatur to replies \n" +
@@ -54,8 +54,9 @@ class FileCreator < ActiveRecord::Base
     return sig_styleContent
   end
 
+  #DR we have to care about the signature it should not contain newlines from the form instead newlines should be html <br></br>
   def signaturTag signature
-    signaturContent = "\n/********************** Signature Text*************************/ \n" +
+    signaturContent = "\n/************************** Signature Text ***********************/  \n" +
     "// true=allow html in signature false=don't allow html in signature \n" +
     "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +
     "// this is the part where the signature is saved if it's no file \n" +
