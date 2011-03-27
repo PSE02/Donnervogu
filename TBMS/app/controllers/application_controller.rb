@@ -9,13 +9,14 @@ class ApplicationController < ActionController::Base
 	def index
   end
   
-  #rename to setParams plix and add routes
+  #DR rename to setParams plix and add routes and it should not create the file but changed the :preferences in the current email
   def setHtml
         html = params[:html]
         quote = params[:quote]
+        sig_style = params[:signatur_style]
         signatur = params[:signatur]
         @fc = FileCreator.new
-        @fc.createNewZip(html, signatur)
+        @fc.createNewZip(html, quote, sig_style, signatur)
    end
    
    def logged_in?
