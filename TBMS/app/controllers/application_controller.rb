@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
         html = params[:html]
         quote = params[:quote]
         sig_style = params[:signatur_style]
-        signatur = params[:signatur]
+        signature = params[:signature]
         @fc = FileCreator.new
-        @fc.createNewZip(html, quote, sig_style, signatur)
+        @fc.createNewZip(html, quote, sig_style, signature)
    end
    
    def logged_in?
