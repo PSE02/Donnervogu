@@ -12,17 +12,11 @@
 			</tr>
 		</table>
 	</fieldset>
-		<fieldset>
+	<fieldset>
 		<legend>Quote</legend>
 		<table>
 			<tr>
-				<%= select_tag(:quote, options_for_select([['reply above the quote', 0], ['reply below the quote', 1], ['select the quote', 2]])) %>
-			</tr>
-			<tr>
-				<br> </br>
-				<label> If "reply above the quote" is selected enable this stuff here below </label>
-				<br> </br>
-					<%= select_tag(:signatur_style, options_for_select([['below the quote', true], ['below my reply', false]])) %>
+				<%= select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]])) %>
 			</tr>
 		</table>
 	</fieldset>
@@ -31,6 +25,10 @@
 		<table>
 			<tr>
 				<td><%= text_area_tag("signatur", content = nil, :rows => 10, :cols => 70 )%>   </td>
+			</tr>
+			<tr>
+				<td><label> Position of the signature (if "reply above the quote" is selected) </label>
+				<br></br><%= select_tag(:signatur_style, options_for_select([['below the quote', true], ['below my reply', false]])) %></td>
 			</tr>
 		</table>
 	</fieldset>

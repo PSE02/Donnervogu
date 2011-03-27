@@ -45,7 +45,8 @@ class FileCreator < ActiveRecord::Base
    
    
   def sigTag sig_style
-    sig_styleContent = "// true=below the quote false=below my reply \n" +
+    sig_styleContent = "\n/********************** Signature *************************/ \n"+
+    "// true=below the quote false=below my reply \n" +
     "user_pref(\"mail.identity.id1.sig_bottom\", #{sig_style == "true"}); \n" +
     "// add signatur to replies \n" +
     "user_pref(\"mail.identity.id1.sig_on_reply\", true);"
