@@ -36,15 +36,20 @@ class EmailaccountsController < ApplicationController
   def create
     @emailaccount = Emailaccount.new params[:emailaccount]
     respond_to do |format|
-      if @emailaccount.save
-        format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully created.') }
-        format.xml  { render :xml => @emailaccount, :status => :created, :location => @emailaccount }
+      if validInput params[:emailaccount] 
+        if @emailaccount.save
+          format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully created.') }
+          format.xml  { render :xml => @emailaccount, :status => :created, :location => @emailaccount }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @emailaccount.errors, :status => :unprocessable_entity }
+        end
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @emailaccount.errors, :status => :unprocessable_entity }
+        format.html { redirect_to(new_emailaccount_path, :notice => 'ERROR') }
       end
     end
   end
+  
 
   def update
     @emailaccount = Emailaccount.find(params[:id])
@@ -77,7 +82,7 @@ class EmailaccountsController < ApplicationController
     redirect_to emailaccount_path
   end
   
-  def overview
-    @emailaccounts = Emailaccounts.all
+  def validInput emailaccount
+    return emailaccount[:email].match("@")
   end
 end
