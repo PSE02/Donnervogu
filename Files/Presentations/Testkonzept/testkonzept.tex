@@ -1,0 +1,94 @@
+%-----------------------------------------------------------------
+% PSE 01 - Team Donnervogu
+%
+% Filename: testkonzept.tex
+% Date: 25.03.2011
+% Author: Aaron Karper <akarper@students.unibe.ch>
+%-----------------------------------------------------------------
+\documentclass{beamer}
+% Latex Packages
+\usepackage[utf8x]{inputenc}
+\usetheme{Singapore}
+\usepackage[ngerman]{babel}
+% Standard Beamer Latex Settings
+\setbeamercovered{dynamic}
+% Frame Numbers on
+\setbeamertemplate{footline}[frame number]
+% Set Beamer Colors
+\setbeamercolor{normal text}{fg=white,bg=black}
+\setbeamercolor{structure}{fg=white}
+\setbeamercolor{section in head/foot}{fg=white}
+\setbeamercolor{section in head/foot shaded}{fg=gray}
+% Set Fontsize in Head and Foot
+\setbeamerfont{section in head/foot}{size={\fontsize{6}{01}}}
+%-----------------------------------------------------------------
+%Edit here
+%-----------------------------------------------------------------
+\title{Testkonzept}
+\author{PSE Team 2 \\ Aaron Karper}
+\date{28. März 2011}
+
+\begin{document}
+
+\maketitle
+\begin{frame}{Testkonzept}
+	\tableofcontents
+\end{frame}
+\section{Erwägungen}
+\begin{frame}{Erwägungen}
+	\begin{itemize}
+	  \item Rolle
+	  \item Umfang
+	  \item Fokus
+	  \item Technik
+	\end{itemize}
+\end{frame}
+\subsection{Analyse}
+\begin{frame}{Analyse}
+  \begin{itemize}[<+->]
+    \item Serverapplication
+    \item GUI tiefe Priorität
+    \item Komponenten nicht sinnvoll trennbar
+    \item Fixe Anzahl von Clients
+  \end{itemize}
+\end{frame}
+\subsection{Testarten}
+\begin{frame}{Testarten}
+  \begin{itemize}[<alert@+>]
+    \item Unittests
+    \item Datenbanktest
+    \item GUI- \& Usability-Test
+    \item Installationstest
+    \item Stress-Test
+    \item Integrationtests
+  \end{itemize}
+\end{frame}
+\section{Konzept}
+\subsection{Welche Tests?}
+\begin{frame}{Konzept: Welche Tests?}
+  \begin{itemize}[<+->]
+    \item Fokus auf Integrationtests
+    \item Unittests im Modell soweit möglich
+    \item Datenbank nur indirekt
+  \end{itemize}
+\end{frame}
+\subsection{Wie getestet?}
+\begin{frame}{Konzept: Wie wird getestet?}
+    Nutzen von Rails' Testing-Framework
+  \begin{itemize}
+    \item Unit-, Integration-, Performance, \ldots
+    \item Gut integriert
+  \end{itemize}
+\end{frame}
+\subsection{Wie geschrieben?}
+\begin{frame}{Konzept: Wie geschrieben?}
+  \begin{itemize}
+    \item Teampartner schreibt Tests
+    \item Gleichzeitig oder kurz nach Implementierung
+    \item Kein TDD
+  \end{itemize}
+\end{frame}
+\section{Fragen}
+\begin{frame}{Fragen?}
+\end{frame}
+\end{document}
