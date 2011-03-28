@@ -1,7 +1,5 @@
 TBMS::Application.routes.draw do
 
-  get "home/index"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -58,7 +56,17 @@ TBMS::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests
 
-	root :to => "home#index"
-	match "/home/index" => "home#index"
-	match "/home/:action" => "home#setHtml"
+  match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
+
+  #routes for login/logout
+  resources :users  # give us our some normal resource routes for users
+  resource :user, :as => 'account'  # a convenience route
+  resources :user_sessions 
+  
+  resources :emailaccounts
+  
+  match 'login' => "user_sessions#new",      :as => :login
+  match 'logout' => "user_sessions#destroy", :as => :logout
+  
+  root :to => "home#index"
 end
