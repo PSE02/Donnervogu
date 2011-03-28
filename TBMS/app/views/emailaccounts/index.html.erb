@@ -15,7 +15,7 @@
     <td><%= emailaccount.name %></td>
     <td><%= link_to 'Show', emailaccount %></td>
     <td><%= link_to 'Edit', edit_emailaccount_path(emailaccount) %></td>
-    <td><%= link_to 'Destroy', emailaccount, :confirm => 'Do you really want to delete ' + emailaccount.email + '?', :method => :delete %></td>
+    <td><%= link_to 'Delete', emailaccount, :confirm => 'Do you really want to delete ' + emailaccount.email + '?', :method => :delete %></td>
     <td><a href= <%= emailaccount.zipPath %>>Get the zip file</a> </td>
   </tr>
 <% end %>

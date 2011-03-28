@@ -10,9 +10,5 @@ class HomeController < ApplicationController
    end
 
    def configureProfile
-       html = params[:html]
-       signature = params[:signature]  
-       @fc = FileCreator.new
-       @fc.createNewZip(html, signature )
    end
 end

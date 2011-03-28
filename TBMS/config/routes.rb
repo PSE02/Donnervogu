@@ -56,16 +56,8 @@ TBMS::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests
 
-#  match "/emailaccounts/index" => "emailaccounts#index"
-#  match "/emailaccounts/" => "emailaccounts#index"
-#  match "/emailaccounts/:id/edit" => "emailaccounts#edit"
   match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
-#  match "/emailaccounts/new" => "emailaccounts#new"
-#  match "/home/index" => "home#index"
-#  match "/home/:action" => "home#setHtml"
- #match 'emailaccount' => "emailaccount#index", :as => :emailaccount
-  #match 'new_emailaccount' => "emailaccount#new", :as => :new_emailaccount
-  
+
   #routes for login/logout
   resources :users  # give us our some normal resource routes for users
   resource :user, :as => 'account'  # a convenience route

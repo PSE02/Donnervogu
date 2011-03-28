@@ -8,6 +8,7 @@ class Emailaccount < ActiveRecord::Base
   def initialize panda={}
 	  super panda
     self.preferences = Hash.new
+    self.loadInitPreferences
 	end
 	
 	def setParams params
@@ -28,6 +29,11 @@ class Emailaccount < ActiveRecord::Base
 	
 	def zipPath
     "/profiles/#{self.id}_profile.zip"
+	end
+	
+	#DR we have to load group or template stuff here from a file or what ever
+	def loadInitPreferences
+	  self.preferences[:signature] = "This is just a template signature"
 	end
 	
 end
