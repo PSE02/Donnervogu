@@ -65,7 +65,7 @@ class EmailaccountsController < ApplicationController
     @emailaccount.destroy
 
     respond_to do |format|
-      format.html { redirect_to(emailaccount_url) }
+      format.html { redirect_to(emailaccounts_path) }
       format.xml  { head :ok }
     end
   end
