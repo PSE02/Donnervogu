@@ -21,7 +21,6 @@ class EmailaccountController < ApplicationController
   
   def new
     @emailaccount = Emailaccount.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @emailaccount }
@@ -69,5 +68,12 @@ class EmailaccountController < ApplicationController
       format.html { redirect_to(emailaccount_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def setParams
+    @emailaccount = Emailaccount.find(params[:id])
+    raise "No Account found" if @emailaccount.nil?
+    @emailaccount.setParams(params)
+    redirect_to emailaccount_path
   end
 end
