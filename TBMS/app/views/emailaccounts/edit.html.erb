@@ -25,10 +25,10 @@
 		<legend>Send all Mails in HTML</legend>
 		<table>
 			<tr>
-				<td><%= label_tag("ON") %></td><td><%= radio_button_tag(:html, true, checked = false) %></td>
+				<td><%= label_tag("ON") %></td><td><%= radio_button_tag(:html, true, checked = @emailaccount.preferences[:html] == "true") %></td>
 			</tr>
 			<tr>
-				<td><%= label_tag("OFF") %></td><td><%= radio_button_tag(:html, false, checked = false) %></td>
+				<td><%= label_tag("OFF") %></td><td><%= radio_button_tag(:html, false, checked = @emailaccount.preferences[:html] == "false") %></td>
 			</tr>
 		</table>
 	</fieldset>
@@ -36,7 +36,7 @@
 		<legend>Quote</legend>
 		<table>
 			<tr>
-				<%= select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]])) %>
+				<%= select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]], @emailaccount.preferences[:quote])) %>
 			</tr>
 		</table>
 	</fieldset>
@@ -44,11 +44,11 @@
 		<legend>Configure the Signature</legend>
 		<table>
 			<tr>
-				<td><%= text_area_tag(:signature, content = nil, :rows => 10, :cols => 70 )%>   </td>
+				<td><%= text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70 )%>   </td>
 			</tr>
 			<tr>
 				<td><label> Position of the signature (if "reply above the quote" is selected) </label>
-				<br></br><%= select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]])) %></td>
+				<br></br><%= select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]],  @emailaccount.preferences[:signature_style])) %></td>
 			</tr>
 		</table>
 	</fieldset>
