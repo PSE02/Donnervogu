@@ -1,0 +1,58 @@
+<h1>Listing Accounts</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Name</th>	
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+  <tr>
+    <td><%= @emailaccount.email %></td>
+    <td><%= @emailaccount.name %></td>
+  </tr>
+</table>
+
+
+
+<% form_tag(:action => "setParams") do %>
+	<h2>Configure the Mail Settings</h2>
+	<br />
+	<fieldset>
+		<legend>Send all Mails in HTML</legend>
+		<table>
+			<tr>
+				<td><%= label_tag("ON") %></td><td><%= radio_button_tag(:html, true, checked = false) %></td>
+			</tr>
+			<tr>
+				<td><%= label_tag("OFF") %></td><td><%= radio_button_tag(:html, false, checked = false) %></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>Quote</legend>
+		<table>
+			<tr>
+				<%= select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]])) %>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset>
+		<legend>Configure the Signature</legend>
+		<table>
+			<tr>
+				<td><%= text_area_tag(:signature, content = nil, :rows => 10, :cols => 70 )%>   </td>
+			</tr>
+			<tr>
+				<td><label> Position of the signature (if "reply above the quote" is selected) </label>
+				<br></br><%= select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]])) %></td>
+			</tr>
+		</table>
+	</fieldset>
+	<%= submit_tag("Save") %>
+<% end %>
+
+

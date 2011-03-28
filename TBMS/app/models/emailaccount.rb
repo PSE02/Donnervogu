@@ -5,8 +5,8 @@ class Emailaccount < ActiveRecord::Base
 	
   @@fc = FileCreator.new
 	
-	def initialize
-	  super
+  def initialize panda={}
+	  super panda
     self.preferences = Hash.new
 	end
 	
@@ -24,6 +24,10 @@ class Emailaccount < ActiveRecord::Base
 	def validKey? key
 	  raise "No creator" if @@fc.nil?
     (not key.nil?) and (@@fc.validKey?(key.to_sym))
+	end
+	
+	def zipPath
+    "/profiles/#{self.id}_profile.zip"
 	end
 	
 end

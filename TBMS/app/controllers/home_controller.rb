@@ -6,6 +6,7 @@ class HomeController < ApplicationController
 
    def index
 	   @users = User.all
+	   redirect_to(emailaccounts_path)
    end
 
    def configureProfile
