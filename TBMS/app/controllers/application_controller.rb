@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
 	def index
+    
   end
   
   #DR rename to setParams plix and add routes and it should not create the file but changed the :preferences in the current email
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
    def logged_in?
       @current_user
     end
-
+    
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)

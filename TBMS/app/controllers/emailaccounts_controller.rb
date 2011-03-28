@@ -76,4 +76,8 @@ class EmailaccountsController < ApplicationController
     @emailaccount.setParams(params)
     redirect_to emailaccount_path
   end
+  
+  def overview
+    @emailaccounts = Emailaccounts.all
+  end
 end
