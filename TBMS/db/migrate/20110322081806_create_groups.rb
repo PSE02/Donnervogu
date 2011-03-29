@@ -1,7 +1,6 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateGroups < ActiveRecord::Migration
   def self.up
-    create_table :users do |t|
-      t.string :email
+    create_table :groups do |t|
       t.string :name
       t.text :preferences
 
@@ -10,6 +9,6 @@ class CreateUsers < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :users
+    drop_table :groups
   end
 end

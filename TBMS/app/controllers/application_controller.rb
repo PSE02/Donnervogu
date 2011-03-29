@@ -2,11 +2,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_filter :require_user
+  before_filter :overview
   
   filter_parameter_logging :password, :password_confirmation # there are underscores :-|
   helper_method :current_user_session, :current_user
 
+  def overview
+	  @emailac_count = Emailaccount.count
+	  @email_oldest_get = Emailaccount.oldestGet
+  end
+
 	def index
+    
   end
   
   #DR rename to setParams plix and add routes and it should not create the file but changed the :preferences in the current email
@@ -22,7 +29,7 @@ class ApplicationController < ActionController::Base
    def logged_in?
       @current_user
     end
-
+    
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)

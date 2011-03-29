@@ -1,5 +1,6 @@
 class EmailaccountsController < ApplicationController
-
+  # GET /emailaccounts
+  # GET /emailaccounts.xml
   def index
     @emailaccounts = Emailaccount.all
 
@@ -9,6 +10,8 @@ class EmailaccountsController < ApplicationController
     end
   end
 
+  # GET /emailaccounts/1
+  # GET /emailaccounts/1.xml
   def show
     @emailaccount = Emailaccount.find(params[:id])
 
@@ -18,23 +21,27 @@ class EmailaccountsController < ApplicationController
     end
   end
 
-  
+  # GET /emailaccounts/new
+  # GET /emailaccounts/new.xml
   def new
     @emailaccount = Emailaccount.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @emailaccount }
     end
   end
 
-
+  # GET /emailaccounts/1/edit
   def edit
     @emailaccount = Emailaccount.find(params[:id])
   end
 
-
+  # POST /emailaccounts
+  # POST /emailaccounts.xml
   def create
-    @emailaccount = Emailaccount.new params[:emailaccount]
+    @emailaccount = Emailaccount.new(params[:emailaccount])
+
     respond_to do |format|
       if @emailaccount.save
         format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully created.') }
@@ -46,6 +53,8 @@ class EmailaccountsController < ApplicationController
     end
   end
 
+  # PUT /emailaccounts/1
+  # PUT /emailaccounts/1.xml
   def update
     @emailaccount = Emailaccount.find(params[:id])
 
@@ -60,20 +69,34 @@ class EmailaccountsController < ApplicationController
     end
   end
 
+  # DELETE /emailaccounts/1
+  # DELETE /emailaccounts/1.xml
   def destroy
     @emailaccount = Emailaccount.find(params[:id])
     @emailaccount.destroy
 
     respond_to do |format|
-      format.html { redirect_to(emailaccounts_path) }
+      format.html { redirect_to(emailaccounts_url) }
       format.xml  { head :ok }
     end
   end
-  
+
   def setParams
     @emailaccount = Emailaccount.find(params[:id])
     raise "No Account found" if @emailaccount.nil?
     @emailaccount.setParams(params)
     redirect_to emailaccount_path
+  end
+  
+  def validInput emailaccount
+    return emailaccount[:email].match("@")
+  end
+
+  def zipOf
+    raise "format is nil" if params[:format].nil? 
+	  emailaccount = Emailaccount.find_by_email params[:email] + "." + params[:format]
+	  raise "No such account" if emailaccount.nil?
+	  emailaccount.downloaded
+	  send_file emailaccount.assureZipPath
   end
 end

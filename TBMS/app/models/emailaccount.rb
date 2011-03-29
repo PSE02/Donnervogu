@@ -1,15 +1,25 @@
+include EmailaccountHelper
 class Emailaccount < ActiveRecord::Base
 	validates_presence_of :email
 	validates_presence_of :name
+  validates_format_of :email,
+      :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates_format_of :name, :with => /^\w+$/i,
+    :message => "can only contain letters and numbers."
+
 	serialize :preferences
 	
-  @@fc = FileCreator.new
 	
   def initialize panda={}
 	  super panda
     self.preferences = Hash.new
     self.loadInitPreferences
+    self.last_get = Time.now
 	end
+
+  def self.oldestGet
+	  self.minimum("last_get")
+  end
 	
 	def setParams params
 	  raise "No Params" if params.nil?
@@ -19,16 +29,26 @@ class Emailaccount < ActiveRecord::Base
 	     self.preferences[key.to_sym] = value if validKey?(key)
 	  end 
     self.save
-    @@fc.createNewZip(self)
+    FileCreator::createNewZip(self)
+    assureCreatedZip
   end
   
 	def validKey? key
-	  raise "No creator" if @@fc.nil?
-    (not key.nil?) and (@@fc.validKey?(key.to_sym))
+	    (not key.nil?) and (FileCreator::validKey?(key.to_sym))
+	end
+	
+	def assureCreatedZip
+	    FileCreator::createNewZip(self)
+	    raise "No file created" unless File.exists? zipPath
+	end
+
+	def assureZipPath
+		assureCreatedZip
+		zipPath
 	end
 	
 	def zipPath
-    "/profiles/#{self.id}_profile.zip"
+		FileCreator::completeZipPath self
 	end
 	
 	#DR we have to load group or template stuff here from a file or what ever
@@ -36,4 +56,7 @@ class Emailaccount < ActiveRecord::Base
 	  self.preferences[:signature] = "This is just a template signature"
 	end
 	
+	def downloaded
+		self.last_get = Time.now
+	end
 end
