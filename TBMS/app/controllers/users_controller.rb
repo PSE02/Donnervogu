@@ -3,10 +3,12 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :show
   
+  #Creates a new empty user
   def new
     @user = User.new
   end
 
+  #Setting up the user
   def create
     @user = User.new(params[:user])
     
@@ -22,10 +24,12 @@ class UsersController < ApplicationController
     end
     
   end
-
+  
+  #Show the user and his statistics
   def show
     @user = current_user
   end
+  
   
   def getHtml
     return @user.preferences[:html]

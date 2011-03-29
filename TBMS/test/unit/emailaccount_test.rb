@@ -5,4 +5,10 @@ class EmailaccountTest < ActiveSupport::TestCase
   test "the truth" do
     assert true
   end
+  
+  fixtures :emailaccounts
+  # Replace this with your real tests.
+  test "hans exists" do
+	  assert User.all != []
+  end
 end

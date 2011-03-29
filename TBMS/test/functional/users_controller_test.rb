@@ -2,12 +2,8 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-  test "the truth" do
-    assert true
-	end
-
   setup do
-    @user = users(:hans)
+    @user = users(:testUser)
   end
 
   test "should get index" do
@@ -32,16 +28,6 @@ class UsersControllerTest < ActionController::TestCase
   test "should show user" do
     get :show, :id => @user.to_param
     assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => @user.to_param
-    assert_response :success
-  end
-
-  test "should update user" do
-    put :update, :id => @user.to_param, :user => @user.attributes
-    assert_redirected_to user_path(assigns(:user))
   end
 
   test "should destroy user" do

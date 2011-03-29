@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
 	  @email_oldest_get = Emailaccount.oldestGet
   end
 
-	def index
-    
+  def index   
   end
   
   #DR rename to setParams plix and add routes and it should not create the file but changed the :preferences in the current email
@@ -28,20 +27,22 @@ class ApplicationController < ActionController::Base
    
    def logged_in?
       @current_user
-    end
+   end
     
   private
+    #Returns current user session, if somebody is logged in
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
     end
 
+    #Returns current logged in user
     def current_user
       return @current_user if defined?(@current_user)
       @current_user = current_user_session && current_user_session.user
     end
     
-    
+    #Makes a view only accessible if you are a logged in user
     def require_user
       unless current_user
         store_location
@@ -51,6 +52,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    #Makes a view accessable to logged and not logged in user
     def require_no_user
       if current_user
         store_location
@@ -60,10 +62,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    #Store the URI of the current request in the session
     def store_location
       session[:return_to] = request.request_uri
     end
 
+    #Redirect to the URI stored by the most recent store_location call or to the passed default
     def redirect_back_or_default(default)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
