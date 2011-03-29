@@ -1,9 +1,9 @@
+include EmailaccountHelper
 class Emailaccount < ActiveRecord::Base
 	validates_presence_of :email
 	validates_presence_of :name
 	serialize :preferences
 	
-  @@fc = FileCreator.new
 	
   def initialize panda={}
 	  super panda
@@ -19,7 +19,7 @@ class Emailaccount < ActiveRecord::Base
 	     self.preferences[key.to_sym] = value if validKey?(key)
 	  end 
     self.save
-    @@fc.createNewZip(self)
+    FileCreator::createNewZip(self)
   end
   
 	def validKey? key

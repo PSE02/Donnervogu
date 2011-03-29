@@ -1,5 +1,6 @@
 class EmailaccountsController < ApplicationController
-
+  # GET /emailaccounts
+  # GET /emailaccounts.xml
   def index
     @emailaccounts = Emailaccount.all
 
@@ -9,6 +10,8 @@ class EmailaccountsController < ApplicationController
     end
   end
 
+  # GET /emailaccounts/1
+  # GET /emailaccounts/1.xml
   def show
     @emailaccount = Emailaccount.find(params[:id])
 
@@ -18,39 +21,40 @@ class EmailaccountsController < ApplicationController
     end
   end
 
-  
+  # GET /emailaccounts/new
+  # GET /emailaccounts/new.xml
   def new
     @emailaccount = Emailaccount.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @emailaccount }
     end
   end
 
-
+  # GET /emailaccounts/1/edit
   def edit
     @emailaccount = Emailaccount.find(params[:id])
   end
 
-
+  # POST /emailaccounts
+  # POST /emailaccounts.xml
   def create
-    @emailaccount = Emailaccount.new params[:emailaccount]
+    @emailaccount = Emailaccount.new(params[:emailaccount])
+
     respond_to do |format|
-      if validInput params[:emailaccount] 
-        if @emailaccount.save
-          format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully created.') }
-          format.xml  { render :xml => @emailaccount, :status => :created, :location => @emailaccount }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @emailaccount.errors, :status => :unprocessable_entity }
-        end
+      if @emailaccount.save
+        format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully created.') }
+        format.xml  { render :xml => @emailaccount, :status => :created, :location => @emailaccount }
       else
-        format.html { redirect_to(new_emailaccount_path, :notice => 'ERROR') }
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @emailaccount.errors, :status => :unprocessable_entity }
       end
     end
   end
-  
 
+  # PUT /emailaccounts/1
+  # PUT /emailaccounts/1.xml
   def update
     @emailaccount = Emailaccount.find(params[:id])
 
@@ -65,24 +69,15 @@ class EmailaccountsController < ApplicationController
     end
   end
 
+  # DELETE /emailaccounts/1
+  # DELETE /emailaccounts/1.xml
   def destroy
     @emailaccount = Emailaccount.find(params[:id])
     @emailaccount.destroy
 
     respond_to do |format|
-      format.html { redirect_to(emailaccounts_path) }
+      format.html { redirect_to(emailaccounts_url) }
       format.xml  { head :ok }
     end
-  end
-  
-  def setParams
-    @emailaccount = Emailaccount.find(params[:id])
-    raise "No Account found" if @emailaccount.nil?
-    @emailaccount.setParams(params)
-    redirect_to emailaccount_path
-  end
-  
-  def validInput emailaccount
-    return emailaccount[:email].match("@")
   end
 end
