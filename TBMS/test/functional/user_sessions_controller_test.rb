@@ -24,21 +24,6 @@ class UserSessionsControllerTest < ActionController::TestCase
     assert_redirected_to user_session_path(assigns(:user_session))
   end
 
-  test "should show user_session" do
-    get :show, :id => @user_session.to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => @user_session.to_param
-    assert_response :success
-  end
-
-  test "should update user_session" do
-    put :update, :id => @user_session.to_param, :user_session => @user_session.attributes
-    assert_redirected_to user_session_path(assigns(:user_session))
-  end
-
   test "should destroy user_session" do
     assert_difference('UserSession.count', -1) do
       delete :destroy, :id => @user_session.to_param

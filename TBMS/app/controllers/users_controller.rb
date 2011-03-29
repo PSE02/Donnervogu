@@ -1,3 +1,5 @@
+# Author:: Jonas Ruef
+# Manages the users
 class UsersController < ApplicationController
 
   before_filter :require_no_user, :only => [:new, :create]
