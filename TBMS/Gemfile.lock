@@ -86,6 +86,7 @@ DEPENDENCIES
   authlogic
   haml
   hpricot
+  nokogiri
   rails (= 3.0.5)
   rcov
   rubyzip

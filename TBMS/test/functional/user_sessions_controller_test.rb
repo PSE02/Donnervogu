@@ -1,14 +1,11 @@
 require 'test_helper'
 
 class UserSessionsControllerTest < ActionController::TestCase
-  setup do
-    @user_session = user_sessions(:one)
-  end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:user_sessions)
+    assert_not_nil assigns(:sessions)
   end
 
   test "should get new" do
@@ -16,19 +13,16 @@ class UserSessionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create user_session" do
-    assert_difference('UserSession.count') do
-      post :create, :user_session => @user_session.attributes
-    end
-
-    assert_redirected_to user_session_path(assigns(:user_session))
+  test "should create user session" do
+    post :create, :session => { :login => "testUser", :password => "testUserPw" }
+    assert user_session = UserSession.find
+    assert_equal users(:testUser), user_session.user
+    assert_redirected_to account_path
   end
 
-  test "should destroy user_session" do
-    assert_difference('UserSession.count', -1) do
-      delete :destroy, :id => @user_session.to_param
-    end
-
-    assert_redirected_to user_sessions_path
+   test "should destroy user session" do
+    delete :destroy
+    assert_nil UserSession.find
+    assert_redirected_to new_user_session_path
   end
 end

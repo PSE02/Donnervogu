@@ -9,3 +9,8 @@ two:
   email: MyString
   name: MyString
   preferences: MyText
+  
+hans:
+  email: hans@example.com
+  name: Hans Mustermann
+  preferences: <%= {:html_mail => true, :quoting_style => :above } %>

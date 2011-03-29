@@ -3,10 +3,6 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-  setup do
-    @user = users(:testUser)
-  end
-
   test "should get index" do
     get :index
     assert_response :success
@@ -20,14 +16,14 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
    assert_difference('User.count') do
-      post :create, :user => { :login => "ben", :password => "benrocks", :password_confirmation => "benrocks" }
+      post :create, :user => { :login => "testUser", :password => "testUserPw", :password_confirmation => "testUserPw" }
     end
     
     assert_redirected_to account_path
   end
 
   test "should show user" do
-   UserSession.create(users(:ben))
+   UserSession.create(users(:testUser))
     get :show
     assert_response :success
   end
