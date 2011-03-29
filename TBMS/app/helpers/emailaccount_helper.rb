@@ -2,12 +2,12 @@ require 'zip/zip' # rubyzip gem
 require 'zip/zipfilesystem'
 
 module EmailaccountHelper
-  module FileCreator < ActiveRecord::Base
+  module FileCreator 
   
-    @@validKeys = [:html, :quote, :signature_style, :signature]
+    @validKeys = [:html, :quote, :signature_style, :signature]
     
     #DR we have to refactor this to simple pass an array or a email (email would be even better!)
-  	def createNewZip emailaccount
+  	def self.createNewZip emailaccount
   		zipPath = Dir.pwd + "/public/profiles/#{emailaccount.id}_profile.zip"
   		Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) do
   			|zipfile|
@@ -15,7 +15,7 @@ module EmailaccountHelper
   		end
   	end
   
-  	def getConfig emailaccount
+  	def self.getConfig emailaccount
   	  raise "Emailaccount nil" if emailaccount.nil?
   	  raise "Preferences nil" if emailaccount.preferences.nil?
   	  filecontent = ""
@@ -25,13 +25,13 @@ module EmailaccountHelper
   		return filecontent
   	end
   	 
-    def validKey? key
-        return @@validKeys.include?(key)
-    end
+	def self.validKey? key
+	    @validKeys.include?(key)
+        end
   
   	#DR I love string interpolation! we don't need the XML anymore!
   	#DR I think all this stuff will need some refactoring sooner or later!
-  	def html html
+  	def self.html html
   		htmlContent =  "/************************** HTML *********************************/ \n" +
   		"// 0=ask, 1=plain, 2=html, 3=both \n" +
   		"pref(\"mail.default_html_action\", #{html == "true" ? 2 : 1}); \n" +
@@ -41,7 +41,7 @@ module EmailaccountHelper
   		return htmlContent
   	end
     
-     def quote quote
+     def self.quote quote
        quoteContent = "\n/************************** Quotes *******************************/ \n"+
        "// 0=reply below 1=reply above 2=select the quote \n" +
        "user_pref(\"mail.identity.id1.reply_on_top\", #{quote}); \n" +
@@ -51,7 +51,7 @@ module EmailaccountHelper
        return quoteContent
      end
   
-    def signature_style sig_style
+    def self.signature_style sig_style
       sig_styleContent = "\n/************************** Signature Style **********************/  \n"+
       "// true=below the quote false=below my reply \n" +
       "user_pref(\"mail.identity.id1.sig_bottom\", #{sig_style == "true"}); \n" +
@@ -61,7 +61,7 @@ module EmailaccountHelper
     end
   
     #DR we have to care about the signature it should not contain newlines from the form instead newlines should be html <br></br>
-    def signature signature
+    def self.signature signature
       signatureContent = "\n/************************** Signature Text ***********************/  \n" +
       "// true=allow html in signature false=don't allow html in signature \n" +
       "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +

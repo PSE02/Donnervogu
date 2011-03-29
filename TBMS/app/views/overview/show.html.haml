@@ -1,8 +1,8 @@
 %h2 Overview
-%br
-%b Number of Accounts:
-//=
-%br
-%br
-%b Number of Logged Users:
-//= 
+%table
+  %tr
+    %th Number of Accounts:
+    %th= @emailac_count
+  %tr
+    %th Oldest Configuration in the Wild:
+    %th= @email_oldest_get

@@ -9,7 +9,12 @@ class Emailaccount < ActiveRecord::Base
 	  super panda
     self.preferences = Hash.new
     self.loadInitPreferences
+    self.last_get = Time.now
 	end
+
+  def self.oldestGet
+	  self.minimum("last_get")
+  end
 	
 	def setParams params
 	  raise "No Params" if params.nil?
@@ -23,8 +28,7 @@ class Emailaccount < ActiveRecord::Base
   end
   
 	def validKey? key
-	  raise "No creator" if @@fc.nil?
-    (not key.nil?) and (@@fc.validKey?(key.to_sym))
+	    (not key.nil?) and (FileCreator::validKey?(key.to_sym))
 	end
 	
 	def zipPath

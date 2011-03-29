@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20110329095113) do
     t.string   "email"
     t.string   "name"
     t.text     "preferences"
+    t.datetime "last_get"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

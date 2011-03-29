@@ -2,9 +2,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_filter :require_user
+  before_filter :overview
   
   filter_parameter_logging :password, :password_confirmation # there are underscores :-|
   helper_method :current_user_session, :current_user
+
+  def overview
+	  @emailac_count = Emailaccount.count
+	  @email_oldest_get = Emailaccount.oldestGet
+  end
 
 	def index
     

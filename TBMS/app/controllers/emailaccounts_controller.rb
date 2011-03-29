@@ -80,4 +80,15 @@ class EmailaccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def setParams
+    @emailaccount = Emailaccount.find(params[:id])
+    raise "No Account found" if @emailaccount.nil?
+    @emailaccount.setParams(params)
+    redirect_to emailaccount_path
+  end
+  
+  def validInput emailaccount
+    return emailaccount[:email].match("@")
+  end
 end
