@@ -7,8 +7,15 @@ module EmailaccountHelper
     @validKeys = [:html, :quote, :signature_style, :signature]
     
     #DR we have to refactor this to simple pass an array or a email (email would be even better!)
+    
+    def self.completeZipPath emailaccount
+	    File.join(Dir.pwd,"public",
+		      "profiles",
+		      "#{emailaccount.id}_profile.zip")
+    end
+
   	def self.createNewZip emailaccount
-  		zipPath = Dir.pwd + "/public/profiles/#{emailaccount.id}_profile.zip"
+  		zipPath = self.completeZipPath emailaccount
   		Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) do
   			|zipfile|
   			zipfile.get_output_stream("user.js") { |f| f.puts getConfig(emailaccount)}  

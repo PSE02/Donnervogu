@@ -18,7 +18,7 @@
         |
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete #{emailaccount.email}?", :method => :delete
         |
-        = link_to 'Get the zip file' , emailaccount.zipPath
+        = link_to 'Get the zip file' , "/profile/#{emailaccount.email}"
 %br
 = link_to 'New Account', new_emailaccount_path
 

@@ -91,4 +91,11 @@ class EmailaccountsController < ApplicationController
   def validInput emailaccount
     return emailaccount[:email].match("@")
   end
+
+  def zipOf
+	  emailaccount = Emailaccount.find_by_email params[:email]
+	  raise "No such account" if emailaccount.nil?
+	  emailaccount.downloaded
+	  send_file emailaccount.assureZipPath
+  end
 end
