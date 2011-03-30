@@ -1,5 +1,5 @@
+# Author:: Jonas Ruef
 require 'test_helper'
-
 class UsersControllerTest < ActionController::TestCase
 
   test "We're awesome" do

@@ -14,4 +14,3 @@ admin:
     persistence_token: 17  
     single_access_token: 13
     perishable_token: 37
-
