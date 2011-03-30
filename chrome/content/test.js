@@ -12,7 +12,7 @@ function downloadFile(httpLoc) {
 		// download the zip file
 		try {
 			//new obj_URI object, adds the email address as parameter to the URI
-			var obj_URI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(httpLoc + "?email=" + email, null, null);
+			var obj_URI = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(httpLoc, null, null);
 			//set to download the zip file into the profil direct
 			obj_TargetFile.initWithPath(profilePath);
 			obj_TargetFile.append("test.zip");
@@ -94,7 +94,7 @@ var hello = {
 	click: function() {
 	var email = prompt("Please enter email address", "john@example.com");
 	
-	if (name!=null && name!="") {
+	if (email!=null && email!="") {
 		downloadFile("http://pse2.iam.unibe.ch/profiles/profile.zip");
 	}  	
 	},
