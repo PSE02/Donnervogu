@@ -1,6 +1,5 @@
 # Author:: Jonas Ruef
 require 'test_helper'
-
 class UsersControllerTest < ActionController::TestCase
 
   test "should get index" do

@@ -1,5 +1,5 @@
+# Author:: Jonas Ruef
 require 'test_helper'
-
 class UserSessionsControllerTest < ActionController::TestCase
 
   test "should get index" do
