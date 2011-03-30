@@ -2,11 +2,13 @@
 require 'test_helper'
 class UserSessionsControllerTest < ActionController::TestCase
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:sessions)
-  end
+  
+  # AK Is this test valid?
+#  test "should get index" do
+#    get :index
+#    assert_response :success
+#    assert_not_nil assigns(:sessions)
+#  end 
 
   test "should get new" do
     get :new
