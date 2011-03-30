@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EmailaccountsControllerTest < ActionController::TestCase
   setup do
-    @emailaccount = emailaccounts(:one)
+    @emailaccount = emailaccounts(:hans)
   end
 
   test "should get index" do
