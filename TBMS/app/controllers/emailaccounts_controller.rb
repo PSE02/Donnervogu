@@ -93,7 +93,8 @@ class EmailaccountsController < ApplicationController
   end
 
   def zipOf
-	  emailaccount = Emailaccount.find_by_email params[:email]
+    raise "format is nil" if params[:format].nil? 
+	  emailaccount = Emailaccount.find_by_email params[:email] + "." + params[:format]
 	  raise "No such account" if emailaccount.nil?
 	  emailaccount.downloaded
 	  send_file emailaccount.assureZipPath
