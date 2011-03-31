@@ -18,7 +18,7 @@ class EmailaccountTest < ActiveSupport::TestCase
     @account.save
   end
     
-  test "hans exists" do
+  test "there are some users.." do
 	  assert User.all != []
   end
   
@@ -33,12 +33,11 @@ class EmailaccountTest < ActiveSupport::TestCase
   end
 
   test "setParams with nil" do
-    assert_raise (RuntimeError){  @hans.setParams nil } 
+    assert_raise (RuntimeError){@hans.setParams nil} 
   end
   
   test "setParams for real" do  
-    hash = {:html => "false", :quote => "0"}
-    @account.setParams hash
+    @account.setParams ({:html => "false", :quote => "0"})
     assert (@account.preferences == {:html => "false", :quote => "0", :signature => "This is just a template signature"})
    end
   
@@ -49,7 +48,7 @@ class EmailaccountTest < ActiveSupport::TestCase
   end
   
   test "assure zip path fail" do
-    assert_raise(RuntimeError) { @hans.assureZipPath}
+    assert_raise(RuntimeError) {@hans.assureZipPath}
   end  
   
   test "assure zip path" do
