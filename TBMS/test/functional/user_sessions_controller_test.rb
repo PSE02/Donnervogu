@@ -18,7 +18,7 @@ class UserSessionsControllerTest < ActionController::TestCase
     assert_equal users(:admin), user_session.user
     assert_redirected_to 'index#show'
   end
-  
+
   test "should destroy user session" do
     delete :destroy
     assert_nil UserSession.find
