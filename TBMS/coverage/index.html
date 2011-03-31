@@ -1,0 +1,452 @@
+<html>
+  <head>
+    <title>Coverage Report</title>
+    <link href="report.css?0.3762105325275017" media="screen" rel="stylesheet" type="text/css" />
+    <link href="index.css?0.24771136133603044" media="screen" rel="stylesheet" type="text/css" />
+    <script src="jquery.js?0.9919126073948691"></script>
+    <script src="jquery.tablesorter.js?0.48153748135591434"></script>
+    <script>
+      $(function() {
+        
+        function filterByPercent() {
+          var p = $('#filter_by_percent').val();
+          if (p == 0 ) {
+            $('#main tbody tr').show();
+          } else if (p == 10) {
+            $('#main tbody tr.row').show();
+            $('#main tbody tr.10').hide();
+          } else if (p == 100) {
+            $('#main tbody tr.row').hide();
+            $('#main tbody tr.10').show();
+          } else {
+            $('#main tbody tr.row').hide();
+            var x = 0;
+            while (x < p) {
+              $('#main tbody tr.' + x).show();
+              x++;
+            }
+          }
+        }
+        
+        function filterByName(name) {
+          $('#main tbody tr:visible').each(function() {
+            if ($(this).attr('id').indexOf(name) != -1) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        }
+        
+        $('#filter_by_percent').change(function(e) {
+          filterByPercent();
+          filterByName($('#filter_by_name').val());
+        });
+      
+        $('#filter_by_name').keyup(function(e) {
+          filterByPercent();
+          filterByName($(this).val());
+        });
+        
+        $("#main").tablesorter(); 
+      });
+    </script>
+  </head>
+  <body>
+    <div id='big_total' class='miss'>76.9%</div>
+    
+    <h1>Coverage Report</h1>
+    
+    <div id='filters'>
+      Filter:
+      <input type='text' id='filter_by_name'>
+      
+      Code Coverage Threshold:
+      <select id='filter_by_percent'>
+        <option value='0'>Show All</option>
+        <option value='1'><= 10% Coverage</option>
+        <option value='2'><= 20% Coverage</option>
+        <option value='3'><= 30% Coverage</option>
+        <option value='4'><= 40% Coverage</option>
+        <option value='5'><= 50% Coverage</option>
+        <option value='6'><= 60% Coverage</option>
+        <option value='7'><= 70% Coverage</option>
+        <option value='8'><= 80% Coverage</option>
+        <option value='9'><= 90% Coverage</option>
+        <option value='10'>< 100% Coverage</option>
+        <option value='100'>= 100% Coverage</option>
+      </select>
+    </div>
+
+    <table cellpadding='0' cellspacing='1'>
+      <tr>
+        <th>Legend</th>
+      </tr>
+      <tr>
+        
+        <td class='hit'>This file was tested 100%!</td>
+      </tr>
+      <tr>
+        <td class='near'>This file was tested >90%!</td>
+      </tr>
+      <tr>
+        <td class='miss'>This file was not tested nearly enough!</td>
+      </tr>
+    </table>
+    
+    <div>&nbsp;</div>
+
+    <table cellpadding="0" cellspacing='1' id='main'>
+      <thead>
+        <tr class='header'>
+          <th>File</th>
+          <th>Lines</th>
+          <th>Lines Of Code</th>
+          <th>Tested %</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        
+          <tr class='row miss 7' id='app/controllers/application_controller.rb'>
+            <td>
+              <a href="app/controllers/application_controller.rb.html">app/controllers/application_controller.rb</a>
+            </td>
+            <td>
+              73
+            </td>
+            <td>
+              41
+            </td>
+            <td>
+              70.7%
+            </td>
+          </tr>
+        
+          <tr class='row miss 2' id='app/controllers/emailaccounts_controller.rb'>
+            <td>
+              <a href="app/controllers/emailaccounts_controller.rb.html">app/controllers/emailaccounts_controller.rb</a>
+            </td>
+            <td>
+              102
+            </td>
+            <td>
+              53
+            </td>
+            <td>
+              20.8%
+            </td>
+          </tr>
+        
+          <tr class='row miss 2' id='app/controllers/groups_controller.rb'>
+            <td>
+              <a href="app/controllers/groups_controller.rb.html">app/controllers/groups_controller.rb</a>
+            </td>
+            <td>
+              83
+            </td>
+            <td>
+              40
+            </td>
+            <td>
+              20.0%
+            </td>
+          </tr>
+        
+          <tr class='row miss 8' id='app/controllers/home_controller.rb'>
+            <td>
+              <a href="app/controllers/home_controller.rb.html">app/controllers/home_controller.rb</a>
+            </td>
+            <td>
+              13
+            </td>
+            <td>
+              6
+            </td>
+            <td>
+              83.3%
+            </td>
+          </tr>
+        
+          <tr class='row miss 6' id='app/controllers/profile_controller.rb'>
+            <td>
+              <a href="app/controllers/profile_controller.rb.html">app/controllers/profile_controller.rb</a>
+            </td>
+            <td>
+              5
+            </td>
+            <td>
+              3
+            </td>
+            <td>
+              66.7%
+            </td>
+          </tr>
+        
+          <tr class='row miss 5' id='app/controllers/user_sessions_controller.rb'>
+            <td>
+              <a href="app/controllers/user_sessions_controller.rb.html">app/controllers/user_sessions_controller.rb</a>
+            </td>
+            <td>
+              27
+            </td>
+            <td>
+              13
+            </td>
+            <td>
+              53.8%
+            </td>
+          </tr>
+        
+          <tr class='row miss 5' id='app/controllers/users_controller.rb'>
+            <td>
+              <a href="app/controllers/users_controller.rb.html">app/controllers/users_controller.rb</a>
+            </td>
+            <td>
+              32
+            </td>
+            <td>
+              12
+            </td>
+            <td>
+              50.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/application_helper.rb'>
+            <td>
+              <a href="app/helpers/application_helper.rb.html">app/helpers/application_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row miss 4' id='app/helpers/boolean_helper.rb'>
+            <td>
+              <a href="app/helpers/boolean_helper.rb.html">app/helpers/boolean_helper.rb</a>
+            </td>
+            <td>
+              7
+            </td>
+            <td>
+              5
+            </td>
+            <td>
+              40.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/emailaccount_helper.rb'>
+            <td>
+              <a href="app/helpers/emailaccount_helper.rb.html">app/helpers/emailaccount_helper.rb</a>
+            </td>
+            <td>
+              77
+            </td>
+            <td>
+              27
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/groups_helper.rb'>
+            <td>
+              <a href="app/helpers/groups_helper.rb.html">app/helpers/groups_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/home_helper.rb'>
+            <td>
+              <a href="app/helpers/home_helper.rb.html">app/helpers/home_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/overview_helper.rb'>
+            <td>
+              <a href="app/helpers/overview_helper.rb.html">app/helpers/overview_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/profile_helper.rb'>
+            <td>
+              <a href="app/helpers/profile_helper.rb.html">app/helpers/profile_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/setups_helper.rb'>
+            <td>
+              <a href="app/helpers/setups_helper.rb.html">app/helpers/setups_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row miss 6' id='app/helpers/stringstripper_helper.rb'>
+            <td>
+              <a href="app/helpers/stringstripper_helper.rb.html">app/helpers/stringstripper_helper.rb</a>
+            </td>
+            <td>
+              7
+            </td>
+            <td>
+              3
+            </td>
+            <td>
+              66.7%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/user_sessions_helper.rb'>
+            <td>
+              <a href="app/helpers/user_sessions_helper.rb.html">app/helpers/user_sessions_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/helpers/users_helper.rb'>
+            <td>
+              <a href="app/helpers/users_helper.rb.html">app/helpers/users_helper.rb</a>
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row miss 4' id='app/models/emailaccount.rb'>
+            <td>
+              <a href="app/models/emailaccount.rb.html">app/models/emailaccount.rb</a>
+            </td>
+            <td>
+              63
+            </td>
+            <td>
+              38
+            </td>
+            <td>
+              44.7%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/models/group.rb'>
+            <td>
+              <a href="app/models/group.rb.html">app/models/group.rb</a>
+            </td>
+            <td>
+              5
+            </td>
+            <td>
+              4
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+          <tr class='row miss 7' id='app/models/user.rb'>
+            <td>
+              <a href="app/models/user.rb.html">app/models/user.rb</a>
+            </td>
+            <td>
+              12
+            </td>
+            <td>
+              4
+            </td>
+            <td>
+              75.0%
+            </td>
+          </tr>
+        
+          <tr class='row hit 10' id='app/models/user_session.rb'>
+            <td>
+              <a href="app/models/user_session.rb.html">app/models/user_session.rb</a>
+            </td>
+            <td>
+              5
+            </td>
+            <td>
+              2
+            </td>
+            <td>
+              100.0%
+            </td>
+          </tr>
+        
+      </tbody>
+      
+      <tr class='header'>
+        <th>Total</th>
+        <th>527</th>
+        <th>259</th>
+        <th>76.9%</th>
+      </tr>
+    </table>
+    <p>Generated on: 2011-03-31 09:48:04 +0200</p>
+  </body>
+</html>
