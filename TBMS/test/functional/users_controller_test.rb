@@ -1,26 +1,24 @@
 # Author:: Jonas Ruef
 require 'test_helper'
-require 'haml'
-require 'haml/template/plugin'
 
 class UsersControllerTest < ActionController::TestCase
-
-  test "should get new" do
-    get :new
-    assert_response :success
+  
+  test "prevent access if you are not logged in user" do
+  	get :show
+    assert_redirected_to '/user_sessions/new'
   end
-
+  
+  test "site accesible only when logged in" do
+    UserSession.create(users(:admin))
+  	get :show
+  	assert_response :success
+  end
+  
   test "should create user" do
-   assert_difference('users.count') do
-      post :create, :users => { :login => "admin", :password => "admin", :password_confirmation => "admin" }
+    assert_difference "User.count" do
+        post :create, :user => { :login => "superpippo", :password => "noccioline", :password_confirmation => "noccioline"}
+        assert_redirected_to root_path
     end
-    
-    assert_redirected_to account_path
-  end
-
-  test "should show user" do
-   UserSession.create(users(:admin))
-    get :show
-    assert_response :success
+    assert_equal "superpippo", assigns(:user).login
   end
 end

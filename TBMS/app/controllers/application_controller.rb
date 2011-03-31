@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       @current_user
    end
     
-  private
+  
     #JR Returns current user session, if somebody is logged in
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
