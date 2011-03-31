@@ -32,11 +32,6 @@ class EmailaccountsController < ApplicationController
     end
   end
 
-  # GET /emailaccounts/1/edit
-  def edit
-    @emailaccount = Emailaccount.find(params[:id])
-  end
-
   # POST /emailaccounts
   # POST /emailaccounts.xml
   def create

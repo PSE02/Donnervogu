@@ -1,5 +1,3 @@
-= flash[:notice]
-%br
 %table
   %tr
     %td
@@ -15,41 +13,38 @@
 %br
 %hr
 %br 
-%h2 Preferences:
-%br
-%fieldset
-  %legend Send all Mails in HTML
-  %table
-    %tr
-      %td
-        = label_tag("ON")
-      %td
-        = radio_button_tag(:html, true, checked = @emailaccount.preferences[:html] == "true",:disabled => true)
-    %tr
-      %td
-        = label_tag("OFF")
-      %td
-        = radio_button_tag(:html, false, checked = @emailaccount.preferences[:html] == "false", :disabled => true)
-%fieldset
-  %legend Quote
-  %table
-    %tr
-      %td
-        = select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0],['select the quote', 2]], @emailaccount.preferences[:quote]), :disabled => true)
-%fieldset
-  %legend Configure the Signature
-  %table
-    %tr
-      %td
-        = text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70, :disabled => true )
-    %tr
-      %td
-        %label Position of the signature
-    %tr
-      %td
-        = select_tag(:signature_style, options_for_select([['below the quote', true],['below my reply', false]],  @emailaccount.preferences[:signature_style]), :disabled => true)
-
-%br
-= link_to 'Edit', edit_emailaccount_path(@emailaccount) 
-|
-= link_to 'Back', emailaccounts_path
+= form_tag(:action => "setParams") do
+  %fieldset
+    %legend Send all Mails in HTML
+    %table
+      %tr
+        %td
+          = label_tag("ON")
+        %td
+          = radio_button_tag(:html, true, checked = @emailaccount.preferences[:html] == "true")
+      %tr
+        %td
+          = label_tag("OFF")
+        %td
+          = radio_button_tag(:html, false, checked = @emailaccount.preferences[:html] == "false")
+  %fieldset
+    %legend Quote
+    %table
+      %tr
+        %td
+          = select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]], @emailaccount.preferences[:quote]))
+  %fieldset
+    %legend Configure the Signature
+    %table
+      %tr
+        %td
+          = text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70 )
+      %tr
+        %td
+          %label Position of the signature (if "reply above the quote" is selected)
+      %tr
+        %td
+          = select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]],  @emailaccount.preferences[:signature_style]))
+  %br
+  = submit_tag("Save")
+  = link_to 'Back', emailaccounts_path

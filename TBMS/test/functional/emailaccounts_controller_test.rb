@@ -29,11 +29,6 @@ class EmailaccountsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test "should get edit" do
-    get :edit, :id => @emailaccount.to_param
-    assert_response :redirect
-  end
-
 #  test "should update emailaccount" do
 #    put :update, :id => @emailaccount.to_param, :emailaccount => @emailaccount.attributes
 #    assert_redirected_to emailaccount_path(assigns(:emailaccount))

@@ -1,0 +1,11 @@
+
+/************************** Signature Text ***********************/  
+// true=allow html in signature false=don't allow html in signature 
+user_pref("mail.identity.id1.htmlSigFormat", true); 
+// this is the part where the signature is saved if it's no file 
+user_pref("mail.identity.id1.htmlSigText", "This is just a template signature"); 
+/************************** HTML *********************************/ 
+// 0=ask, 1=plain, 2=html, 3=both 
+pref("mail.default_html_action", 2); 
+// true=Messages in HTML false=Messages not in HTML 
+user_pref("mail.identity.id1.compose_html", true); 
