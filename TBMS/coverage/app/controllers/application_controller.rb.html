@@ -2,8 +2,8 @@
   <head>
     <title>app/controllers/application_controller.rb</title>
     
-    <link href="../../report.css?0.48777550453799146" media="screen" rel="stylesheet" type="text/css" />
-    <script src='../../jquery.js?0.8825090985602186'></script>
+    <link href="../../report.css?0.018208777924312636" media="screen" rel="stylesheet" type="text/css" />
+    <script src='../../jquery.js?0.3521600023578031'></script>
     <script>
       $(function() {
 
@@ -88,7 +88,7 @@
               <td class='code_line'>
                 <pre>class ApplicationController < ActionController::Base</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -96,7 +96,7 @@
               <td class='code_line'>
                 <pre>  protect_from_forgery</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -112,7 +112,7 @@
               <td class='code_line'>
                 <pre>  before_filter :require_user</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -120,7 +120,7 @@
               <td class='code_line'>
                 <pre>  before_filter :overview</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -136,7 +136,7 @@
               <td class='code_line'>
                 <pre>  filter_parameter_logging :password, :password_confirmation # there are underscores :-|</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -144,7 +144,7 @@
               <td class='code_line'>
                 <pre>  helper_method :current_user_session, :current_user</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -160,7 +160,7 @@
               <td class='code_line'>
                 <pre>  def overview</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -200,7 +200,7 @@
               <td class='code_line'>
                 <pre>  def index   </pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -232,7 +232,7 @@
               <td class='code_line'>
                 <pre>  def setHtml</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="miss" data-hits='#{cov}'"">
@@ -304,7 +304,7 @@
               <td class='code_line'>
                 <pre>   def logged_in?</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="miss" data-hits='#{cov}'"">
@@ -336,7 +336,7 @@
               <td class='code_line'>
                 <pre>  private</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -352,7 +352,7 @@
               <td class='code_line'>
                 <pre>    def current_user_session</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -360,7 +360,7 @@
               <td class='code_line'>
                 <pre>      return @current_user_session if defined?(@current_user_session)</pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -368,7 +368,7 @@
               <td class='code_line'>
                 <pre>      @current_user_session = UserSession.find</pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -400,7 +400,7 @@
               <td class='code_line'>
                 <pre>    def current_user</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -408,7 +408,7 @@
               <td class='code_line'>
                 <pre>      return @current_user if defined?(@current_user)</pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -416,7 +416,7 @@
               <td class='code_line'>
                 <pre>      @current_user = current_user_session && current_user_session.user</pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -448,7 +448,7 @@
               <td class='code_line'>
                 <pre>    def require_user</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -456,7 +456,7 @@
               <td class='code_line'>
                 <pre>      unless current_user</pre>
               </td>
-              <td class='hit_number'>1</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -464,7 +464,7 @@
               <td class='code_line'>
                 <pre>        store_location</pre>
               </td>
-              <td class='hit_number'>1</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -472,7 +472,7 @@
               <td class='code_line'>
                 <pre>        redirect_to new_user_session_url</pre>
               </td>
-              <td class='hit_number'>1</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -480,7 +480,7 @@
               <td class='code_line'>
                 <pre>        return false</pre>
               </td>
-              <td class='hit_number'>1</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="never" "">
@@ -520,7 +520,7 @@
               <td class='code_line'>
                 <pre>    def require_no_user</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -592,7 +592,7 @@
               <td class='code_line'>
                 <pre>    def store_location</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -600,7 +600,7 @@
               <td class='code_line'>
                 <pre>      session[:return_to] = request.request_uri</pre>
               </td>
-              <td class='hit_number'>1</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="never" "">
@@ -632,7 +632,7 @@
               <td class='code_line'>
                 <pre>    def redirect_back_or_default(default)</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="miss" data-hits='#{cov}'"">
@@ -672,6 +672,6 @@
       
     </div>
     
-    <p>Generated on: 2011-03-31 09:48:04 +0200</p>
+    <p>Generated on: 2011-03-31 14:39:08 +0200</p>
   </body>
 </html>

@@ -29,6 +29,7 @@ module EmailaccountHelper
   	  emailaccount.preferences.each do |key, value|
   	    filecontent += self.send(key, value) if validKey? key
   	  end
+  	  return filecontent;
   	end
   	 
     def self.validKey? key

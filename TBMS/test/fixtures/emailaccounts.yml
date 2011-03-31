@@ -14,5 +14,5 @@ juerg:
 max:
   email: max@example.com
   name: Max
-  preferences: { !ruby/symbol html: "true" } 
+  preferences: { !ruby/symbol html: "false", !ruby/symbol quote: "2", !ruby/symbol signature_style: "true",  !ruby/symbol signature: "Max Muster's signature" } 
 

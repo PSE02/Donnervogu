@@ -2,23 +2,15 @@ require 'test_helper'
 
 # Tests for the fileCreator module
 # Needs 3 emailaccounts in the fixtures called "hans", "juerg" and "max" - please don't delete them!
-# 
-# ToDo: the getConfig method is not fully tested!
-
+#
 # Author::    Dominique Rahm
 # License::   Distributes under the same terms as Ruby
 
 class FileCreatorTest < ActiveSupport::TestCase
-  
   setup do
     @hans = emailaccounts(:hans)
     @juerg = emailaccounts(:juerg)
     @max = emailaccounts(:max)
-  end
-  
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
   end
   
   test "html text" do
@@ -61,19 +53,39 @@ class FileCreatorTest < ActiveSupport::TestCase
     assert_raise (RuntimeError){ FileCreator::createNewZip @hans } 
   end
   
-  test "config file with empty preferences" do
-      testString = FileCreator::getConfig @juerg
-      assert (@juerg.preferences.empty?)
+  test "create Zip" do
+    zip_file_content = ""
+    FileCreator::createNewZip @max
+    assert FileTest.exist?("public/profiles/#{@max.id}_profile.zip")
+    Zip::ZipFile.open( "public/profiles/#{@max.id}_profile.zip" )do
+      |zipfile| 
+      assert (zipfile.get_entry("user.js"))
+      zip_file_content = zipfile.read("user.js") 
+    end
+    assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"Max Muster's signature\");", zip_file_content)
   end
   
-  #DR this test does not work somehow the preferences are not what they should be...
-  #DR therefore getConfig is not fully tested!
+  test "config file with empty preferences" do
+      testString = FileCreator::getConfig @juerg
+      assert @juerg.preferences.empty?
+  end
+  
   test "complete config file" do
-      testString = FileCreator::getConfig (@max)
-      assert (not @max.preferences.empty?)
-      # assert_match("pref(\"mail.default_html_action\", 1);", testString)
- 		# assert_match("user_pref(\"mail.identity.id1.compose_html\", false);", testString)
- 		# assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 0);", testString)
-     	# assert_match("user_pref(\"mail.identity.id1.sig_bottom\", false);", testString)
+      assert !(@max.preferences.empty?)
+      testString = FileCreator::getConfig @max
+      
+      #HTML 
+      assert_match("pref(\"mail.default_html_action\", 1);", testString)
+ 		  assert_match("user_pref(\"mail.identity.id1.compose_html\", false);", testString)
+ 		  
+ 		  #Quote
+ 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 2);", testString)
+ 		  
+ 		  #Signature_style
+     	assert_match("user_pref(\"mail.identity.id1.sig_bottom\", true);", testString)
+    
+      #Signature
+      assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"Max Muster's signature\");", testString)
    end
+   
 end

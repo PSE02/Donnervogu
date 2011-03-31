@@ -2,8 +2,8 @@
   <head>
     <title>app/helpers/emailaccount_helper.rb</title>
     
-    <link href="../../report.css?0.36128933196627444" media="screen" rel="stylesheet" type="text/css" />
-    <script src='../../jquery.js?0.0860234434831505'></script>
+    <link href="../../report.css?0.10011910438929239" media="screen" rel="stylesheet" type="text/css" />
+    <script src='../../jquery.js?0.2029177847051542'></script>
     <script>
       $(function() {
 
@@ -54,8 +54,8 @@
           app/helpers/emailaccount_helper.rb
           
         </td>
-        <td>77</td>
-        <td>27</td>
+        <td>78</td>
+        <td>28</td>
         <td>100.0%</td>
       </tr>
     </table>
@@ -88,7 +88,7 @@
               <td class='code_line'>
                 <pre>require 'zip/zip' # rubyzip gem</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -96,7 +96,7 @@
               <td class='code_line'>
                 <pre>require 'zip/zipfilesystem'</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -112,7 +112,7 @@
               <td class='code_line'>
                 <pre>module EmailaccountHelper</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -120,7 +120,7 @@
               <td class='code_line'>
                 <pre>  module FileCreator </pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -136,7 +136,7 @@
               <td class='code_line'>
                 <pre>    @validKeys = [:html, :quote, :signature_style, :signature]</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -168,7 +168,7 @@
               <td class='code_line'>
                 <pre>    def self.completeZipPath emailaccount</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -176,7 +176,7 @@
               <td class='code_line'>
                 <pre>	    File.join(Dir.pwd,"public",</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>29</td>
             </tr>
           
             <tr class="never" "">
@@ -216,7 +216,7 @@
               <td class='code_line'>
                 <pre>  	def self.createNewZip emailaccount</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -224,7 +224,7 @@
               <td class='code_line'>
                 <pre>      raise "Emailaccount nil" if emailaccount.nil?</pre>
               </td>
-              <td class='hit_number'>32</td>
+              <td class='hit_number'>21</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -232,7 +232,7 @@
               <td class='code_line'>
                 <pre>      raise "Preferences nil" if emailaccount.preferences.nil?</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>20</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -240,7 +240,7 @@
               <td class='code_line'>
                 <pre>  		zipPath = self.completeZipPath emailaccount</pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>15</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -248,7 +248,7 @@
               <td class='code_line'>
                 <pre>  		Zip::ZipFile.open(zipPath, Zip::ZipFile::CREATE) do</pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>15</td>
             </tr>
           
             <tr class="never" "">
@@ -264,7 +264,7 @@
               <td class='code_line'>
                 <pre>  			zipfile.get_output_stream("user.js") { |f| f.puts getConfig(emailaccount)}  </pre>
               </td>
-              <td class='hit_number'>2</td>
+              <td class='hit_number'>30</td>
             </tr>
           
             <tr class="never" "">
@@ -296,7 +296,7 @@
               <td class='code_line'>
                 <pre>  	def self.getConfig emailaccount</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -304,7 +304,7 @@
               <td class='code_line'>
                 <pre>  	  filecontent = ""</pre>
               </td>
-              <td class='hit_number'>28</td>
+              <td class='hit_number'>17</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -312,7 +312,7 @@
               <td class='code_line'>
                 <pre>  	  emailaccount.preferences.each do |key, value|</pre>
               </td>
-              <td class='hit_number'>28</td>
+              <td class='hit_number'>17</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -320,7 +320,7 @@
               <td class='code_line'>
                 <pre>  	    filecontent += self.send(key, value) if validKey? key</pre>
               </td>
-              <td class='hit_number'>13</td>
+              <td class='hit_number'>46</td>
             </tr>
           
             <tr class="never" "">
@@ -331,8 +331,16 @@
               <td class='hit_number'></td>
             </tr>
           
-            <tr class="never" "">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>32</td>
+              <td class='code_line'>
+                <pre>  	  return filecontent;</pre>
+              </td>
+              <td class='hit_number'>17</td>
+            </tr>
+          
+            <tr class="never" "">
+              <td class='line_number'>33</td>
               <td class='code_line'>
                 <pre>  	end</pre>
               </td>
@@ -340,7 +348,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>33</td>
+              <td class='line_number'>34</td>
               <td class='code_line'>
                 <pre>  	 </pre>
               </td>
@@ -348,33 +356,25 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>34</td>
+              <td class='line_number'>35</td>
               <td class='code_line'>
                 <pre>    def self.validKey? key</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>35</td>
+              <td class='line_number'>36</td>
               <td class='code_line'>
                 <pre>	    @validKeys.include?(key)</pre>
               </td>
-              <td class='hit_number'>20</td>
-            </tr>
-          
-            <tr class="never" "">
-              <td class='line_number'>36</td>
-              <td class='code_line'>
-                <pre>    end</pre>
-              </td>
-              <td class='hit_number'></td>
+              <td class='hit_number'>57</td>
             </tr>
           
             <tr class="never" "">
               <td class='line_number'>37</td>
               <td class='code_line'>
-                <pre>  </pre>
+                <pre>    end</pre>
               </td>
               <td class='hit_number'></td>
             </tr>
@@ -382,7 +382,7 @@
             <tr class="never" "">
               <td class='line_number'>38</td>
               <td class='code_line'>
-                <pre>  	#DR I love string interpolation! we don't need the XML anymore!</pre>
+                <pre>  </pre>
               </td>
               <td class='hit_number'></td>
             </tr>
@@ -390,21 +390,29 @@
             <tr class="never" "">
               <td class='line_number'>39</td>
               <td class='code_line'>
+                <pre>  	#DR I love string interpolation! we don't need the XML anymore!</pre>
+              </td>
+              <td class='hit_number'></td>
+            </tr>
+          
+            <tr class="never" "">
+              <td class='line_number'>40</td>
+              <td class='code_line'>
                 <pre>  	#DR I think all this stuff will need some refactoring sooner or later!</pre>
               </td>
               <td class='hit_number'></td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>40</td>
+              <td class='line_number'>41</td>
               <td class='code_line'>
                 <pre>  	def self.html html</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>41</td>
+              <td class='line_number'>42</td>
               <td class='code_line'>
                 <pre>  		"/************************** HTML *********************************/ \n" +</pre>
               </td>
@@ -412,7 +420,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>42</td>
+              <td class='line_number'>43</td>
               <td class='code_line'>
                 <pre>  		"// 0=ask, 1=plain, 2=html, 3=both \n" +</pre>
               </td>
@@ -420,7 +428,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>43</td>
+              <td class='line_number'>44</td>
               <td class='code_line'>
                 <pre>  		"pref(\"mail.default_html_action\", #{html == "true" ? 2 : 1}); \n" +</pre>
               </td>
@@ -428,7 +436,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>44</td>
+              <td class='line_number'>45</td>
               <td class='code_line'>
                 <pre>  	</pre>
               </td>
@@ -436,7 +444,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>45</td>
+              <td class='line_number'>46</td>
               <td class='code_line'>
                 <pre>  	  "// true=Messages in HTML false=Messages not in HTML \n" +</pre>
               </td>
@@ -444,15 +452,15 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>46</td>
+              <td class='line_number'>47</td>
               <td class='code_line'>
                 <pre>      "user_pref(\"mail.identity.id1.compose_html\", #{html == "true"}); \n"</pre>
               </td>
-              <td class='hit_number'>28</td>
+              <td class='hit_number'>17</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>47</td>
+              <td class='line_number'>48</td>
               <td class='code_line'>
                 <pre>  	end</pre>
               </td>
@@ -460,7 +468,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>48</td>
+              <td class='line_number'>49</td>
               <td class='code_line'>
                 <pre>    </pre>
               </td>
@@ -468,15 +476,15 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>49</td>
+              <td class='line_number'>50</td>
               <td class='code_line'>
                 <pre>     def self.quote quote</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>50</td>
+              <td class='line_number'>51</td>
               <td class='code_line'>
                 <pre>       "\n/************************** Quotes *******************************/ \n"+</pre>
               </td>
@@ -484,7 +492,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>51</td>
+              <td class='line_number'>52</td>
               <td class='code_line'>
                 <pre>       "// 0=reply below 1=reply above 2=select the quote \n" +</pre>
               </td>
@@ -492,7 +500,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>52</td>
+              <td class='line_number'>53</td>
               <td class='code_line'>
                 <pre>       "user_pref(\"mail.identity.id1.reply_on_top\", #{quote}); \n" +</pre>
               </td>
@@ -500,7 +508,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>53</td>
+              <td class='line_number'>54</td>
               <td class='code_line'>
                 <pre>       </pre>
               </td>
@@ -508,7 +516,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>54</td>
+              <td class='line_number'>55</td>
               <td class='code_line'>
                 <pre>       "// enable quoting for replies \n" +</pre>
               </td>
@@ -516,15 +524,15 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>55</td>
+              <td class='line_number'>56</td>
               <td class='code_line'>
                 <pre>       "user_pref(\"mail.identity.id1.auto_quote\", true); \n"</pre>
               </td>
-              <td class='hit_number'>15</td>
+              <td class='hit_number'>13</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>56</td>
+              <td class='line_number'>57</td>
               <td class='code_line'>
                 <pre>     end</pre>
               </td>
@@ -532,7 +540,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>57</td>
+              <td class='line_number'>58</td>
               <td class='code_line'>
                 <pre>  </pre>
               </td>
@@ -540,15 +548,15 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>58</td>
+              <td class='line_number'>59</td>
               <td class='code_line'>
                 <pre>    def self.signature_style sig_style</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>59</td>
+              <td class='line_number'>60</td>
               <td class='code_line'>
                 <pre>      "\n/************************** Signature Style **********************/  \n"+</pre>
               </td>
@@ -556,7 +564,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>60</td>
+              <td class='line_number'>61</td>
               <td class='code_line'>
                 <pre>      "// true=below the quote false=below my reply \n" +</pre>
               </td>
@@ -564,7 +572,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>61</td>
+              <td class='line_number'>62</td>
               <td class='code_line'>
                 <pre>      "user_pref(\"mail.identity.id1.sig_bottom\", #{sig_style == "true"}); \n" +</pre>
               </td>
@@ -572,7 +580,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>62</td>
+              <td class='line_number'>63</td>
               <td class='code_line'>
                 <pre>      "// add signatur to replies \n" +</pre>
               </td>
@@ -580,25 +588,17 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>63</td>
+              <td class='line_number'>64</td>
               <td class='code_line'>
                 <pre>      "user_pref(\"mail.identity.id1.sig_on_reply\", true); \n"</pre>
               </td>
-              <td class='hit_number'>15</td>
-            </tr>
-          
-            <tr class="never" "">
-              <td class='line_number'>64</td>
-              <td class='code_line'>
-                <pre>    end</pre>
-              </td>
-              <td class='hit_number'></td>
+              <td class='hit_number'>3</td>
             </tr>
           
             <tr class="never" "">
               <td class='line_number'>65</td>
               <td class='code_line'>
-                <pre>  </pre>
+                <pre>    end</pre>
               </td>
               <td class='hit_number'></td>
             </tr>
@@ -606,21 +606,29 @@
             <tr class="never" "">
               <td class='line_number'>66</td>
               <td class='code_line'>
+                <pre>  </pre>
+              </td>
+              <td class='hit_number'></td>
+            </tr>
+          
+            <tr class="never" "">
+              <td class='line_number'>67</td>
+              <td class='code_line'>
                 <pre>    #DR we have to care about the signature it should not contain newlines from the form instead newlines should be html <br></br></pre>
               </td>
               <td class='hit_number'></td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>67</td>
+              <td class='line_number'>68</td>
               <td class='code_line'>
                 <pre>    def self.signature signature</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>68</td>
+              <td class='line_number'>69</td>
               <td class='code_line'>
                 <pre>      "\n/************************** Signature Text ***********************/  \n" +</pre>
               </td>
@@ -628,7 +636,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>69</td>
+              <td class='line_number'>70</td>
               <td class='code_line'>
                 <pre>      "// true=allow html in signature false=don't allow html in signature \n" +</pre>
               </td>
@@ -636,7 +644,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>70</td>
+              <td class='line_number'>71</td>
               <td class='code_line'>
                 <pre>      "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +</pre>
               </td>
@@ -644,7 +652,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>71</td>
+              <td class='line_number'>72</td>
               <td class='code_line'>
                 <pre>      "// this is the part where the signature is saved if it's no file \n" +</pre>
               </td>
@@ -652,15 +660,15 @@
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
-              <td class='line_number'>72</td>
+              <td class='line_number'>73</td>
               <td class='code_line'>
                 <pre>      "user_pref(\"mail.identity.id1.htmlSigText\", \"#{signature}\"); \n"</pre>
               </td>
-              <td class='hit_number'>15</td>
+              <td class='hit_number'>17</td>
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>73</td>
+              <td class='line_number'>74</td>
               <td class='code_line'>
                 <pre>    end</pre>
               </td>
@@ -668,7 +676,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>74</td>
+              <td class='line_number'>75</td>
               <td class='code_line'>
                 <pre>    </pre>
               </td>
@@ -676,7 +684,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>75</td>
+              <td class='line_number'>76</td>
               <td class='code_line'>
                 <pre>  end</pre>
               </td>
@@ -684,7 +692,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>76</td>
+              <td class='line_number'>77</td>
               <td class='code_line'>
                 <pre></pre>
               </td>
@@ -692,7 +700,7 @@
             </tr>
           
             <tr class="never" "">
-              <td class='line_number'>77</td>
+              <td class='line_number'>78</td>
               <td class='code_line'>
                 <pre>end</pre>
               </td>
@@ -704,6 +712,6 @@
       
     </div>
     
-    <p>Generated on: 2011-03-31 09:48:04 +0200</p>
+    <p>Generated on: 2011-03-31 14:39:08 +0200</p>
   </body>
 </html>

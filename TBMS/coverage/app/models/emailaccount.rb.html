@@ -2,8 +2,8 @@
   <head>
     <title>app/models/emailaccount.rb</title>
     
-    <link href="../../report.css?0.939450906997703" media="screen" rel="stylesheet" type="text/css" />
-    <script src='../../jquery.js?0.1891683000228811'></script>
+    <link href="../../report.css?0.5171763871877229" media="screen" rel="stylesheet" type="text/css" />
+    <script src='../../jquery.js?0.9439517727576439'></script>
     <script>
       $(function() {
 
@@ -56,7 +56,7 @@
         </td>
         <td>63</td>
         <td>38</td>
-        <td>44.7%</td>
+        <td>100.0%</td>
       </tr>
     </table>
 
@@ -88,7 +88,7 @@
               <td class='code_line'>
                 <pre>include EmailaccountHelper</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -96,7 +96,7 @@
               <td class='code_line'>
                 <pre>class Emailaccount < ActiveRecord::Base</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -104,7 +104,7 @@
               <td class='code_line'>
                 <pre>	validates_presence_of :email</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -112,7 +112,7 @@
               <td class='code_line'>
                 <pre>	validates_presence_of :name</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -120,7 +120,7 @@
               <td class='code_line'>
                 <pre>  validates_format_of :email,</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -136,7 +136,7 @@
               <td class='code_line'>
                 <pre>  validates_format_of :name, :with => /^\w+$/i,</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -160,7 +160,7 @@
               <td class='code_line'>
                 <pre>	serialize :preferences</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="never" "">
@@ -184,39 +184,39 @@
               <td class='code_line'>
                 <pre>  def initialize panda={}</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>14</td>
               <td class='code_line'>
                 <pre>	  super panda</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>38</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>15</td>
               <td class='code_line'>
                 <pre>    self.preferences = Hash.new</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>38</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>16</td>
               <td class='code_line'>
                 <pre>    self.loadInitPreferences</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>38</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>17</td>
               <td class='code_line'>
                 <pre>    self.last_get = Time.now</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>38</td>
             </tr>
           
             <tr class="never" "">
@@ -240,7 +240,7 @@
               <td class='code_line'>
                 <pre>  def self.oldestGet</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
             <tr class="hit" data-hits='#{cov}'"">
@@ -272,47 +272,47 @@
               <td class='code_line'>
                 <pre>	def setParams params</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>25</td>
               <td class='code_line'>
                 <pre>	  raise "No Params" if params.nil?</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>10</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>26</td>
               <td class='code_line'>
                 <pre>	  params.each do |key, value|</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>5</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>27</td>
               <td class='code_line'>
                 <pre>	    raise "key nil" if key.nil?</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>10</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>28</td>
               <td class='code_line'>
                 <pre>	    raise "value nil" if value.nil?</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>10</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>29</td>
               <td class='code_line'>
                 <pre>	     self.preferences[key.to_sym] = value if validKey?(key)</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>10</td>
             </tr>
           
             <tr class="never" "">
@@ -323,28 +323,28 @@
               <td class='hit_number'></td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>31</td>
               <td class='code_line'>
                 <pre>    self.save</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>5</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>32</td>
               <td class='code_line'>
                 <pre>    FileCreator::createNewZip(self)</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>5</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>33</td>
               <td class='code_line'>
                 <pre>    assureCreatedZip</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="never" "">
@@ -368,15 +368,15 @@
               <td class='code_line'>
                 <pre>	def validKey? key</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>37</td>
               <td class='code_line'>
                 <pre>	    (not key.nil?) and (FileCreator::validKey?(key.to_sym))</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>10</td>
             </tr>
           
             <tr class="never" "">
@@ -400,23 +400,23 @@
               <td class='code_line'>
                 <pre>	def assureCreatedZip</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>41</td>
               <td class='code_line'>
                 <pre>	    FileCreator::createNewZip(self)</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>13</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>42</td>
               <td class='code_line'>
                 <pre>	    raise "No file created" unless File.exists? zipPath</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>9</td>
             </tr>
           
             <tr class="never" "">
@@ -440,23 +440,23 @@
               <td class='code_line'>
                 <pre>	def assureZipPath</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>46</td>
               <td class='code_line'>
                 <pre>		assureCreatedZip</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>8</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>47</td>
               <td class='code_line'>
                 <pre>		zipPath</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>4</td>
             </tr>
           
             <tr class="never" "">
@@ -480,15 +480,15 @@
               <td class='code_line'>
                 <pre>	def zipPath</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>51</td>
               <td class='code_line'>
                 <pre>		FileCreator::completeZipPath self</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>13</td>
             </tr>
           
             <tr class="never" "">
@@ -520,23 +520,23 @@
               <td class='code_line'>
                 <pre>	def loadInitPreferences</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>56</td>
               <td class='code_line'>
                 <pre>	  self.preferences[:signature] = "This is just a template signature"</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>38</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>57</td>
               <td class='code_line'>
                 <pre>    self.preferences[:html] = "true"</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>38</td>
             </tr>
           
             <tr class="never" "">
@@ -560,15 +560,15 @@
               <td class='code_line'>
                 <pre>	def downloaded</pre>
               </td>
-              <td class='hit_number'>17</td>
+              <td class='hit_number'>6</td>
             </tr>
           
-            <tr class="miss" data-hits='#{cov}'"">
+            <tr class="hit" data-hits='#{cov}'"">
               <td class='line_number'>61</td>
               <td class='code_line'>
                 <pre>		self.last_get = Time.now</pre>
               </td>
-              <td class='hit_number'>0</td>
+              <td class='hit_number'>5</td>
             </tr>
           
             <tr class="never" "">
@@ -592,6 +592,6 @@
       
     </div>
     
-    <p>Generated on: 2011-03-31 09:48:04 +0200</p>
+    <p>Generated on: 2011-03-31 14:39:08 +0200</p>
   </body>
 </html>
