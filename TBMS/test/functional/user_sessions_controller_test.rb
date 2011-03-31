@@ -2,6 +2,7 @@
 require 'test_helper'
 
 class UserSessionsControllerTest < ActionController::TestCase
+  
   test "test the tests" do
     assert true
   end

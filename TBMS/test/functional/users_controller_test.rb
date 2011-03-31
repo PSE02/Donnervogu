@@ -3,12 +3,16 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   
-  test "prevent access if you are not logged in user" do
+  test "test the tests" do
+    assert true
+  end
+  
+  test "should prevent access if you are not a logged in user" do
   	get :show
     assert_redirected_to '/user_sessions/new'
   end
   
-  test "site accesible only when logged in" do
+  test "should grant you access if you are a logged in user" do
     UserSession.create(users(:admin))
   	get :show
   	assert_response :success
