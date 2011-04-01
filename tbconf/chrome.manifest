@@ -1,4 +1,4 @@
-content     pse1   chrome/content/
-overlay chrome://messenger/content/messenger.xul chrome://pse1/content/test.xul
+# https://developer.mozilla.org/en/chrome_registration
 
-
+content tbconf chrome/content/
+overlay chrome://messenger/content/messenger.xul chrome://tbconf/content/messenger.xul
