@@ -1,6 +1,5 @@
-pref("extensions.pse1test.boolpref", false);
-pref("extensions.pse1test.intpref", 0);
-pref("extensions.pse1test.stringpref", "A string");
+/* https://developer.mozilla.org/En/A_Brief_Guide_to_Mozilla_Preferences */
 
-// https://developer.mozilla.org/en/Localizing_extension_descriptions
-pref("extensions.pse1test.description", "chrome://pse1test/locale/overlay.properties");
+pref("extensions.tbconf.boolpref", false);
+pref("extensions.tbconf.intpref", 0);
+pref("extensions.tbconf.stringpref", "some string");
