@@ -11,6 +11,14 @@ var t = { /* object types */
 	isrv:i++
 }
 
+function debug(msg) {
+	dump("[tbconf."+debug.caller.name+"]");
+	if (msg) {
+		dump(" "+msg);
+	}
+	dump("\n");
+}
+
 function newb(type) { /* new object */
 	if (type == t.path) {
 		return Components
@@ -41,12 +49,43 @@ function newp(dest, basename) { /* new path */
 	return path;
 }
 
-function debug(msg) {
-	dump(debug.caller.name);
-	if (msg) {
-		dump(": "+msg);
+function getp(key) { /* get preference */
+	return setp(key);
+}
+
+function setp(key, val) { /* set preference */
+	var b = "extensions.tbconf.";
+	var p = Components
+		.classes["@mozilla.org/preferences-service;1"]
+		.getService(Components.interfaces.nsIPrefService)
+		.getBranch(b);
+	var t = p.getPrefType(key);
+
+	if (t == p.PREF_INVALID) {
+		debug("key: invalid: "+key);
+		return;
 	}
-	dump("\n");
+	if (t == p.PREF_STRING) {
+		debug("key: string: "+key);
+		if (!val) {
+			return p.getCharPref(key);
+		}
+		return p.setCharPref(key, val);
+	}
+	if (t == p.PREF_INT) {
+		debug("key: int: "+key);
+		if (!val) {
+			return p.getIntPref(key);
+		}
+		return p.setIntPref(key, val);
+	}
+	if (t == p.PREF_BOOL) {
+		debug("key: bool: "+key);
+		if (!val) {
+			return p.getBoolPref(key);
+		}
+		return p.setBoolPref(key, val);
+	}
 }
 
 function init() {
@@ -57,7 +96,7 @@ function pad(s) {
 	return s<10?'0'+s:s;
 }
 
-function hdate() {	/* HTTP-date */
+function hdate() { /* HTTP-date */
 	debug();
 
 	var date = new Date();
@@ -89,6 +128,7 @@ function fetch(uri, dest, basename) {
 	var path = newp(dest, basename);
 	var webp = newb(t.webp);
 	var isrv = newb(t.isrv);
+	var hedr = "If-Modified-Since: "+hdate();
 
 	webp.saveURI(isrv.newURI(uri, null, null), null, null, null, null, path);
 }
@@ -142,13 +182,12 @@ function restart() {
 function main() {
 	debug();
 
+	var basename = getp("profile.basename");
+	var uri = getp("source")+getp("profile.id");
 	var dest = Components
 		.classes["@mozilla.org/file/directory_service;1"]
 		.getService(Components.interfaces.nsIProperties)
 		.get("ProfD", Components.interfaces.nsIFile);
-
-	var basename = "profile.zip"
-	var uri = "http://smokva.net/pse/"+basename;
 
 	init();
 	fetch(uri, dest, basename);
