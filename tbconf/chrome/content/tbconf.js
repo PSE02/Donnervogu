@@ -17,7 +17,7 @@ function newb(type) { /* new object */
 			.classes["@mozilla.org/file/local;1"]
 			.createInstance(Components.interfaces.nsILocalFile);
 	}
-	if (type == t.zipr)
+	if (type == t.zipr) {
 		return Components
 			.classes["@mozilla.org/libjar/zip-reader;1"]
 			.createInstance(Components.interfaces.nsIZipReader);
@@ -66,7 +66,7 @@ function fetch(uri, dest, basename) {
 function extract(dest, basename) {
 	debug(basename);
 
-	var path = newp(dest, basename;
+	var path = newp(dest, basename);
 	var zipr = newb(t.zipr);
 
 	zipr.open(path);
