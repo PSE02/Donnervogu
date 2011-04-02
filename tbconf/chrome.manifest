@@ -1,4 +1,4 @@
 # https://developer.mozilla.org/en/chrome_registration
 
 content tbconf chrome/content/
-overlay chrome://messenger/content/messenger.xul chrome://tbconf/content/messenger.xul
+overlay chrome://messenger/content/messenger.xul chrome://tbconf/content/tbconf.xul
