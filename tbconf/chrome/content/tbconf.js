@@ -3,6 +3,8 @@
  *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIZipReader
  *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIWebBrowserPersist
  */
+var t;	/* object types */
+
 function debug(msg) {
 	dump(debug.caller.name);
 	if (msg) {
@@ -11,47 +13,63 @@ function debug(msg) {
 	dump("\n");
 }
 
-function new_path() {
-	return Components.classes["@mozilla.org/file/local;1"]
-		.createInstance(Components.interfaces.nsILocalFile);
-}
-
-function new_zipr() {
-	return Components.classes["@mozilla.org/libjar/zip-reader;1"]
-		.createInstance(Components.interfaces.nsIZipReader);
-}
-
-function new_wbp() {
-	return Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1']
-		.createInstance(Components.interfaces.nsIWebBrowserPersist);
-}
-
-function new_ios() {
-	return Components.classes['@mozilla.org/network/io-service;1']
-		.getService(Components.interfaces.nsIIOService);
-}
-
 function init() {
 	debug(null);
+	var i = 0;
+
+	t = {
+		path:i++,
+		zipr:i++,
+		webp:i++,
+		isrv:i++
+	}
+}
+
+function newb(type) {
+	switch (type) {
+		case t.path:
+		return Components
+			.classes["@mozilla.org/file/local;1"]
+			.createInstance(Components.interfaces.nsILocalFile);
+		break;
+
+		case t.zipr:
+		return Components
+			.classes["@mozilla.org/libjar/zip-reader;1"]
+			.createInstance(Components.interfaces.nsIZipReader);
+		break;
+
+		case t.webp:
+		return Components
+			.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1']
+			.createInstance(Components.interfaces.nsIWebBrowserPersist);
+		break;
+
+		case t.isrv:
+		return Components
+			.classes['@mozilla.org/network/io-service;1']
+			.getService(Components.interfaces.nsIIOService);
+		break;
+	}
 }
 
 function fetch(uri, dest, basename) {
 	debug(uri+", "+basename);
 
-	var path = new_path();
-	var wbp = new_wbp();
-	var ios = new_ios();
+	var path = newb(t.path);
+	var webp = newb(t.webp);
+	var isrv = newb(t.isrv);
 
 	path.initWithPath(dest.path);
 	path.appendRelativePath(basename);
-	wbp.saveURI(ios.newURI(uri, null, null), null, null, null, null, path);
+	webp.saveURI(isrv.newURI(uri, null, null), null, null, null, null, path);
 }
 
 function extract(dest, basename) {
 	debug(basename);
 
-	var path = new_path();
-	var zipr = new_zipr();
+	var path = newb(t.path);
+	var zipr = newb(t.zipr);
 
 	path.initWithPath(dest.path);
 	path.appendRelativePath(basename);
@@ -63,7 +81,7 @@ function extract(dest, basename) {
 
 	while (dent.hasMore()) {
 		var e = dent.getNext();
-		var f = new_path();
+		var f = newb(t.path);
 		f.initWithPath(dest.path);
 		f.appendRelativePath(e);
 
@@ -76,7 +94,7 @@ function extract(dest, basename) {
 
 	while (fent.hasMore()) {
 		var e = fent.getNext();
-		var f = new_path();
+		var f = newb(t.path);
 		f.initWithPath(dest.path);
 		f.appendRelativePath(e);
 
