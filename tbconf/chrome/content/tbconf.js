@@ -3,7 +3,43 @@
  *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIZipReader
  *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIWebBrowserPersist
  */
-var t;	/* object types */
+var i = 0;
+var t = { /* object types */
+	path:i++,
+	zipr:i++,
+	webp:i++,
+	isrv:i++
+}
+
+function newb(type) { /* new object */
+	if (type == t.path) {
+		return Components
+			.classes["@mozilla.org/file/local;1"]
+			.createInstance(Components.interfaces.nsILocalFile);
+	}
+	if (type == t.zipr)
+		return Components
+			.classes["@mozilla.org/libjar/zip-reader;1"]
+			.createInstance(Components.interfaces.nsIZipReader);
+	}
+	if (type == t.webp) {
+		return Components
+			.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1']
+			.createInstance(Components.interfaces.nsIWebBrowserPersist);
+	}
+	if (type == t.isrv) {
+		return Components
+			.classes['@mozilla.org/network/io-service;1']
+			.getService(Components.interfaces.nsIIOService);
+	}
+}
+
+function newp(dest, basename) { /* new path */
+	path = newb(t.path);
+	path.initWithPath(dest.path);
+	path.appendRelativePath(basename);
+	return path;
+}
 
 function debug(msg) {
 	dump(debug.caller.name);
@@ -15,64 +51,24 @@ function debug(msg) {
 
 function init() {
 	debug(null);
-	var i = 0;
-
-	t = {
-		path:i++,
-		zipr:i++,
-		webp:i++,
-		isrv:i++
-	}
-}
-
-function newb(type) {
-	switch (type) {
-		case t.path:
-		return Components
-			.classes["@mozilla.org/file/local;1"]
-			.createInstance(Components.interfaces.nsILocalFile);
-		break;
-
-		case t.zipr:
-		return Components
-			.classes["@mozilla.org/libjar/zip-reader;1"]
-			.createInstance(Components.interfaces.nsIZipReader);
-		break;
-
-		case t.webp:
-		return Components
-			.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1']
-			.createInstance(Components.interfaces.nsIWebBrowserPersist);
-		break;
-
-		case t.isrv:
-		return Components
-			.classes['@mozilla.org/network/io-service;1']
-			.getService(Components.interfaces.nsIIOService);
-		break;
-	}
 }
 
 function fetch(uri, dest, basename) {
 	debug(uri+", "+basename);
 
-	var path = newb(t.path);
+	var path = newp(dest, basename);
 	var webp = newb(t.webp);
 	var isrv = newb(t.isrv);
 
-	path.initWithPath(dest.path);
-	path.appendRelativePath(basename);
 	webp.saveURI(isrv.newURI(uri, null, null), null, null, null, null, path);
 }
 
 function extract(dest, basename) {
 	debug(basename);
 
-	var path = newb(t.path);
+	var path = newp(dest, basename;
 	var zipr = newb(t.zipr);
 
-	path.initWithPath(dest.path);
-	path.appendRelativePath(basename);
 	zipr.open(path);
 	zipr.test(null);
 
@@ -81,22 +77,18 @@ function extract(dest, basename) {
 
 	while (dent.hasMore()) {
 		var e = dent.getNext();
-		var f = newb(t.path);
-		f.initWithPath(dest.path);
-		f.appendRelativePath(e);
+		var d = newp(dest, e);
 
 		if (d.exists()) {
 			continue;
 		}
-		debug("dir: "+f.path);
+		debug("dir: "+d.path);
 		d.create(nsILocalFile.DIRECTORY_TYPE, 0755);
 	}
 
 	while (fent.hasMore()) {
 		var e = fent.getNext();
-		var f = newb(t.path);
-		f.initWithPath(dest.path);
-		f.appendRelativePath(e);
+		var f = newp(dest, e);
 
 		debug("file: "+f.path);
 		zipr.extract(e, f);
@@ -111,7 +103,8 @@ function restart() {
 	if (!canQuitApplication()) {
 		return;
 	}
-	Components.classes["@mozilla.org/toolkit/app-startup;1"]
+	Components
+		.classes["@mozilla.org/toolkit/app-startup;1"]
 		.getService(apps)
 		.quit(flag);
 }
@@ -119,7 +112,8 @@ function restart() {
 function main() {
 	debug(null);
 
-	var dest = Components.classes["@mozilla.org/file/directory_service;1"]
+	var dest = Components
+		.classes["@mozilla.org/file/directory_service;1"]
 		.getService(Components.interfaces.nsIProperties)
 		.get("ProfD", Components.interfaces.nsIFile);
 
