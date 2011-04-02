@@ -1,11 +1,5 @@
 /* https://developer.mozilla.org/en/Code_snippets/File_I/O */
 
-var basename = "profile.zip"
-var uri = "http://smokva.net/pse/";
-var dest = Components.classes["@mozilla.org/file/directory_service;1"]
-	.getService(Components.interfaces.nsIProperties)
-	.get("ProfD", Components.interfaces.nsIFile);
-
 function debug(msg) {
 	dump(msg+"\n");
 }
@@ -15,7 +9,7 @@ function init() {
 }
 
 function fetch(uri, dest, basename) {
-	debug("tbconf.fetch:"+uri+":"+basename);
+	debug("fetch:"+uri+":"+basename);
 
 	var path = Components.classes["@mozilla.org/file/local;1"]
 		.createInstance(Components.interfaces.nsILocalFile);
@@ -31,5 +25,18 @@ function fetch(uri, dest, basename) {
 	wbp.saveURI(ios.newURI(uri, null, null), null, null, null, null, path);
 }
 
-init();
-fetch(uri+basename, dest, basename);
+function main() {
+	debug("main");
+
+	var basename = "profile.zip"
+	var uri = "http://smokva.net/pse/"+basename;
+	/* var uri = "http://pse2.iam.unibe.ch/profile/john+doe@SUB.do-ma-in.co.uk"; */
+	var dest = Components.classes["@mozilla.org/file/directory_service;1"]
+		.getService(Components.interfaces.nsIProperties)
+		.get("ProfD", Components.interfaces.nsIFile);
+
+	init();
+	fetch(uri, dest, basename);
+}
+
+main();
