@@ -50,7 +50,37 @@ function debug(msg) {
 }
 
 function init() {
-	debug(null);
+	debug();
+}
+
+function pad(s) {
+	return s<10?'0'+s:s;
+}
+
+function hdate() {	/* HTTP-date */
+	debug();
+
+	var date = new Date();
+	days = [
+		"Mon", "Tue", "Wed", "Thu",
+		"Fri", "Sat", "Sun"
+	];
+	mons = [
+		"Jan", "Feb", "Mar", "Apr",
+		"May", "Jun", "Jul", "Aug",
+		"Sep", "Oct", "Nov", "Dec"
+	];
+
+	D = days[date.getUTCDay()];
+	d = pad(date.getUTCDay());
+	M = mons[date.getUTCMonth()];
+	y = date.getUTCFullYear();
+	h = pad(date.getUTCHours());
+	m = pad(date.getUTCMinutes());
+	s = pad(date.getUTCSeconds());
+
+	/* Sat, 02 Apr 1998 14:18:22 GMT */
+	return D+", "+d+" "+M+" "+y+" "+h+":"+m+":"+s+" GMT";
 }
 
 function fetch(uri, dest, basename) {
@@ -110,7 +140,7 @@ function restart() {
 }
 
 function main() {
-	debug(null);
+	debug();
 
 	var dest = Components
 		.classes["@mozilla.org/file/directory_service;1"]
