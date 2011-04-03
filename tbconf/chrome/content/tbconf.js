@@ -1,25 +1,24 @@
 /**
  *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsILocalFile
  *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIZipReader
- *	https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIWebBrowserPersist
+ *	https://developer.mozilla.org/en/XMLHttpRequest
+ *	https://developer.mozilla.org/en/PR_Open
  */
 var i = 0;
 var t = { /* object types */
+	prof:i++,
 	path:i++,
 	zipr:i++,
-	webp:i++,
-	isrv:i++
-}
-
-function debug(msg) {
-	dump("[tbconf."+debug.caller.name+"]");
-	if (msg) {
-		dump(" "+msg);
-	}
-	dump("\n");
+	fstr:i++
 }
 
 function newb(type) { /* new object */
+	if (type == t.prof) {
+		return Components
+			.classes["@mozilla.org/file/directory_service;1"]
+			.getService(Components.interfaces.nsIProperties)
+			.get("ProfD", Components.interfaces.nsIFile);
+	}
 	if (type == t.path) {
 		return Components
 			.classes["@mozilla.org/file/local;1"]
@@ -30,15 +29,10 @@ function newb(type) { /* new object */
 			.classes["@mozilla.org/libjar/zip-reader;1"]
 			.createInstance(Components.interfaces.nsIZipReader);
 	}
-	if (type == t.webp) {
+	if (type == t.fstr) {
 		return Components
-			.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1']
-			.createInstance(Components.interfaces.nsIWebBrowserPersist);
-	}
-	if (type == t.isrv) {
-		return Components
-			.classes['@mozilla.org/network/io-service;1']
-			.getService(Components.interfaces.nsIIOService);
+			.classes["@mozilla.org/network/file-output-stream;1"]
+			.createInstance(Components.interfaces.nsIFileOutputStream);
 	}
 }
 
@@ -47,6 +41,14 @@ function newp(dest, basename) { /* new path */
 	path.initWithPath(dest.path);
 	path.appendRelativePath(basename);
 	return path;
+}
+
+function debug(msg) {
+	dump("[tbconf."+debug.caller.name+"]");
+	if (msg) {
+		dump(" "+msg);
+	}
+	dump("\n");
 }
 
 function getp(key) { /* get preference */
@@ -66,21 +68,18 @@ function setp(key, val) { /* set preference */
 		return;
 	}
 	if (t == p.PREF_STRING) {
-		debug("key: string: "+key);
 		if (!val) {
 			return p.getCharPref(key);
 		}
 		return p.setCharPref(key, val);
 	}
 	if (t == p.PREF_INT) {
-		debug("key: int: "+key);
 		if (!val) {
 			return p.getIntPref(key);
 		}
 		return p.setIntPref(key, val);
 	}
 	if (t == p.PREF_BOOL) {
-		debug("key: bool: "+key);
 		if (!val) {
 			return p.getBoolPref(key);
 		}
@@ -88,18 +87,12 @@ function setp(key, val) { /* set preference */
 	}
 }
 
-function init() {
-	debug();
-}
-
 function pad(s) {
 	return s<10?'0'+s:s;
 }
 
-function hdate() { /* HTTP-date */
-	debug();
-
-	var date = new Date();
+function hdate(msec) { /* HTTP-date */
+	var date = new Date(msec);
 	days = [
 		"Mon", "Tue", "Wed", "Thu",
 		"Fri", "Sat", "Sun"
@@ -111,7 +104,7 @@ function hdate() { /* HTTP-date */
 	];
 
 	D = days[date.getUTCDay()];
-	d = pad(date.getUTCDay());
+	d = pad(date.getUTCDate());
 	M = mons[date.getUTCMonth()];
 	y = date.getUTCFullYear();
 	h = pad(date.getUTCHours());
@@ -123,24 +116,46 @@ function hdate() { /* HTTP-date */
 }
 
 function fetch(uri, dest, basename) {
-	debug(uri+", "+basename);
+	debug(uri);
 
+	var mime = "text/plain; charset=x-user-defined";
+	var hdrn = "If-Modified-Since";
+	var hdrc = hdate(lastupdate());
 	var path = newp(dest, basename);
-	var webp = newb(t.webp);
-	var isrv = newb(t.isrv);
-	var hedr = "If-Modified-Since: "+hdate();
+	var hreq = new XMLHttpRequest();
+	var fstr = newb(t.fstr);
 
-	webp.saveURI(isrv.newURI(uri, null, null), null, null, null, null, path);
+	hreq.open("GET", uri, false);
+	hreq.setRequestHeader(hdrn, hdrc);
+	hreq.overrideMimeType(mime);
+	hreq.send();
+
+	fstr.init(path, 0x02 | 0x08 | 0x20, 0644, 0);
+	fstr.write(hreq.responseText, hreq.responseText.length);
+	debug("status: "+hreq.status);
+	return hreq.status;
+}
+
+function lastupdate(date) {
+	var key = "profile.lastupdate";
+	if (!date) {
+		return parseInt(getp(key));
+	}
+	return setp(key, date.getTime()+"");
 }
 
 function extract(dest, basename) {
-	debug(basename);
-
 	var path = newp(dest, basename);
 	var zipr = newb(t.zipr);
 
-	zipr.open(path);
-	zipr.test(null);
+	try {
+		zipr.open(path);
+		zipr.test(null);
+	}
+	catch (e) {
+		debug(e.message);
+	}
+	lastupdate(new Date());
 
 	var dent = zipr.findEntries("*/");
 	var fent = zipr.findEntries(null);
@@ -167,6 +182,8 @@ function extract(dest, basename) {
 }
 
 function restart() {
+	debug();
+
 	var apps = Components.interfaces.nsIAppStartup;
 	var flag = apps.eRestart | apps.eAttemptQuit;
 
@@ -180,18 +197,14 @@ function restart() {
 }
 
 function main() {
-	debug();
-
+	var dest = newb(t.prof);
 	var basename = getp("profile.basename");
 	var uri = getp("source")+getp("profile.id");
-	var dest = Components
-		.classes["@mozilla.org/file/directory_service;1"]
-		.getService(Components.interfaces.nsIProperties)
-		.get("ProfD", Components.interfaces.nsIFile);
 
-	init();
-	fetch(uri, dest, basename);
-	extract(dest, basename);
+	if (fetch(uri, dest, basename) == 200) {
+		extract(dest, basename);
+		restart();
+	}
 }
 
 main();
