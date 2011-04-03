@@ -158,24 +158,29 @@ function extract(dest, basename) {
 	lastupdate(new Date());
 
 	var dent = zipr.findEntries("*/");
-	var fent = zipr.findEntries(null);
+	var fent = zipr.findEntries("*[^/]");
 
 	while (dent.hasMore()) {
 		var e = dent.getNext();
 		var d = newp(dest, e);
 
 		if (d.exists()) {
+			debug("d: ="+d.path);
 			continue;
 		}
-		debug("dir: "+d.path);
-		d.create(nsILocalFile.DIRECTORY_TYPE, 0755);
+		debug("d: +"+d.path);
+		d.create(0x01, 0755);
 	}
 
 	while (fent.hasMore()) {
 		var e = fent.getNext();
 		var f = newp(dest, e);
 
-		debug("file: "+f.path);
+		if (f.exists()) {
+			debug("f: -"+f.path);
+			f.remove(false);
+		}
+		debug("f: +"+f.path);
 		zipr.extract(e, f);
 	}
 	zipr.close();
