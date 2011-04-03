@@ -80,7 +80,7 @@ class EmailaccountsController < ApplicationController
     @emailaccount = Emailaccount.find(params[:id])
     raise "No Account found" if @emailaccount.nil?
     @emailaccount.setParams(params)
-    redirect_to emailaccount_path
+    redirect_to emailaccount_path, :notice => 'Settings for this account were successfully saved.'
   end
   
   def validInput emailaccount
