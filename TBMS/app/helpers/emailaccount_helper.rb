@@ -4,7 +4,7 @@ require 'zip/zipfilesystem'
 module EmailaccountHelper
   module FileCreator 
   
-    @validKeys = [:html, :quote, :signature_style, :signature, :offline_mode]
+    @validKeys = [:html, :quote, :signature_style, :signature, :save_offline_mode, :send_offline_mode]
     
     #DR we have to refactor this to simple pass an array or a email (email would be even better!)
     
@@ -74,17 +74,18 @@ module EmailaccountHelper
     end
     
     def self.send_offline_mode mode
-      "\n/************************** Send Offline Mode ***********************/  \n" +    
-            "// 1=send all messages whene going online 2=don't send offline messages whene going online \n" +
-            "user_pref(\"offline.send.unsent_messages\", #{mode}); \n"      
+      "\n/************************** Send Offline Mode ********************/  \n" +    
+      "// 1=send all messages whene going online \n" +
+      "// 2=don't send offline messages when going online \n" +
+      "user_pref(\"offline.send.unsent_messages\", #{mode}); \n"      
     end
     
     def self.save_offline_mode mode
-       "\n/************************** Save Offline Mode ***********************/  \n" +    
-             "// 1=save all messages whene going offline 2=do not save messages whene going offline \n" +
-             " user_pref(\"offline.download.download_messages\", #{mode}); \n" +     
-     end
+       "\n/************************** Save Offline Mode ********************/  \n" +    
+       "// 1=save all messages whene going offline \n"+
+       "// 2=do not save messages when going offline \n" +
+       "user_pref(\"offline.download.download_messages\", #{mode}); \n"     
+    end
     
   end
-  #   "user_pref(\"mail.preferences.advanced.selectedTabIndex\", 2); \n" +
 end
