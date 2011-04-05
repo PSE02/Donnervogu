@@ -11,13 +11,13 @@ class GroupTest < ActiveSupport::TestCase
   end
   test "should merge non-conflicting" do
 	  assert_equal(
-		  {:html_mail => "false", :quoting_style => :below},
+		  {:html_mail => false, :quoting_style => :below},
 		  @ft.final_preferences)
   end
 
   test "should merge conflicting" do
 	  assert_equal(
-		  {:html_mail => "true", :quoting_style => :below},
+		  {:html_mail => true, :quoting_style => :below},
 		  @trampos.final_preferences)
   end
 end

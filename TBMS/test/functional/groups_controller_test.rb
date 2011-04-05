@@ -2,14 +2,14 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
   setup do
-    @group = groups(:one)
+    @group = groups(:fantasticfour)
   end
-#
-#  test "should get index" do
-#    get :index
-#    assert_response :success
-#    assert_not_nil assigns(:groups)
-#  end
+
+ test "should get index" do
+   get :index
+   assert_response :success
+   assert_not_nil assigns(:groups)
+ end
 #
 #  test "should get new" do
 #    get :new

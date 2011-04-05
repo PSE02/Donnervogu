@@ -1,7 +1,7 @@
 fantasticthree:
   name: Fantastic Three
   preferences: 
-    :html_mail: "false"
+    :html_mail: false
 fantasticfour:
   name: Fantastic Four
   preferences: 
@@ -9,9 +9,9 @@ fantasticfour:
 trampolin:
   name: Trampoline Inc.
   preferences:
-     :html_mail: "false"
+     :html_mail: false
      :quoting_style: :below
 trampolinsued:
   name: Trampoline Inc. Süd
   preferences:
-     :html_mail: "true"
+     :html_mail: true

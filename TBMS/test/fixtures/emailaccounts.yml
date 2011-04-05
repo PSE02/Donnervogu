@@ -3,10 +3,13 @@
 hans:
   email: hans@example.com
   name: Hans Mustermann
-  preferences: <%= {:html_mail => true, :quoting_style => :above } %>
+  preferences: 
+    :html_mail: true
+    :quoting_style: :above
 
-two:
-  email: MyString
-  name: MyString
-  preferences: MyText
-  
+wicki:
+  email: wicky@wikinger.il
+  name: Wicki
+  preferences: 
+    :html_mail: false
+    :quoting_style: :above
