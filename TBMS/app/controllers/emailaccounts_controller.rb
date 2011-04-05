@@ -91,6 +91,7 @@ class EmailaccountsController < ApplicationController
   def zipOf
 	  emailaccount = Emailaccount.find_by_email params[:email] 
 	  raise "No such account" if emailaccount.nil?
+	  #DR we have to change this here, if we get a response from the plugin the emailaccount.downloaded is called
 	  emailaccount.downloaded
 	  send_file emailaccount.assureZipPath
   end
