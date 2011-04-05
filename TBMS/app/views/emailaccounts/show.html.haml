@@ -46,6 +46,19 @@
       %tr
         %td
           = select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]],  @emailaccount.preferences[:signature_style]))
+  %fieldset
+    %legend Oflline mode
+    %table
+      %tr
+        %td
+          = label_tag("Yes")
+        %td
+          = radio_button_tag(:offline_mode, "1", checked = @emailaccount.preferences[:offline_mode] == "1")
+      %tr
+        %td
+          = label_tag("No")
+        %td
+          = radio_button_tag(:offline_mode, "2", checked = @emailaccount.preferences[:offline_mode] == "2")
   %br
   = submit_tag("Save")
   = link_to 'Back', emailaccounts_path

@@ -74,7 +74,7 @@ module EmailaccountHelper
     end
     
     def self.offline_mode mode
-      "\n/************************** Offline Mode ***********************/  \n" +    
+      "\n/************************** Offline Mode ************************/  \n" +    
             "// 1=save all messages whene going offline 2=do not save messages whene going offline \n" +
             " user_pref(\"offline.download.download_messages\", #{mode}); \n" +
             "// 1=send all messages whene going online 2=don't send offline messages whene going online \n" +
