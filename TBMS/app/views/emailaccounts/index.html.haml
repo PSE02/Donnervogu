@@ -1,0 +1,22 @@
+%h2 Listing Accounts
+%br
+%table.users
+  %tr
+    %th Email
+    %th Name
+    %th 
+  - @emailaccounts.each do |emailaccount|
+    %tr
+      %td
+        = emailaccount.email
+      %td
+        = emailaccount.name
+      %td
+        = link_to 'Show', emailaccount
+        |
+        = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete #{emailaccount.email}?", :method => :delete
+        |
+        = link_to 'Get the zip file' , "/profile/#{emailaccount.email}"
+%br
+= link_to 'New Account', new_emailaccount_path
+

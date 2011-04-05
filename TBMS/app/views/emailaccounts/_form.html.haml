@@ -1,0 +1,30 @@
+= flash[:notice]
+%br
+= form_for @emailaccount do |f| 
+  - if @emailaccount.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@emailaccount.errors.count, "error")
+        prohibited this account from being saved:
+      %ul
+        - @emailaccount.errors.full_messages.each do |msg|
+          %li
+            = msg
+  
+  %fieldset
+    %legend Create E-Mail Account        
+    %table
+      %tr
+        %td
+          = f.label :email
+        %td
+          = f.text_field :email
+      %tr
+        %td
+          = f.label :name
+        %td
+          = f.text_field :name
+      %tr
+        %td  
+          = submit_tag("Create")
+
