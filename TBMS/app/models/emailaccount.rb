@@ -1,5 +1,6 @@
 include EmailaccountHelper
 class Emailaccount < ActiveRecord::Base
+  
 	validates_presence_of :email
 	validates_presence_of :name
   validates_format_of :email,
@@ -9,7 +10,6 @@ class Emailaccount < ActiveRecord::Base
   validates_uniqueness_of :email
 
 	serialize :preferences
-	
 	
   def initialize panda={}
 	  super panda

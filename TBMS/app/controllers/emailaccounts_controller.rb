@@ -85,7 +85,7 @@ class EmailaccountsController < ApplicationController
   
   def validInput emailaccount
     return emailaccount[:email].match("@")
-  end
+  end 
 
   def zipOf
     raise "format is nil" if params[:format].nil? 

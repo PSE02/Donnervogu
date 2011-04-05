@@ -2,7 +2,7 @@
 basic page style
 ************************/
 body {
-	background: #000000;
+	background: #000;
 	font-family: Helvetica, Veranda, Arial, sans-serif;
 	color: #fff;
 }
@@ -92,6 +92,10 @@ div.contentOne {
 	float:left;
 }
 
+table.users tr td, table.users tr th{
+	border:1px #fff solid;
+}
+
 div.contentTwo {
 	width:20%;
 	padding: 20px;
@@ -109,4 +113,3 @@ div.footer {
 	padding: 5px;
 	background:#222;
 }
-

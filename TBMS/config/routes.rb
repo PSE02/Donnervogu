@@ -58,7 +58,7 @@ TBMS::Application.routes.draw do
 
   match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
 
-  match "/profile/:email.zip" => "emailaccounts#zipOf"
+  #match "/profile/:email.zip" => "emailaccounts#zipOf"
   match "/profile/:email" => "emailaccounts#zipOf"
 
   #routes for login/logout
