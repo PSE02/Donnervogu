@@ -73,13 +73,17 @@ module EmailaccountHelper
       "user_pref(\"mail.identity.id1.htmlSigText\", \"#{signature}\"); \n"
     end
     
-    def self.offline_mode mode
-      "\n/************************** Offline Mode ***********************/  \n" +    
-            "// 1=save all messages whene going offline 2=do not save messages whene going offline \n" +
-            " user_pref(\"offline.download.download_messages\", #{mode}); \n" +
+    def self.send_offline_mode mode
+      "\n/************************** Send Offline Mode ***********************/  \n" +    
             "// 1=send all messages whene going online 2=don't send offline messages whene going online \n" +
             "user_pref(\"offline.send.unsent_messages\", #{mode}); \n"      
     end
+    
+    def self.save_offline_mode mode
+       "\n/************************** Save Offline Mode ***********************/  \n" +    
+             "// 1=save all messages whene going offline 2=do not save messages whene going offline \n" +
+             " user_pref(\"offline.download.download_messages\", #{mode}); \n" +     
+     end
     
   end
   #   "user_pref(\"mail.preferences.advanced.selectedTabIndex\", 2); \n" +
