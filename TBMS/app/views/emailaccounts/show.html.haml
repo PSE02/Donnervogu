@@ -50,15 +50,28 @@
     %legend Oflline mode
     %table
       %tr
+        %label Save all messages when working offline
         %td
           = label_tag("Yes")
         %td
-          = radio_button_tag(:offline_mode, "1", checked = @emailaccount.preferences[:offline_mode] == "1")
+          = radio_button_tag(:save_offline_mode, "1", checked = @emailaccount.preferences[:save_offline_mode] == "1")
       %tr
         %td
           = label_tag("No")
         %td
-          = radio_button_tag(:offline_mode, "2", checked = @emailaccount.preferences[:offline_mode] == "2")
+          = radio_button_tag(:save_offline_mode, "2", checked = @emailaccount.preferences[:save_offline_mode] == "2")
+    %table
+      %tr
+        %label Send all messages when going back online
+        %td
+          = label_tag("Yes")
+        %td
+          = radio_button_tag(:send_offline_mode, "1", checked = @emailaccount.preferences[:send_offline_mode] == "1")
+      %tr
+        %td
+          = label_tag("No")
+        %td
+          = radio_button_tag(:send_offline_mode, "2", checked = @emailaccount.preferences[:send_offline_mode] == "2")
   %br
   = submit_tag("Save")
   = link_to 'Back', emailaccounts_path
