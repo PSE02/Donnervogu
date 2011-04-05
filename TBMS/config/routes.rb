@@ -58,8 +58,8 @@ TBMS::Application.routes.draw do
 
   match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
 
-  #match "/profile/:email.zip" => "emailaccounts#zipOf"
-  match "/profile/:email" => "emailaccounts#zipOf"
+  match "/profile/:email" => "emailaccounts#zipOf",
+	  :constraints => { :email => /.*/ }
 
   #routes for login/logout
   resources :users  # give us our some normal resource routes for users

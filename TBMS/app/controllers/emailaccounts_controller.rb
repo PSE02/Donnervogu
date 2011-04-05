@@ -1,4 +1,5 @@
 class EmailaccountsController < ApplicationController
+	before_filter :require_user, :except => [ :zipOf ]
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
@@ -88,8 +89,7 @@ class EmailaccountsController < ApplicationController
   end 
 
   def zipOf
-    raise "format is nil" if params[:format].nil? 
-	  emailaccount = Emailaccount.find_by_email params[:email] + "." + params[:format]
+	  emailaccount = Emailaccount.find_by_email params[:email] 
 	  raise "No such account" if emailaccount.nil?
 	  emailaccount.downloaded
 	  send_file emailaccount.assureZipPath
