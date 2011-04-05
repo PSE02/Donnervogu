@@ -8,6 +8,7 @@ class Emailaccount < ActiveRecord::Base
     :message => "can only contain letters and numbers."
 
 	serialize :preferences
+	belongs_to :group
 	
 	
   def initialize panda={}
@@ -58,5 +59,24 @@ class Emailaccount < ActiveRecord::Base
 	
 	def downloaded
 		self.last_get = Time.now
+	end
+
+	# the preferences merged with the group's
+	def final_preferences
+		if not self.group.nil?
+			down_merge
+		else
+			self.preferences
+		end
+	end
+
+	# Overwrite the supergroups preferences if necessary
+	def down_merge
+		self.group.final_preferences.merge self.preferences
+	end
+
+	# Overwrite the subgroups preferences if necessary
+	def up_merge
+		self.preferences.merge self.group.final_preferences
 	end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110329095113) do
+ActiveRecord::Schema.define(:version => 20110405062358) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20110329095113) do
     t.datetime "last_get"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
   create_table "groups", :force => true do |t|
@@ -26,17 +27,12 @@ ActiveRecord::Schema.define(:version => 20110329095113) do
     t.text     "preferences"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
   create_table "user_sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-  
-  create_table "file_creators", :force => true do |t|
-    t.string   "zipPath"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20110329095113) do
     t.string   "name",                :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
 end
