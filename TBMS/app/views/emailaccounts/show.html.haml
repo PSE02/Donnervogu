@@ -50,6 +50,18 @@
     %legend Oflline mode
     %table
       %tr
+        %label if this is enabled the two on the bottom should be enabled too!
+        %td
+          = label_tag("Enable")
+        %td
+          = radio_button_tag(:offline_mode, true, checked = @emailaccount.preferences[:save_offline_mode] == "true")
+      %tr
+        %td
+          = label_tag("Disable")
+        %td
+          = radio_button_tag(:offline_mode, false, checked = @emailaccount.preferences[:save_offline_mode] == "false")
+    %table
+      %tr
         %label Save all messages when working offline
         %td
           = label_tag("Yes")

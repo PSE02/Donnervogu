@@ -33,7 +33,22 @@ class FileCreatorTest < ActiveSupport::TestCase
       testString = FileCreator::signature("This is just a simple signature")
       assert_match("user_pref(\"mail.identity.id1.htmlSigFormat\", true);", testString)
       assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"This is just a simple signature\");", testString)
-    end
+  end
+    
+  test "enable offline mode" do
+      testString = FileCreator::offline_mode(true)
+      assert_match("user_pref(\"mail.server.server1.offline_download\", true);", testString)
+  end
+  
+  test "disable send_offline_mode" do
+      testString = FileCreator::send_offline_mode("2")
+      assert_match("user_pref(\"offline.send.unsent_messages\", 2);", testString)
+  end
+  
+  test "enable save_offline_mode" do
+      testString = FileCreator::save_offline_mode("1")
+      assert_match("user_pref(\"offline.download.download_messages\", 1);", testString)
+  end  
   
   test "complete file path" do
       filePath = FileCreator::completeZipPath @hans

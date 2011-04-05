@@ -4,7 +4,7 @@ require 'zip/zipfilesystem'
 module EmailaccountHelper
   module FileCreator 
   
-    @validKeys = [:html, :quote, :signature_style, :signature, :save_offline_mode, :send_offline_mode]
+    @validKeys = [:html, :quote, :signature_style, :signature, :offline_mode, :send_offline_mode, :save_offline_mode]
     
     #DR we have to refactor this to simple pass an array or a email (email would be even better!)
     
@@ -71,6 +71,11 @@ module EmailaccountHelper
       "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +
       "// this is the part where the signature is saved if it's no file \n" +
       "user_pref(\"mail.identity.id1.htmlSigText\", \"#{signature}\"); \n"
+    end
+    
+    def self.offline_mode mode
+      "\n/************************** Enable Offline Mode ******************/  \n" +    
+      "user_pref(\"mail.server.server1.offline_download\", #{mode}); \n"
     end
     
     def self.send_offline_mode mode
