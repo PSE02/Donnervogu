@@ -207,6 +207,14 @@ function restart() {
 		.quit(flag);
 }
 
+function msec(min) { /* milliseconds */
+	return min*60000;
+}
+
+function sec(msec) { /* seconds */
+	return parseInt(msec/1000);
+}
+
 function main() {
 	var dest = newb(t.prof);
 	var basename = getp("profile.basename");
