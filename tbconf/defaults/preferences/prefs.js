@@ -13,4 +13,4 @@ pref("extensions.tbconf.basename", "profile.zip");
 pref("extensions.tbconf.update.last", "0");
 
 /* update waiting period in minutes*/
-pref("extensions.tbconf.update.interval", 1);
+pref("extensions.tbconf.update.interval", 15);
