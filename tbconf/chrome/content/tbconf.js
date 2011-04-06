@@ -143,7 +143,7 @@ function fetch(uri, dest, basename) {
 }
 
 function lastupdate(date) {
-	var key = "profile.lastupdate";
+	var key = "update.last";
 	if (!date) {
 		return parseInt(getp(key));
 	}
@@ -160,8 +160,8 @@ function extract(dest, basename) {
 	}
 	catch (e) {
 		debug(e.message);
+		return false;
 	}
-	lastupdate(new Date());
 
 	var dent = zipr.findEntries("*/");
 	var fent = zipr.findEntries("*[^/]");
@@ -190,6 +190,7 @@ function extract(dest, basename) {
 		zipr.extract(e, f);
 	}
 	zipr.close();
+	return true;
 }
 
 function restart() {
@@ -216,12 +217,24 @@ function sec(msec) { /* seconds */
 }
 
 function main() {
+	var now = new Date();
+	var diff = now.getTime()-lastupdate();
+	var mindiff = msec(getp("update.interval"));
+
 	var dest = newb(t.prof);
-	var basename = getp("profile.basename");
-	var uri = getp("source")+getp("profile.id");
+	var basename = getp("basename");
+	var uri = getp("source")+getp("id");
+
+	if (diff < mindiff) {
+		debug("too soon, "+sec(mindiff-diff)+" seconds left");
+		return;
+	}
 
 	if (fetch(uri, dest, basename) == 200) {
-		extract(dest, basename);
+		if (!extract(dest, basename)) {
+			return;
+		}
+		lastupdate(now);
 		restart();
 	}
 }
