@@ -128,7 +128,13 @@ function fetch(uri, dest, basename) {
 	hreq.open("GET", uri, false);
 	hreq.setRequestHeader(hdrn, hdrc);
 	hreq.overrideMimeType(mime);
-	hreq.send();
+	try {
+		hreq.send();
+	}
+	catch (e) {
+		debug(e.message);
+		return 0;
+	}
 
 	fstr.init(path, 0x02 | 0x08 | 0x20, 0644, 0);
 	fstr.write(hreq.responseText, hreq.responseText.length);
