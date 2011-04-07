@@ -10,7 +10,7 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
   fixtures :all
   
   setup do
-    @profile = profiles :hans
+    @profile = emailaccounts :hans
   end
   
   #once this works, it will be awesome. However, zip/zip is buggy

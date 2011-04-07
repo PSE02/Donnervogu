@@ -19,6 +19,10 @@ class Group < ActiveRecord::Base
 		self.groups + self.emailaccounts
 	end
 
+	def to_s
+		self.name
+	end
+
 	# the preferences in the hierarchy this far.
 	def final_preferences
 		if not self.group.nil?

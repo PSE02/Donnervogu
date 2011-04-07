@@ -12,6 +12,8 @@
       %td
         = emailaccount.name
       %td
+        = emailaccount.group.to_s
+      %td
         = link_to 'Show', emailaccount
         |
         = link_to 'Edit', edit_emailaccount_path(emailaccount)
