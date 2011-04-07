@@ -1,6 +1,6 @@
 %h2 Listing Accounts
 %br
-%table{:border_color => "#FFFFFF", :border => 1, :width => "100%"}
+%table.users
   %tr
     %th Email
     %th Name
@@ -13,8 +13,6 @@
         = emailaccount.name
       %td
         = link_to 'Show', emailaccount
-        |
-        = link_to 'Edit', edit_emailaccount_path(emailaccount)
         |
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete #{emailaccount.email}?", :method => :delete
         |

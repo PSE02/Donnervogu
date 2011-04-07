@@ -14,5 +14,6 @@
 
 #do not commit eclipse stuff
 .metadata/
+
 #Nozip
 *_profile.zip

@@ -4,8 +4,9 @@ require 'zip/zipfilesystem'
 module EmailaccountHelper
   module FileCreator 
   
-    @validKeys = [:html, :quote, :signature_style, :signature]
-    
+    @validKeys = [:html, :quote, :signature_style, :signature, :offline_mode, :send_offline_mode, :save_offline_mode]
+    @offlineMode
+    @quote 
     #DR we have to refactor this to simple pass an array or a email (email would be even better!)
     
     def self.completeZipPath emailaccount
@@ -29,6 +30,7 @@ module EmailaccountHelper
   	  emailaccount.preferences.each do |key, value|
   	    filecontent += self.send(key, value) if validKey? key
   	  end
+  	  return filecontent;
   	end
   	 
     def self.validKey? key
@@ -47,6 +49,7 @@ module EmailaccountHelper
   	end
     
      def self.quote quote
+       @quote = quote
        "\n/************************** Quotes *******************************/ \n"+
        "// 0=reply below 1=reply above 2=select the quote \n" +
        "user_pref(\"mail.identity.id1.reply_on_top\", #{quote}); \n" +
@@ -56,11 +59,14 @@ module EmailaccountHelper
      end
   
     def self.signature_style sig_style
-      "\n/************************** Signature Style **********************/  \n"+
-      "// true=below the quote false=below my reply \n" +
-      "user_pref(\"mail.identity.id1.sig_bottom\", #{sig_style == "true"}); \n" +
-      "// add signatur to replies \n" +
-      "user_pref(\"mail.identity.id1.sig_on_reply\", true); \n"
+      if (@quote == "1") 
+        "\n/************************** Signature Style **********************/  \n"+
+        "// true=below the quote false=below my reply \n" +
+        "user_pref(\"mail.identity.id1.sig_bottom\", #{sig_style == "true"}); \n" +
+        "// add signatur to replies \n" +
+        "user_pref(\"mail.identity.id1.sig_on_reply\", true); \n"
+      else return ""
+      end
     end
   
     #DR we have to care about the signature it should not contain newlines from the form instead newlines should be html <br></br>
@@ -72,6 +78,31 @@ module EmailaccountHelper
       "user_pref(\"mail.identity.id1.htmlSigText\", \"#{signature}\"); \n"
     end
     
+    def self.offline_mode mode
+      @offlineMode = mode
+      "\n/************************** Enable Offline Mode ******************/  \n" +    
+      "user_pref(\"mail.server.server1.offline_download\", #{mode}); \n"
+    end
+    
+    def self.send_offline_mode mode
+      if (@offlineMode == "true") 
+        return ("\n/************************** Send Offline Mode ********************/  \n" +    
+              "// 1=send all messages whene going online \n" +
+              "// 2=don't send offline messages when going online \n" +
+              "user_pref(\"offline.send.unsent_messages\", #{mode}); \n" )
+      else return ""
+      end       
+    end
+    
+    def self.save_offline_mode mode
+      if (@offlineMode == "true") 
+        return ("\n/************************** Save Offline Mode ********************/  \n" +    
+       "// 1=save all messages whene going offline \n"+
+       "// 2=do not save messages when going offline \n" +
+       "user_pref(\"offline.download.download_messages\", #{mode}); \n"  )   
+      else return ""
+      end
+    end
+    
   end
-
 end

@@ -1,5 +1,4 @@
 = flash[:notice]
-%br
 %table
   %tr
     %td
@@ -15,41 +14,106 @@
 %br
 %hr
 %br 
-%h2 Preferences:
-%br
-%fieldset
-  %legend Send all Mails in HTML
-  %table
-    %tr
-      %td
-        = label_tag("ON")
-      %td
-        = radio_button_tag(:html, true, checked = @emailaccount.preferences[:html] == "true",:disabled => true)
-    %tr
-      %td
-        = label_tag("OFF")
-      %td
-        = radio_button_tag(:html, false, checked = @emailaccount.preferences[:html] == "false", :disabled => true)
-%fieldset
-  %legend Quote
-  %table
-    %tr
-      %td
-        = select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0],['select the quote', 2]], @emailaccount.preferences[:quote]), :disabled => true)
-%fieldset
-  %legend Configure the Signature
-  %table
-    %tr
-      %td
-        = text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70, :disabled => true )
-    %tr
-      %td
-        %label Position of the signature
-    %tr
-      %td
-        = select_tag(:signature_style, options_for_select([['below the quote', true],['below my reply', false]],  @emailaccount.preferences[:signature_style]), :disabled => true)
-
-%br
-= link_to 'Edit', edit_emailaccount_path(@emailaccount) 
-|
-= link_to 'Back', emailaccounts_path
+= form_tag(:action => "setParams") do
+  %fieldset
+    %legend Send all Mails in HTML
+    %table
+      %tr
+        %td
+          = label_tag("ON")
+        %td
+          = radio_button_tag(:html, true, checked = @emailaccount.preferences[:html] == "true")
+      %tr
+        %td
+          = label_tag("OFF")
+        %td
+          = radio_button_tag(:html, false, checked = @emailaccount.preferences[:html] == "false")
+  %fieldset
+    %legend Quote
+    %table
+      %tr
+        %td
+          = select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]], @emailaccount.preferences[:quote]))
+  %fieldset
+    %legend Configure the Signature
+    %table
+      %tr
+        %td
+          = text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70 )
+      #position
+        %tr
+          %td
+            %label Position of the signature
+        %tr
+          %td
+            = select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]],  @emailaccount.preferences[:signature_style]))
+  %fieldset
+    %legend Oflline mode
+    %table
+      %tr
+        %label if this is enabled the two on the bottom should be enabled too!
+        %td
+          = label_tag("Enable")
+        %td
+          = radio_button_tag(:offline_mode, true, checked = @emailaccount.preferences[:offline_mode] == "true")
+      %tr
+        %td
+          = label_tag("Disable")
+        %td
+          = radio_button_tag(:offline_mode, false, checked = @emailaccount.preferences[:offline_mode] == "false")          
+    #offlineMode
+      %table
+        %tr
+          %label Save all messages when working offline
+          %td
+            = label_tag("Yes")
+          %td
+            = radio_button_tag(:save_offline_mode, "1", checked = @emailaccount.preferences[:save_offline_mode] == "1")
+        %tr
+          %td
+            = label_tag("No")
+          %td
+            = radio_button_tag(:save_offline_mode, "2", checked = @emailaccount.preferences[:save_offline_mode] == "2")
+      %table
+        %tr
+          %label Send all messages when going back online
+          %td
+            = label_tag("Yes")
+          %td
+            = radio_button_tag(:send_offline_mode, "1", checked = @emailaccount.preferences[:send_offline_mode] == "1")
+        %tr
+          %td
+            = label_tag("No")
+          %td
+            = radio_button_tag(:send_offline_mode, "2", checked = @emailaccount.preferences[:send_offline_mode] == "2")
+          
+    %br
+      :javascript
+        jQuery(function(){
+        	function disable(){
+           		if ($("#quote").val() == "1"){
+            		$("#signature_style").removeAttr("disabled");
+          	 	}
+          	 	if ($("#quote").val() != "1"){
+          	 		$("#signature_style").attr("disabled", "disabled");
+          	 	}
+           	}
+        	disable()
+           	$("#quote").change(disable)
+          
+          	if ($("#offline_mode_true:checked").val() == "true") {
+           		$("#offlineMode").show();
+          	}
+          	if ($("#offline_mode_false:checked").val() == "false") {
+            	$("#offlineMode").hide();
+          	}          
+          	$("#offline_mode_false").click(function(){
+            	$("#offlineMode").hide();
+            })
+          	$("#offline_mode_true").click(function(){
+          	  $("#offlineMode").show();
+         	 })
+        });
+  = submit_tag("Save")
+  = link_to 'Back', emailaccounts_path
+  
