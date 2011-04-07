@@ -39,7 +39,7 @@
     %table
       %tr
         %td
-          = text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70 )
+          = render 'textarea'
       %tr
         %td
           %label Position of the signature (if "reply above the quote" is selected)
