@@ -1,5 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+# Do not delete the top three emailaccounts, they are needed for the file_creator_test
 hans:
   email: hans@example.com
   name: Hans Mustermann
@@ -13,3 +14,14 @@ wicki:
   preferences: 
     :html_mail: false
     :quoting_style: :above
+
+juerg:
+  email: juerg@example.com
+  name: Juerg
+  preferences: {  } 
+
+max:
+  email: max@example.com
+  name: Max
+  preferences: { !ruby/symbol html: "true" } 
+

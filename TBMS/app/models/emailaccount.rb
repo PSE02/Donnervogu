@@ -55,6 +55,7 @@ class Emailaccount < ActiveRecord::Base
 	#DR we have to load group or template stuff here from a file or what ever
 	def loadInitPreferences
 	  self.preferences[:signature] = "This is just a template signature"
+    self.preferences[:html] = "true"
 	end
 	
 	def downloaded

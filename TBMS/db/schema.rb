@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20110405062358) do
     t.datetime "updated_at"
   end
 
-  add_index "user_sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "user_sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+  add_index "user_sessions", ["session_id"], :name => "index_user_sessions_on_session_id"
+  add_index "user_sessions", ["updated_at"], :name => "index_user_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "login",                               :null => false
