@@ -20,11 +20,17 @@ class FileCreatorTest < ActiveSupport::TestCase
   end
   
   test "quote text" do
-    testString = FileCreator::quote("0")
-    assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 0);", testString)
+    testString = FileCreator::quote("2")
+    assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 2);", testString)
   end
   
-  test "signature_style text" do
+  test "signature_style text disable" do
+    testString = FileCreator::signature_style("false")
+    assert_match("", testString)
+  end
+  
+  test "signature_style text enable" do
+    FileCreator::quote("1")
     testString = FileCreator::signature_style("false")
     assert_match("user_pref(\"mail.identity.id1.sig_bottom\", false);", testString)
   end
@@ -33,7 +39,36 @@ class FileCreatorTest < ActiveSupport::TestCase
       testString = FileCreator::signature("This is just a simple signature")
       assert_match("user_pref(\"mail.identity.id1.htmlSigFormat\", true);", testString)
       assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"This is just a simple signature\");", testString)
-    end
+  end
+    
+  test "enable offline mode" do
+      testString = FileCreator::offline_mode("true")
+      assert_match("user_pref(\"mail.server.server1.offline_download\", true);", testString)
+  end
+  
+  test "send_offline_mode" do
+      FileCreator::offline_mode("true")
+      testString = FileCreator::send_offline_mode("2")
+      assert_match("user_pref(\"offline.send.unsent_messages\", 2);", testString)
+  end
+  
+  test "disabled send_offline_mode" do
+      FileCreator::offline_mode("false")
+      testString = FileCreator::send_offline_mode("2")
+      assert_match("", testString)
+  end
+  
+  test "save_offline_mode" do
+      FileCreator::offline_mode("true")
+      testString = FileCreator::save_offline_mode("1")
+      assert_match("user_pref(\"offline.download.download_messages\", 1);", testString)
+  end  
+  
+  test "enabled save_offline_mode" do
+      FileCreator::offline_mode("false")
+      testString = FileCreator::save_offline_mode("1")
+      assert_match("", testString)
+  end  
   
   test "complete file path" do
       filePath = FileCreator::completeZipPath @hans
@@ -79,7 +114,7 @@ class FileCreatorTest < ActiveSupport::TestCase
  		  assert_match("user_pref(\"mail.identity.id1.compose_html\", false);", testString)
  		  
  		  #Quote
- 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 2);", testString)
+ 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 1);", testString)
  		  
  		  #Signature_style
      	assert_match("user_pref(\"mail.identity.id1.sig_bottom\", true);", testString)

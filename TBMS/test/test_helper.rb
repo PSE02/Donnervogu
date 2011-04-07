@@ -14,7 +14,14 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-#Needed for user_controller and user_session_controller tests
+# Helper method for tests, use this method when you have 
+# to test a controller's method which is only accessible for logged in user.
+# Logs you in as user: admin
+def login_as_admin
+	UserSession.create(users(:admin))
+end
+
+# Needed for user_controller and user_session_controller tests
 class ActionController::TestCase
   setup :activate_authlogic
 end

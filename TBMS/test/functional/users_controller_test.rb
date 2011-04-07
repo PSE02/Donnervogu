@@ -4,17 +4,18 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-	test "test the tests" do
-		assert true
+	test "should create a new user" do
+    get :new
+		assert_nil assigns(:new)
 	end
-
+	
 	test "should prevent access if you are not a logged in user" do
 		get :show
 		assert_redirected_to '/user_sessions/new'
 	end
 
 	test "should grant you access if you are a logged in user" do
-		UserSession.create(users(:admin))
+		login_as_admin
 		get :show
 		assert_response :success
 	end

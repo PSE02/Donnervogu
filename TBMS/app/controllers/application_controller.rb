@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
 	filter_parameter_logging :password, :password_confirmation # there are underscores :-|
 	helper_method :current_user_session, :current_user
+	
+	def index
+	end
+	
 	def overview
 		@emailac_count = Emailaccount.count
 		@email_oldest_get = Emailaccount.oldestGet

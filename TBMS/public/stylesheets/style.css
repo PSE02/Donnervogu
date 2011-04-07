@@ -79,7 +79,7 @@ main
 ************************/
 div.main {
 	color: #fff;
-	min-height: 680px;
+	min-height: 850px;
 }
 /*********************** 
 content
@@ -87,7 +87,7 @@ content
 div.contentOne {
 	width:72%;
 	padding: 20px;
-	min-height: 640px;
+	min-height: 810px;
 	border-right: 1px #666 solid;
 	float:left;
 }

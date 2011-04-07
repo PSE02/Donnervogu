@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110329095113) do
+ActiveRecord::Schema.define(:version => 20110405141834) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20110329095113) do
     t.datetime "last_get"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "informations"
   end
 
   create_table "groups", :force => true do |t|

@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
    require 'rubygems'
    
-   #grants access to the methods only for logged in user
+   # Restricts access for every method in this controller to logged in user only.
    before_filter :require_user
 
    def index

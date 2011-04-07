@@ -82,15 +82,12 @@ class EmailaccountsController < ApplicationController
     raise "No Account found" if @emailaccount.nil?
     @emailaccount.setParams(params)
     redirect_to emailaccount_path, :notice => 'Settings for this account were successfully saved.'
-  end
-  
-  def validInput emailaccount
-    return emailaccount[:email].match("@")
   end 
 
   def zipOf
 	  emailaccount = Emailaccount.find_by_email params[:email] 
 	  raise "No such account" if emailaccount.nil?
+	  #DR we have to change this here, if we get a response from the plugin the emailaccount.downloaded is called
 	  emailaccount.downloaded
 	  send_file emailaccount.assureZipPath
   end
