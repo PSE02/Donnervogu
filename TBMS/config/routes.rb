@@ -57,6 +57,7 @@ TBMS::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests
 
   match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
+  match "/user.current/upload" => "users#upload"
 
   match "/profile/:email" => "emailaccounts#zipOf",
 	  :constraints => { :email => /.*/ }

@@ -29,4 +29,24 @@ class UsersController < ApplicationController
   def show
     @user = current_user
   end
+  
+  def upload
+    file_param = params[:upload][:file]
+    filename = file_param.original_filename
+    filedata = file_param.read
+    raise "filename nil" if filename.nil?
+    raise "data nil" if filedata.nil?
+    
+    
+    path = Dir.pwd + "/public/uploads/" + filename
+    @a = File.new(path, "w+")
+    @a.puts filedata
+    @a.close
+    csvimport(@a)
+    redirect_to root_path
+  end
+  
+  def csvimport file
+    
+  end
 end
