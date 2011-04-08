@@ -13,3 +13,5 @@ coverage.data
 
 #do not commit netbeans stuff
 nbproject/
+
+.csv

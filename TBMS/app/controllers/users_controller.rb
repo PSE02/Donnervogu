@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     raise "data nil" if filedata.nil?
     
     
-    path = Dir.pwd + "/public/uploads/" + filename
+    path = File.join(Dir.pwd, "public","uploads", filename)
     @a = File.new(path, "w+")
     @a.puts filedata
     csvimport(filedata)
@@ -49,6 +49,9 @@ class UsersController < ApplicationController
   def csvimport filedata
     csv = CSV.parse(filedata)
     csv.delete_at(0)
-    raise "#{csv}"
+    for i in 0..csv.size do 
+      
+    end
+    raise "#{csv[1][0]}"
   end
 end
