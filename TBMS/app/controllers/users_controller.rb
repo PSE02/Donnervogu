@@ -1,4 +1,5 @@
-# Author:: Jonas Ruef
+require 'csv'
+# Author:: Jonas Ruef, Dominique Rahm
 # Manages the users
 class UsersController < ApplicationController
 
@@ -41,12 +42,13 @@ class UsersController < ApplicationController
     path = Dir.pwd + "/public/uploads/" + filename
     @a = File.new(path, "w+")
     @a.puts filedata
-    @a.close
-    csvimport(@a)
+    csvimport(filedata)
     redirect_to root_path
   end
   
-  def csvimport file
-    
+  def csvimport filedata
+    csv = CSV.parse(filedata)
+    csv.delete_at(0)
+    raise "#{csv}"
   end
 end
