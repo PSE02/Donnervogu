@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     # auto-login which can't happen here because
     # the User has not yet been activated
     if @user.save
-      redirect_to signup_url
+      redirect_to root_path
     else
       render :action => :new
     end

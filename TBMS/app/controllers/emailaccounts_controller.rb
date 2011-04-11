@@ -1,5 +1,5 @@
 class EmailaccountsController < ApplicationController
-	before_filter :require_user, :except => [ :zipOf]
+	before_filter :require_user, :except => [ :zipOf ]
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
@@ -31,11 +31,6 @@ class EmailaccountsController < ApplicationController
       format.html # new.html.erb
       format.xml  { render :xml => @emailaccount }
     end
-  end
-
-  # GET /emailaccounts/1/edit
-  def edit
-    @emailaccount = Emailaccount.find(params[:id])
   end
 
   # POST /emailaccounts
@@ -87,16 +82,13 @@ class EmailaccountsController < ApplicationController
     @emailaccount = Emailaccount.find(params[:id])
     raise "No Account found" if @emailaccount.nil?
     @emailaccount.setParams(params)
-    redirect_to emailaccount_path
-  end
-  
-  def validInput emailaccount
-    return emailaccount[:email].match("@")
-  end
+    redirect_to emailaccount_path, :notice => 'Settings for this account were successfully saved.'
+  end 
 
   def zipOf
 	  emailaccount = Emailaccount.find_by_email params[:email] 
 	  raise "No such account" if emailaccount.nil?
+	  #DR we have to change this here, if we get a response from the plugin the emailaccount.downloaded is called
 	  emailaccount.downloaded
 	  send_file emailaccount.assureZipPath
   end

@@ -1,16 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
 #
-# column: value
-#
-#  column: value
+#Don't delete will be used by some tests
 admin:
-    login: admin
-    crypted_password: admin
-    password_salt:   4
-    persistence_token: 17  
-    single_access_token: 13
-    perishable_token: 37
+ login: admin
+ password_salt: <%= salt = Authlogic::Random.hex_token %>
+ crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("admin" + salt) %>
+ single_access_token: 13
+ persistence_token: 6cde0674657a8a313ce952df979de2830309aa4c11ca65805dd00bfdc65dbcc2f5e36718660a1d2e68c1a08c276d996763985d2f06fd3d076eb7bc4d97b1e317
+ perishable_token: 37

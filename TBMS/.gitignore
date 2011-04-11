@@ -6,3 +6,10 @@ hpricot/
 
 #do not commit eclipse stuff
 .metadata/
+
+#do not commit code coverage stuff
+coverage/
+coverage.data
+
+#do not commit netbeans stuff
+nbproject/
