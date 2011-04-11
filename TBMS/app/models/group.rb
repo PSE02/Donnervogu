@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
 	has_many :groups
 	serialize :preferences
 
-	def initialize params
+	def initialize params={}
 		super params
 		self.preferences = Hash.new
 	end
@@ -43,8 +43,8 @@ class Group < ActiveRecord::Base
 		self.preferences.merge self.group.final_preferences
   end
 
-  def update
-    self.members.each {|member| member.update}
+  def propagate_update
+    self.members.each {|member| member.propagate_update}
   end
 
   def setParams params

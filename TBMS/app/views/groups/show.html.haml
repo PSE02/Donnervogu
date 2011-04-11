@@ -11,10 +11,33 @@
       %b Group
     %td= @profile.group.to_s
   %tr
+%table
+  %tr
+    %th Name
+    %th Email
+    %th
+  - @profile.groups.each do |group|
+    %tr
+      %td= group.name
+      %td
+      %td
+        = link_to 'Show', group
+        |
+        = link_to 'Delete', group, :confirm => "Do you really want to delete #{group.name}?", :method => :delete
+  - @profile.emailaccounts.each do |email|
+    %tr
+      %td= email.name
+      %td= email.email
+      %td
+        = link_to 'Show', email
+        |
+        = link_to 'Delete', email, :confirm => "Do you really want to delete #{email.name}?", :method => :delete
+
 %br
 %hr
 %br
 = render "shared/preferences"
+
 = link_to 'Edit', edit_group_path(@profile)
 |
-= link_to 'Back', emailaccounts_path
+= link_to 'Back', groups_path
