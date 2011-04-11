@@ -1,5 +1,6 @@
 # Emailaccounts can belong to groups and merge their preferences
-# with the group's. 
+# with the group's.
+include GroupsHelper
 class Group < ActiveRecord::Base
 	validates_presence_of :name
 	has_many :emailaccounts
@@ -40,5 +41,21 @@ class Group < ActiveRecord::Base
 	# Overwrite the subgroups preferences if necessary
 	def up_merge
 		self.preferences.merge self.group.final_preferences
-	end
+  end
+
+  def update
+    self.members.each {|member| member.update}
+  end
+
+  def setParams params
+	  raise "No Params" if params.nil?
+	  params.each do |key, value|
+	    raise "key nil" if key.nil?
+	    raise "value nil" if value.nil?
+	     self.preferences[key.to_sym] = value if FileCreator::validKey?(key)
+	  end
+    self.save
+    self.update
+  end
+
 end

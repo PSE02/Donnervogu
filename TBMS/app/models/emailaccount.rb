@@ -80,5 +80,9 @@ class Emailaccount < ActiveRecord::Base
 	# Overwrite the subgroups preferences if necessary
 	def up_merge
 		self.preferences.merge self.group.final_preferences
-	end
+  end
+
+  def update
+    assureCreatedZip
+  end
 end
