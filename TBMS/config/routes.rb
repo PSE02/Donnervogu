@@ -66,6 +66,7 @@ TBMS::Application.routes.draw do
   resource :user, :as => 'account'  # a convenience route
   resources :user_sessions 
   resources :emailaccounts
+  resources :groups
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout

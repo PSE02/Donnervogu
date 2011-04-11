@@ -3,11 +3,6 @@
 %table
   %tr
     %td
-      %b Email:
-    %td
-      = @profile.email
-  %tr
-    %td
       %b Name:
     %td
       = @profile.name
@@ -19,7 +14,7 @@
 %br
 %hr
 %br
-=render "shared/preferences"
-= link_to 'Edit', edit_emailaccount_path(@profile)
+= render "shared/preferences"
+= link_to 'Edit', edit_group_path(@profile)
 |
 = link_to 'Back', emailaccounts_path

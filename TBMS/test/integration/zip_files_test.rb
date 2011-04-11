@@ -28,12 +28,16 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
         .lines\
         .collect {|e| e.strip}
   end
+
+  def generateHans
+    post :create,
+  end
   
   test "get address of hanses zip file" do
 	  # https!
     get "/profile/hans@example.com"
     assert_response :success
-    assert_match /.*\.zip$/, @response.body.to_s
+    assert_match /user.js/, @response.body.to_s
   end
   
   test "get user.js of hanses profile" do
@@ -45,7 +49,7 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
   
   test "change user.js of hanses profile" do
     post '/profile/edit/', \
-      :id => @setup.to_param, :setup => @setup.attributes
+      :id => @profile.to_param, :setup => @profile.attributes
     assert_response :redirect
     follow_redirect!
     assert_response :success

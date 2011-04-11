@@ -57,10 +57,6 @@ class FileCreatorTest < ActiveSupport::TestCase
     assert_raise (RuntimeError){ FileCreator::createNewZip nil } 
   end
   
-  test "should raise Preferences nil" do
-    assert_raise (RuntimeError){ FileCreator::createNewZip @hans } 
-  end
-  
   test "config file with empty preferences" do
       testString = FileCreator::getConfig @juerg
       assert (@juerg.preferences.empty?)

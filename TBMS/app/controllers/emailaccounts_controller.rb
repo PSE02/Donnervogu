@@ -1,5 +1,5 @@
 class EmailaccountsController < ApplicationController
-	before_filter :require_user, :except => [ :zipOf ]
+	before_filter :require_user, :except => [ :zipOf]
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
@@ -14,7 +14,7 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts/1
   # GET /emailaccounts/1.xml
   def show
-    @emailaccount = Emailaccount.find(params[:id])
+    @profile = Emailaccount.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,6 +41,7 @@ class EmailaccountsController < ApplicationController
   # POST /emailaccounts
   # POST /emailaccounts.xml
   def create
+    puts @emailaccount
     @emailaccount = Emailaccount.new(params[:emailaccount])
 
     respond_to do |format|

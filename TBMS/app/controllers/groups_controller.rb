@@ -13,18 +13,18 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
-    @group = Group.find(params[:id])
+    @profile = Group.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @group }
+      format.xml  { render :xml => @profile }
     end
   end
 
   # GET /groups/new
   # GET /groups/new.xml
   def new
-    @group = Group.new
+    @group = Group.new params
 
     respond_to do |format|
       format.html # new.html.erb
