@@ -42,32 +42,18 @@ class FileCreatorTest < ActiveSupport::TestCase
   end
     
   test "enable offline mode" do
-      testString = FileCreator::offline_mode("true")
+      testString = FileCreator::offline_mode(true)
       assert_match("user_pref(\"mail.server.server1.offline_download\", true);", testString)
   end
   
-  test "send_offline_mode" do
-      FileCreator::offline_mode("true")
+  test "disable send_offline_mode" do
       testString = FileCreator::send_offline_mode("2")
       assert_match("user_pref(\"offline.send.unsent_messages\", 2);", testString)
   end
   
-  test "disabled send_offline_mode" do
-      FileCreator::offline_mode("false")
-      testString = FileCreator::send_offline_mode("2")
-      assert_match("", testString)
-  end
-  
-  test "save_offline_mode" do
-      FileCreator::offline_mode("true")
+  test "enable save_offline_mode" do
       testString = FileCreator::save_offline_mode("1")
       assert_match("user_pref(\"offline.download.download_messages\", 1);", testString)
-  end  
-  
-  test "enabled save_offline_mode" do
-      FileCreator::offline_mode("false")
-      testString = FileCreator::save_offline_mode("1")
-      assert_match("", testString)
   end  
   
   test "complete file path" do

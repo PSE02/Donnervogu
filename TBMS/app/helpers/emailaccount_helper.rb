@@ -85,21 +85,21 @@ module EmailaccountHelper
     end
     
     def self.send_offline_mode mode
-      if (@offlineMode == "true") 
-        return ("\n/************************** Send Offline Mode ********************/  \n" +    
+      if (@offlineMode == "true")
+        return "\n/************************** Send Offline Mode ********************/  \n" +    
               "// 1=send all messages whene going online \n" +
               "// 2=don't send offline messages when going online \n" +
-              "user_pref(\"offline.send.unsent_messages\", #{mode}); \n" )
+              "user_pref(\"offline.send.unsent_messages\", #{mode}); \n" 
       else return ""
       end       
     end
     
     def self.save_offline_mode mode
-      if (@offlineMode == "true") 
-        return ("\n/************************** Save Offline Mode ********************/  \n" +    
+      if (@offlineMode == "true")
+       "\n/************************** Save Offline Mode ********************/  \n" +    
        "// 1=save all messages whene going offline \n"+
        "// 2=do not save messages when going offline \n" +
-       "user_pref(\"offline.download.download_messages\", #{mode}); \n"  )   
+       "user_pref(\"offline.download.download_messages\", #{mode}); \n"     
       else return ""
       end
     end
