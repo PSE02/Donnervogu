@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   # GET /groups/new.xml
   def new
-    @group = Group.new params
+    @group = Group.new
 
     respond_to do |format|
       format.html # new.html.erb

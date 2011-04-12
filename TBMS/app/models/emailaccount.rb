@@ -22,15 +22,25 @@ class Emailaccount < ActiveRecord::Base
   def self.oldestGet
 	  self.minimum("last_get")
   end
-	
+
+  def setGroup param
+    return nil if param.nil?
+    group = Group.find(param)
+    if (group != self.group and group != nil)
+      self.group = group
+      group.emailaccounts << self
+      raise "save error" unless self.save and group.save
+    end
+  end
+
 	def setParams params
 	  raise "No Params" if params.nil?
-	  params.each do |key, value|
+    params.each do |key, value|
 	    raise "key nil" if key.nil?
 	    raise "value nil" if value.nil?
 	     self.preferences[key.to_sym] = value if validKey?(key)
 	  end 
-    self.save
+    raise "save failed: #{errors}" unless self.save
     FileCreator::createNewZip(self)
     assureCreatedZip
   end
@@ -82,7 +92,7 @@ class Emailaccount < ActiveRecord::Base
 		self.preferences.merge self.group.final_preferences
   end
 
-  def update
+  def propagate_update
     assureCreatedZip
   end
 end

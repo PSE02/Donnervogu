@@ -36,7 +36,6 @@ class EmailaccountsController < ApplicationController
   # POST /emailaccounts
   # POST /emailaccounts.xml
   def create
-    puts @emailaccount
     @emailaccount = Emailaccount.new(params[:emailaccount])
 
     respond_to do |format|
@@ -81,9 +80,10 @@ class EmailaccountsController < ApplicationController
   def setParams
     @emailaccount = Emailaccount.find(params[:id])
     raise "No Account found" if @emailaccount.nil?
+    @emailaccount.setGroup params[:group]
     @emailaccount.setParams(params)
-    redirect_to emailaccount_path, :notice => 'Settings for this account were successfully saved.'
-  end 
+    redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
+  end
 
   def zipOf
 	  emailaccount = Emailaccount.find_by_email params[:email] 

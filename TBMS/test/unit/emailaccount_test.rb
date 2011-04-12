@@ -39,7 +39,12 @@ class EmailaccountTest < ActiveSupport::TestCase
   test "setParams for real" do  
     @account.setParams ({:html => "false", :quote => "0"})
     assert (@account.preferences == {:html => "false", :quote => "0", :signature => "This is just a template signature"})
-   end
+  end
+
+  test "setParams set group" do
+    @account.setParams({:group => Group.find(:first).to_param})
+    assert_equal(Group.find(:first), @account.group )
+  end
   
   test "test download" do
     lastget = @account.last_get

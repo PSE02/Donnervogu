@@ -1,5 +1,12 @@
 = form_tag(:action => "setParams") do
   %fieldset
+    %legend Group
+    %table
+      %tr
+        %td
+          = select_tag(:group, options_for_select(Group.all.collect {|g| [g.to_s, g.id]}, @profile.group_id))
+
+  %fieldset
     %legend Send all Mails in HTML
     %table
       %tr
