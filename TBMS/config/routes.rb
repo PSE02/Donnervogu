@@ -1,5 +1,7 @@
 TBMS::Application.routes.draw do
 
+  resources :subaccounts
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -56,11 +58,15 @@ TBMS::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests
 
-  match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
-  match "/groups/:id/edit/setParams" => "groups#setParams"
+  match "/emailaccounts/:id/edit/set_params" => "emailaccounts#set_params"
+  match "/groups/:id/edit/set_params" => "groups#set_params"
 
-  match "/profile/:email" => "emailaccounts#zipOf",
-	  :constraints => { :email => /.*/ }
+  match "/profile/:id" => "emailaccounts#zip_of_id",
+      :constraints => { :id => /\d+/ }
+  match "/profile/:id/ok" => "emailaccounts#was_successfully_updated",
+      :constraints => { :id => /\d+/ }
+  match "/profile/:email" => "emailaccounts#zip_of_email",
+	  :constraints => { :email => /.*@.*/ }
 
   #routes for login/logout
   resources :users  # give us our some normal resource routes for users

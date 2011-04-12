@@ -5,23 +5,35 @@ hans:
   email: hans@example.com
   name: Hans Mustermann
   preferences: 
-    :html_mail: true
-    :quoting_style: :above
+    :html: "true"
+    :quote: :above
+    :offline_mode: "true"
+    :send_offline_mode: "true"
+    :save_offline_mode: "false"
+    :signature_style: "false"
+    :signature: "This is just a simple signature"
 
 wicki:
   email: wicky@wikinger.il
   name: Wicki
   preferences: 
-    :html_mail: false
-    :quoting_style: :above
+    :html: false
+    :quote: :above
 
 juerg:
   email: juerg@example.com
   name: Juerg
-  preferences: {  } 
+  preferences:
+    :offline_mode: "true"
+    :send_offline_mode: "false"
+    :save_offline_mode: "true"
 
 max:
   email: max@example.com
   name: Max
-  preferences: { !ruby/symbol html: "false", !ruby/symbol quote: "1", !ruby/symbol signature_style: "true",  !ruby/symbol signature: "Max Muster's signature" } 
+  preferences:
+    :html: "false"
+    :quoting_style: :above
+    :signature_style: "true"
+    :signature: "Max Muster's signature"
 

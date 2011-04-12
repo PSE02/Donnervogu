@@ -19,7 +19,7 @@ class EmailaccountTest < ActiveSupport::TestCase
   end
     
   test "there are some users.." do
-	  assert User.all != []
+	  assert User.count > 0
   end
   
   test "create new emailaccount" do
@@ -28,38 +28,33 @@ class EmailaccountTest < ActiveSupport::TestCase
     @newaccount.email = "test@example.ch"
     @newaccount.save
     
-    assert @newaccount.preferences == {:html => "true", :signature => "This is just a template signature"}
-    assert @newaccount.last_get < Time.now
+    assert_equal @newaccount.preferences, {:html => "true", :signature => "This is just a template signature"}
   end
 
-  test "setParams with nil" do
-    assert_raise (RuntimeError){@hans.setParams nil} 
+  test "set_params with nil" do
+    assert_raise (RuntimeError){@hans.set_params nil}
   end
   
-  test "setParams for real" do  
-    @account.setParams ({:html => "false", :quote => "0"})
+  test "set_params for real" do
+    @account.set_params ({:html => "false", :quote => "0"})
     assert (@account.preferences == {:html => "false", :quote => "0", :signature => "This is just a template signature"})
   end
 
-  test "setParams set group" do
-    @account.setGroup Group.find(:first).to_param
-    assert_equal(Group.find(:first), @account.group )
+  test "set_params set group" do
+    @account.set_group Group.first.to_param
+    assert_equal(Group.first, @account.group )
   end
   
-  test "test download" do
-    lastget = @account.last_get
-    @account.downloaded
-    assert lastget < @account.last_get
-  end
+
 
   # what the heck? It's an assertion!
   test "assure zip path fail" do
     return nil
-    assert_raise(RuntimeError) {@hans.assureZipPath}
+    assert_raise(RuntimeError) {@hans.assure_zip_path}
   end  
   
   test "assure zip path" do
-    path = @account.assureZipPath
+    path = @account.assure_zip_path
     assert_match(/\.zip$/, path)
   end 
   

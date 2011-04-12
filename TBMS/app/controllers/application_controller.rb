@@ -6,13 +6,10 @@ class ApplicationController < ActionController::Base
 
 	filter_parameter_logging :password, :password_confirmation # there are underscores :-|
 	helper_method :current_user_session, :current_user
-	
-	def index
-	end
-	
+
 	def overview
-		@emailac_count = Emailaccount.count
-		@email_oldest_get = Emailaccount.oldestGet
+		@emailaccount_size = Emailaccount.count
+		@email_oldest_get = Subaccount.oldest_get
 	end
 
 	def index
@@ -39,7 +36,7 @@ class ApplicationController < ActionController::Base
 		unless current_user
 			store_location
 			redirect_to new_user_session_url
-		return false
+		  false
 		end
 	end
 
@@ -48,7 +45,7 @@ class ApplicationController < ActionController::Base
 		if current_user
 			store_location
 			redirect_to account_url
-		return false
+		  false
 		end
 	end
 

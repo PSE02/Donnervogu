@@ -85,10 +85,10 @@ class GroupsController < ApplicationController
     end
   end
 
-  def setParams
+  def set_params
     @group = Group.find(params[:id])
     raise "No Group found" if @group.nil?
-    @group.setParams(params)
+    @group.set_params(params)
     redirect_to group_path, :notice => 'Settings for this group were successfully saved.'
   end
 

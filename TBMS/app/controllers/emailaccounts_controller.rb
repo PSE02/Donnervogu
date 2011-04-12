@@ -1,5 +1,5 @@
 class EmailaccountsController < ApplicationController
-	before_filter :require_user, :except => [ :zipOf ]
+	before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
@@ -77,19 +77,29 @@ class EmailaccountsController < ApplicationController
     end
   end
 
-  def setParams
+  def set_params
     @emailaccount = Emailaccount.find(params[:id])
     raise "No Account found" if @emailaccount.nil?
-    @emailaccount.setGroup params[:group]
-    @emailaccount.setParams(params)
+    @emailaccount.set_group params[:group]
+    @emailaccount.set_params(params)
     redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
   end
 
-  def zipOf
+  def zip_of_email
 	  emailaccount = Emailaccount.find_by_email params[:email] 
 	  raise "No such account" if emailaccount.nil?
-	  #DR we have to change this here, if we get a response from the plugin the emailaccount.downloaded is called
-	  emailaccount.downloaded
-	  send_file emailaccount.assureZipPath
+    response.headers["X-TBMS-Profile-ID"] = emailaccount.generate_subaccount
+	  send_file emailaccount.assure_zip_path
+  end
+
+  def zip_of_id
+    emailaccount = Subaccount.find(params[:id]).emailaccount
+	  raise "No such account" if emailaccount.nil?
+    send_file emailaccount.assure_zip_path
+  end
+
+  def was_successfully_updated
+    subaccount = Subaccount.find(params[:id])
+    subaccount.downloaded
   end
 end

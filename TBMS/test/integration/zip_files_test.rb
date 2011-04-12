@@ -48,7 +48,7 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
   end
   
   test "change userjs of hanses profile" do
-    url = "/emailaccounts/#{@profile.email}/update/setParams"
+    url = "/emailaccounts/#{@profile.email}/update/set_params"
     raise url
     post url, :setup => @profile.attributes
     assert_response :redirect

@@ -16,6 +16,16 @@
       %b Group
     %td= @profile.group.to_s
   %tr
+-if not @profile.subaccounts.empty?
+  %h2 Profiles
+  %table
+    %tr
+      %th ID
+      %th Last downloaded
+    - @profile.subaccounts.each do |each|
+      %tr
+        %td= each.id
+        %td= time_ago_in_words each.last_get
 %br
 %hr
 = render "shared/preferences"

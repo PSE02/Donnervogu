@@ -10,13 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110405141834) do
+ActiveRecord::Schema.define(:version => 20110412202725) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
     t.string   "name"
     t.text     "preferences"
-    t.datetime "last_get"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
@@ -29,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20110405141834) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+  end
+
+  create_table "subaccounts", :force => true do |t|
+    t.datetime "last_get"
+    t.integer  "emailaccount_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_sessions", :force => true do |t|
