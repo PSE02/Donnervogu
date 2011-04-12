@@ -55,7 +55,7 @@ class Group < ActiveRecord::Base
 	     self.preferences[key.to_sym] = value if FileCreator::validKey?(key)
 	  end
     self.save
-    self.update
+    self.propagate_update
   end
 
 end

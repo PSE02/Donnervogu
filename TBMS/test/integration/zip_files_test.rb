@@ -40,16 +40,17 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
     assert_match /user.js/, @response.body.to_s
   end
   
-  test "get user.js of hanses profile" do
+  test "get userjs of hanses profile" do
     get "/profile/txt/hans@example.com" # nonstandard action to circumvent the zip
     assert_response :success
     lines = getHansLines
     assert lines.any? {|line| /"mail.default_html_action",\s*2/.match line}
   end
   
-  test "change user.js of hanses profile" do
-    post '/profile/edit/', \
-      :id => @profile.to_param, :setup => @profile.attributes
+  test "change userjs of hanses profile" do
+    url = "/emailaccounts/#{@profile.email}/update/setParams"
+    raise url
+    post url, :setup => @profile.attributes
     assert_response :redirect
     follow_redirect!
     assert_response :success
