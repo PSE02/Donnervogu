@@ -52,15 +52,15 @@ class EmailaccountsController < ApplicationController
   # PUT /emailaccounts/1
   # PUT /emailaccounts/1.xml
   def update
-    @emailaccount = Emailaccount.find(params[:id])
-
+    @profile = Emailaccount.find(params[:id])
+    raise "No such account #{params[:id]}" if @profile.nil?
     respond_to do |format|
-      if @emailaccount.update_attributes(params[:emailaccount])
-        format.html { redirect_to(@emailaccount, :notice => 'Emailaccount was successfully updated.') }
+      if @profile.update_attributes(params[:emailaccount])
+        format.html { redirect_to(@profile, :notice => 'Emailaccount was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @emailaccount.errors, :status => :unprocessable_entity }
+        format.html { render :action => "show" }
+        format.xml  { render :xml => @profile.errors, :status => :unprocessable_entity }
       end
     end
   end
