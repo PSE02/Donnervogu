@@ -3,9 +3,11 @@ db/*.sqlite3
 log/*.log
 tmp/
 hpricot/
+public/rcov
 
 #do not commit eclipse stuff
 .metadata/
+.idea/
 
 #do not commit code coverage stuff
 coverage/
