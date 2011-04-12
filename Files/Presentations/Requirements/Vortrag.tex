@@ -1,0 +1,177 @@
+%-----------------------------------------------------------------
+% PSE 02 - Team Donnervogu
+%
+% Filename: Vortrag_1.tex
+% Date: 01.03.2011
+% Author: Felix Langenegger <felix.langenegger@gmail.com>
+% Edited by: Jonas Ruef
+%-----------------------------------------------------------------
+\documentclass{beamer}
+% Latex Packages
+\usepackage[utf8x]{inputenc}
+\usetheme{Singapore}
+\usepackage[ngerman]{babel}
+% Standard Beamer Latex Settings
+\setbeamercovered{dynamic}
+% Frame Numbers on
+\setbeamertemplate{footline}[frame number]
+% Set Beamer Colors
+\setbeamercolor{normal text}{fg=white,bg=black}
+\setbeamercolor{structure}{fg=white}
+\setbeamercolor{section in head/foot}{fg=white}
+\setbeamercolor{section in head/foot shaded}{fg=gray}
+% Set Fontsize in Head and Foot
+\setbeamerfont{section in head/foot}{size={\fontsize{6}{01}}}
+%-----------------------------------------------------------------
+%Edit here
+%-----------------------------------------------------------------
+\title{Requirements}
+\author{PSE Team 2\\Jonas Ruef
+\\Felix Langenegger}
+\date{07. März 2011}
+
+\begin{document}
+
+\maketitle
+\frame{
+	\frametitle{Inhaltsverzeichnis}
+	\tableofcontents
+	[pausesections]
+}
+\begin{frame}{Kunde}
+\section{Einführung}
+\subsection{Kunde}
+\begin{itemize}
+ \item Michael Waelti
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Team PSE 2}
+\subsection{Team PSE 2}
+\begin{itemize}
+ \item \textbf{Aaron Karper} - Quality Evangelist
+ \item \textbf{Dominique Rahm} - Key Account Manager
+ \item \textbf{Felix Langenegger} - Master Tracker
+ \item \textbf{Jonas Ruef} - Chief Deliverable Officer
+ \item \textbf{Sascha Schwärzler} - Head of Communication
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Coach}
+\subsection{Coach}
+\begin{itemize}
+ \item Max Leske
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Projekt}
+\section{Projekt}
+\begin{itemize}
+ \item Thunderbird Plugin
+ \item Automatisches managen von Signaturen, Formatiereungen, etc.
+ \item zentrales Management
+\item Team 1 und Team 2 haben dasselbe Projekt
+\end{itemize}
+
+\end{frame}
+%---------------------------------
+\begin{frame}{Problem?!}
+\section{Aufteilung}
+Wie teilt man ein Projekt auf zwei Teams auf?
+\end{frame}
+%---------------------------------
+\begin{frame}{Szenario 1}
+\subsection{Szenario 1}
+Jedes Team setzt das Projekt individuell um. Keine Absprache unter den beiden
+Teams.\\ \bigbreak
+\textbf{Vorteile}:
+\begin{itemize}
+ \item Kunde erhält \textbf{\underline{zwei}} Produkte und kann dann
+entscheiden
+ \item kleiner Kommunikationsaufwand
+ \item ev. Wettbewerb zwischen den beiden Teams
+\end{itemize} \bigbreak
+\textbf{Nachteile}: 
+\begin{itemize}
+ \item Doppelspurigkeit
+ \item Kunde muss an zwei Meetings
+ \item ev. wird kein Projekt richtig fertig
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Szenario 2}
+\subsection{Szenario 2}
+Beide Teams arbeiten am selben Projekt.\\ \bigbreak
+\textbf{Vorteile}:
+\begin{itemize}
+ \item Kunde bekommt mehr Stories umgesetzt
+ \item Nur ein Kundenmeeting
+\end{itemize} \bigbreak
+\textbf{Nachteil}:
+\begin{itemize}
+ \item Grosser Kommunikationsaufwand
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Definitive Aufteilung}
+\subsection{Definitive Aufteilung}
+\begin{itemize}
+ \item Der Kunde wünschte sich Szenario 2
+ \item Ein Team entwickelt das Thunderbird Plugin
+ \item Das andere Team die Serverapplikation und das Webinterface für den Admin
+\end{itemize}
+Welches Team welchen Part übernimmt ist noch Teil der wöchentlichen Abklärung.
+\end{frame}
+%---------------------------------
+%---------------------------------
+\begin{frame}{Kunde}
+\section{Kunde}
+Michael Waelti\\
+NILE Clothing AG, NILE Trading, Bijou les Boutiques
+\bigbreak
+\begin{itemize}
+\item Fadendaten interne IT der drei Firmen
+\item Externe IT: Aarboard
+ \item Noch Master Student an der Universität Bern
+ \item Studierte im Nebenfach Informatik
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Interne IT- Infrastruktur Kunde}
+\subsection{Interne IT- Infrastruktur Kunde}
+\begin{itemize}
+\item 2 Logistikserver
+\item 1 Testserver
+\item Ca. 70 Clients
+\bigbreak
+\end{itemize}
+Klein aber schnell expandierend!\\
+Lösung muss einfach erweiterbar und skalierbar sein.
+\end{frame}
+%---------------------------------
+\begin{frame}{Kundenmeeting}
+\subsection{Kundenmeeting}
+Technisch versierter Kunde: Fluch oder Segen?
+\bigbreak
+Problematik mit 2 Teams: Mit dem Kunden 12 Leute an Meetings!!!
+\end{frame}
+%---------------------------------
+\begin{frame}{Requirements dieser Woche}
+\subsection{Requirements dieser Woche}
+Noch kein Planning Game durchgeführt.
+\bigbreak
+Recherche von:
+\begin{itemize}
+\item Technologien von Thunderbird-Plugin
+\item Technologien auf Server
+\item Schnittstelle zwischen Server und Plugin
+\end{itemize}
+\end{frame}
+%---------------------------------
+\begin{frame}{Fragen}
+\section{Fragen}
+ \begin{center}
+\fontsize{60}{80}\selectfont ?
+ \end{center}
+\end{frame}
+\end{document}

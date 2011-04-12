@@ -3,8 +3,17 @@
 # Do not delete the top three emailaccounts, they are needed for the file_creator_test and emailccounts_controller_test
 hans:
   email: hans@example.com
-  name: Hans
-  preferences:
+  name: Hans Mustermann
+  preferences: 
+    :html_mail: true
+    :quoting_style: :above
+
+wicki:
+  email: wicky@wikinger.il
+  name: Wicki
+  preferences: 
+    :html_mail: false
+    :quoting_style: :above
 
 juerg:
   email: juerg@example.com

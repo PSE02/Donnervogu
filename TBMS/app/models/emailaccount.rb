@@ -10,6 +10,7 @@ class Emailaccount < ActiveRecord::Base
   validates_uniqueness_of :email
 
 	serialize :preferences
+	belongs_to :group
 	
   def initialize panda={}
 	  super panda
@@ -21,15 +22,25 @@ class Emailaccount < ActiveRecord::Base
   def self.oldestGet
 	  self.minimum("last_get")
   end
-	
+
+  def setGroup param
+    return nil if param.nil?
+    group = Group.find(param)
+    if (group != self.group and group != nil)
+      self.group = group
+      group.emailaccounts << self
+      raise "save error" unless self.save and group.save
+    end
+  end
+
 	def setParams params
 	  raise "No Params" if params.nil?
-	  params.each do |key, value|
+    params.each do |key, value|
 	    raise "key nil" if key.nil?
 	    raise "value nil" if value.nil?
 	     self.preferences[key.to_sym] = value if validKey?(key)
 	  end 
-    self.save
+    raise "save failed: #{errors}" unless self.save
     FileCreator::createNewZip(self)
     assureCreatedZip
   end
@@ -61,4 +72,27 @@ class Emailaccount < ActiveRecord::Base
 	def downloaded
 		self.last_get = Time.now
 	end
+
+	# the preferences merged with the group's
+	def final_preferences
+		if not self.group.nil?
+			down_merge
+		else
+			self.preferences
+		end
+	end
+
+	# Overwrite the supergroups preferences if necessary
+	def down_merge
+		self.group.final_preferences.merge self.preferences
+	end
+
+	# Overwrite the subgroups preferences if necessary
+	def up_merge
+		self.preferences.merge self.group.final_preferences
+  end
+
+  def propagate_update
+    assureCreatedZip
+  end
 end

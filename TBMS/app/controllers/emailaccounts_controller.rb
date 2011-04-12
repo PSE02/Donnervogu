@@ -14,7 +14,7 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts/1
   # GET /emailaccounts/1.xml
   def show
-    @emailaccount = Emailaccount.find(params[:id])
+    @profile = Emailaccount.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -80,9 +80,10 @@ class EmailaccountsController < ApplicationController
   def setParams
     @emailaccount = Emailaccount.find(params[:id])
     raise "No Account found" if @emailaccount.nil?
+    @emailaccount.setGroup params[:group]
     @emailaccount.setParams(params)
-    redirect_to emailaccount_path, :notice => 'Settings for this account were successfully saved.'
-  end 
+    redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
+  end
 
   def zipOf
 	  emailaccount = Emailaccount.find_by_email params[:email] 

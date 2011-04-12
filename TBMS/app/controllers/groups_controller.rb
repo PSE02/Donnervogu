@@ -17,11 +17,11 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
-    @group = Group.find(params[:id])
+    @profile = Group.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @group }
+      format.xml  { render :xml => @profile }
     end
   end
 
@@ -84,4 +84,12 @@ class GroupsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def setParams
+    @group = Group.find(params[:id])
+    raise "No Group found" if @group.nil?
+    @group.setParams(params)
+    redirect_to group_path, :notice => 'Settings for this group were successfully saved.'
+  end
+
 end

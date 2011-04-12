@@ -58,6 +58,7 @@ TBMS::Application.routes.draw do
 
   match "/emailaccounts/:id/edit/setParams" => "emailaccounts#setParams"
   match "/user.current/upload" => "users#upload"
+  match "/groups/:id/edit/setParams" => "groups#setParams"
 
   match "/profile/:email" => "emailaccounts#zipOf",
 	  :constraints => { :email => /.*/ }
@@ -67,6 +68,7 @@ TBMS::Application.routes.draw do
   resource :user, :as => 'account'  # a convenience route
   resources :user_sessions 
   resources :emailaccounts
+  resources :groups
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
