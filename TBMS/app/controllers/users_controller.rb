@@ -43,15 +43,23 @@ class UsersController < ApplicationController
     @a = File.new(path, "w+")
     @a.puts filedata
     csvimport(filedata)
-    redirect_to root_path
   end
   
+  #DR next step would be to add the groups (domain) if the do not exist and add each new Emailaccount to this group
   def csvimport filedata
+    i = 0
     csv = CSV.parse(filedata)
     csv.delete_at(0)
-    for i in 0..csv.size do 
-      
-    end
-    raise "#{csv[1][0]}"
+    csv\
+      .collect {|e| e[0]}\
+        .each do |email|
+          i = i + 1;
+          @newAccount = Emailaccount.new
+          @newAccount.email = email
+          @newAccount.name = email.split(/@/)[0]
+          @newAccount.save
+        end
+   #DR notice does not work!
+     redirect_to(emailaccounts_url, :notice => "#{i} new Emailaccounts created from csv")
   end
 end
