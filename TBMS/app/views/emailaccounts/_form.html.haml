@@ -1,4 +1,5 @@
-= flash[:notice]
+%notice
+  = flash[:notice]
 %br
 = form_for @emailaccount do |f| 
   - if @emailaccount.errors.any?

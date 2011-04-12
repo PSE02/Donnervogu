@@ -1,4 +1,5 @@
-= flash[:notice]
+%notice
+  = flash[:notice]
 %br
 = form_for @group do |f| 
   - if @group.errors.any?

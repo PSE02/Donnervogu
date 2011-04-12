@@ -12,11 +12,11 @@
         %h1 Thunderbird Control Center
         ver. 2.0
       .navigation
-        = link_to "Email Account", emailaccounts_path
+        = link_to "Email Accounts", emailaccounts_path
         |
         = link_to "Groups", groups_path
         |
-        = link_to "Informations", account_url(:current)
+        = link_to "Import", account_url(:current)
         .login
           = link_to "Logout", logout_path
       .main
