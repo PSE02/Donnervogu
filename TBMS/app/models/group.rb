@@ -3,6 +3,7 @@
 include GroupsHelper
 class Group < ActiveRecord::Base
 	validates_presence_of :name
+  validates_uniqueness_of :name
 	has_many :emailaccounts
 	# This is somewhat suboptimal, but inheritance in databases and
 	# rails is really hard work.

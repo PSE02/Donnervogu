@@ -51,15 +51,37 @@ class UsersController < ApplicationController
     csv = CSV.parse(filedata)
     csv.delete_at(0)
     csv\
-      .collect {|e| e[0]}\
-        .each do |email|
-          i = i + 1;
-          @newAccount = Emailaccount.new
-          @newAccount.email = email
-          @newAccount.name = email.split(/@/)[0]
-          @newAccount.save
+      .collect {|e| [e[0], e[1]]}\
+        .each do |email, domain|
+          raise "domain is nil" if domain.nil?
+          init(email, domain)
         end
    #DR notice does not work!
      redirect_to(emailaccounts_url, :notice => "#{i} new Emailaccounts created from csv")
   end
+  
+  def init email, domain
+    group = initGroup(domain) 
+    initAccount(email, group)
+  end
+  
+  def initAccount email, group
+     newAccount = Emailaccount.new
+     newAccount.email = email
+     newAccount.name = email.split(/@/)[0]
+     newAccount.group = group
+     newAccount.save
+  end 
+  
+  def initGroup domain
+    domain = domain.split(/\./)[0]
+    group = Group.find_by_name(domain)
+    if group.nil? 
+      group = Group.new
+      group.name = domain
+      group.save
+    end 
+    return group
+  end
+  
 end

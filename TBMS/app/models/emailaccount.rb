@@ -5,8 +5,6 @@ class Emailaccount < ActiveRecord::Base
 	validates_presence_of :name
   validates_format_of :email,
       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-  validates_format_of :name, :with => /^\w+.+$/i,
-    :message => "can only contain letters, numbers and dots."
   validates_uniqueness_of :email
 
 	serialize :preferences
