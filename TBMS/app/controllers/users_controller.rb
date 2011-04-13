@@ -1,5 +1,6 @@
 # Author:: Jonas Ruef
-# Manages the users
+# Manages the users, when logging in create a user object,
+# when logging out destroy user object.
 class UsersController < ApplicationController
 
   before_filter :require_no_user, :only => [:new, :create]

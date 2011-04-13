@@ -1,4 +1,5 @@
 # Author:: Jonas Ruef
+# Relies on emailaccounts fixtures, so don't delete them.
 require 'test_helper'
 
 class EmailaccountsControllerTest < ActionController::TestCase
