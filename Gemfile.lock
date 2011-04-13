@@ -49,7 +49,9 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mysql2 (0.2.7)
     nokogiri (1.4.4)
+    nokogiri (1.4.4-x86-mingw32)
     nokogiri (1.4.4.1-x86-mingw32)
     polyglot (0.3.1)
     rack (1.2.2)
@@ -94,10 +96,10 @@ DEPENDENCIES
   cover_me (>= 1.0.0.rc6)
   haml
   hpricot
+  mysql2
   nokogiri
   rails (= 3.0.5)
   rcov
   rubyzip
   sqlite3
   webrat
-
