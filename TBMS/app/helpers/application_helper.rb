@@ -1,3 +1,14 @@
+# Module to create a zip file for a emailaccount
+# The zip file contains a user.js file containing all the specified settings
+# (by the admin) to change Thunderbird
+#
+# If you need to add more settings please make sure to add the key (:html for example) 
+# to the @validKeys list and add a method (self.html for example) with the same name as the key
+# Else our FileCreator will not use your new key!
+#
+# Author::    Sascha Schwaerzler, Dominique Rahm
+# License::   Distributes under the same terms as Ruby
+
 require 'zip/zip' # rubyzip gem
 require 'zip/zipfilesystem'
 module ApplicationHelper
@@ -6,7 +17,6 @@ module ApplicationHelper
     @validKeys = [:html, :quote, :signature_style, :signature, :offline_mode, :send_offline_mode, :save_offline_mode]
     @offlineMode
     @quote
-    #DR we have to refactor this to simple pass an array or a email (email would be even better!)
 
     def self.completeZipPath emailaccount
 	    File.join(Dir.pwd,"public",

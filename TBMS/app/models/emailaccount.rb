@@ -5,16 +5,14 @@ class Emailaccount < ActiveRecord::Base
 	validates_presence_of :name
   validates_format_of :email,
       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-  validates_format_of :name, :with => /^[\w\s]+$/i,
-    :message => "can only contain letters, numbers, and whitespaces."
   validates_uniqueness_of :email
 
 	serialize :preferences
 	belongs_to :group
   has_many :subaccounts
 	
-  def initialize param={}
-	  super param
+  def initialize panda={}
+	  super panda
     self.preferences = Hash.new
     self.load_init_preferences
 	end

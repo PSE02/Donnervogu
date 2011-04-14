@@ -60,6 +60,7 @@ TBMS::Application.routes.draw do
 
   match "/emailaccounts/:id/edit/set_params" => "emailaccounts#set_params"
   match "/groups/:id/edit/set_params" => "groups#set_params"
+  match "/user.current/upload" => "users#upload"
 
   match "/profile/:id" => "emailaccounts#zip_of_id",
       :constraints => { :id => /\d+/ }

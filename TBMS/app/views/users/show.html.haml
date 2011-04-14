@@ -1,4 +1,9 @@
 %h2 User Information
+
+=form_for :upload, :url => {:action=>:upload}, :html=>{:multipart=>true} do |f|
+  =f.file_field :file 
+  =f.submit 'Upload'
+
 %br
 %br
 %table
