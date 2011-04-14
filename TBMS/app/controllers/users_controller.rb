@@ -1,3 +1,4 @@
+include UsersHelper
 require 'csv'
 # Author:: Jonas Ruef, Dominique Rahm
 # Manages the users
@@ -32,56 +33,12 @@ class UsersController < ApplicationController
   end
   
   def upload
+    old = Emailaccount.all.count
     file_param = params[:upload][:file]
-    filename = file_param.original_filename
     filedata = file_param.read
-    raise "filename nil" if filename.nil?
     raise "data nil" if filedata.nil?
-    
-    
-    path = File.join(Dir.pwd, "public","uploads", filename)
-    @a = File.new(path, "w+")
-    @a.puts filedata
-    csvimport(filedata)
-  end
-  
-  #DR next step would be to add the groups (domain) if the do not exist and add each new Emailaccount to this group
-  def csvimport filedata
-    i = 0
-    csv = CSV.parse(filedata)
-    csv.delete_at(0)
-    csv\
-      .collect {|e| [e[0], e[1]]}\
-        .each do |email, domain|
-          raise "domain is nil" if domain.nil?
-          init(email, domain)
-        end
-   #DR notice does not work!
-     redirect_to(emailaccounts_url, :notice => "#{i} new Emailaccounts created from csv")
-  end
-  
-  def init email, domain
-    group = initGroup(domain) 
-    initAccount(email, group)
-  end
-  
-  def initAccount email, group
-     newAccount = Emailaccount.new
-     newAccount.email = email
-     newAccount.name = email.split(/@/)[0]
-     newAccount.group = group
-     newAccount.save
-  end 
-  
-  def initGroup domain
-    domain = domain.split(/\./)[0]
-    group = Group.find_by_name(domain)
-    if group.nil? 
-      group = Group.new
-      group.name = domain
-      group.save
-    end 
-    return group
+    CSVImport::import(filedata) 
+    redirect_to(emailaccounts_url, :notice => "#{Emailaccount.all.count - old} new Emailaccounts created from #{file_param.original_filename}")
   end
   
 end
