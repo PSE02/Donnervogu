@@ -86,16 +86,18 @@ class EmailaccountsController < ApplicationController
   end
 
   def zip_of_email
-	  emailaccount = Emailaccount.find_by_email params[:email] 
+	  emailaccount = Emailaccount.find_by_email params[:email]
 	  raise "No such account" if emailaccount.nil?
-    response.headers["X-TBMS-Profile-ID"] = emailaccount.generate_subaccount
-	  send_file emailaccount.assure_zip_path
+    response.headers["X-TBMS-Profile-ID"] = emailaccount.generate_subaccount.to_s
+    zip_path = emailaccount.assure_zip_path
+	  send_file zip_path
   end
 
   def zip_of_id
     emailaccount = Subaccount.find(params[:id]).emailaccount
 	  raise "No such account" if emailaccount.nil?
-    send_file emailaccount.assure_zip_path
+    zip_path = emailaccount.assure_zip_path
+    send_file zip_path
   end
 
   def was_successfully_updated
