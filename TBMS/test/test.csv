@@ -1,5 +1,6 @@
-test1@nile.ch, test1
-test3@nile.ch, test3
-pse2@unibe.ch, pse2
-pse1@unibe.ch, pse1
-hans.test@students.unibe.ch, hans
+"mailadresse","Domain"
+"hans@example.ch","example.ch"
+"juerg@example.ch","example.ch"
+"test@example.domain.ch","example.domain.ch"
+"max.test@another.email.ch","another.email.ch"
+"max.test@another.email.ch","another.ch"

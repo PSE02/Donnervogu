@@ -17,13 +17,13 @@ class GroupsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create group" do
-    assert_difference('Group.count') do
-      post :create, :group => @group.attributes
-    end
-
-    assert_redirected_to group_path(assigns(:group))
-  end
+#  test "should create group" do
+#    assert_difference('Group.count') do
+#      post :create, :group => @group.attributes
+#    end
+#
+#    assert_redirected_to group_path(assigns(:group))
+#  end
 
   test "should show group" do
     get :show, :id => @group.to_param

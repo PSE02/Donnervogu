@@ -92,9 +92,6 @@ class FileCreatorTest < ActiveSupport::TestCase
     assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"Max Muster's signature\");", zip_file_content)
   end
 
-  
-  #DR this test does not work somehow the preferences are not what they should be...
-  #DR therefore getConfig is not fully tested!
   test "complete config file" do
       assert !(@hans.preferences.empty?)
       testString = FileCreator::getConfig @hans

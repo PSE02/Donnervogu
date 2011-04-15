@@ -40,7 +40,7 @@ class EmailaccountsControllerTest < ActionController::TestCase
   test "should set params" do
   	#Use max account in fixtures because he has preferences defined
   	@emailaccount1 = emailaccounts(:max)
-  	put :setParams, :id => @emailaccount1.to_param, :emailaccount => @emailaccount1.attributes
+  	put :set_params, :id => @emailaccount1.to_param, :emailaccount => @emailaccount1.attributes
   	assert_redirected_to emailaccount_path(assigns(:emailaccount))
   end
 
