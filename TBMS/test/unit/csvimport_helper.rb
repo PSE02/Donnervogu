@@ -44,8 +44,7 @@ class CSVImportTest < ActiveSupport::TestCase
     assert_match("hans.example", account.name)
     assert_match("this.is.a.test.domain", account.group.name)
   end
-  90.41%
-  Coverage Report
+  
   test "init" do
     assert(Emailaccount.find_by_email("juerg.test@another.email.domain").nil?)
     assert(Group.find_by_name("another.email").nil?)
@@ -58,7 +57,7 @@ class CSVImportTest < ActiveSupport::TestCase
     assert_false(Group.find_by_name("another.email").nil?)
   end
   
-  test "import" dor
+  test "import" do
     CSVImport::import(File.read("/home/d3orn/Documents/PSE/Donnervogu/TBMS/test/test.csv"))
     assert_false(Emailaccount.find_by_email("hans@example.ch").nil?)
     assert_false(Emailaccount.find_by_email("max.test@another.email.ch").nil?)
