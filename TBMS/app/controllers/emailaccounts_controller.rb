@@ -11,6 +11,9 @@ class EmailaccountsController < ApplicationController
     end
   end
 
+  def not_modified
+  end
+
   # GET /emailaccounts/1
   # GET /emailaccounts/1.xml
   def show
@@ -94,10 +97,16 @@ class EmailaccountsController < ApplicationController
   end
 
   def zip_of_id
+    cacheTime = Time.rfc2822(@request.env["HTTP_IF_MODIFIED_SINCE"]) rescue nil
     emailaccount = Subaccount.find(params[:id]).emailaccount
-	  raise "No such account" if emailaccount.nil?
-    zip_path = emailaccount.assure_zip_path
-    send_file zip_path
+    raise "No such account" if emailaccount.nil?
+    if cacheTime and emailaccount.updated_at <= cacheTime
+      return render :nothing => true, :status => 304
+    else
+      @response.headers['Last-Modified'] = emailaccount.updated_at.httpdate
+      zip_path = emailaccount.assure_zip_path
+      send_file zip_path
+    end
   end
 
   def was_successfully_updated
