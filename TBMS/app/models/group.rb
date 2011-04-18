@@ -1,8 +1,11 @@
 # Emailaccounts can belong to groups and merge their preferences
-# with the group's.
+# with the group's. This merge is done once on the creation
+# of the account and then on request.
+# Author:: Aaron Karper <akarper@students.unibe.ch>
 include GroupsHelper
 class Group < ActiveRecord::Base
 	validates_presence_of :name
+  validates_uniqueness_of :name
 	has_many :emailaccounts
 	# This is somewhat suboptimal, but inheritance in databases and
 	# rails is really hard work.
@@ -13,7 +16,18 @@ class Group < ActiveRecord::Base
 	def initialize params={}
 		super params
 		self.preferences = Hash.new
-	end
+  end
+
+  # Every User belongs to a group, which might be the null_group
+  def self.null_group
+    if @null_group.nil?
+      @null_group = Group.new
+      @null_group.name = "No Group"
+      @null_group.preferences={:html => "true", :signature => "This is just a template signature"}
+      @null_group.save
+    end
+    @null_group
+  end
 
 	# a list of all members (groups and emailaccounts)
 	def members
@@ -43,16 +57,18 @@ class Group < ActiveRecord::Base
 		self.preferences.merge self.group.final_preferences
   end
 
+  # Changes might be propagated down the hierarchy.
   def propagate_update
     self.members.each {|member| member.propagate_update}
   end
 
-  def setParams params
+  # Change the preferences according to the FileCreator.
+  def set_params params
 	  raise "No Params" if params.nil?
 	  params.each do |key, value|
 	    raise "key nil" if key.nil?
 	    raise "value nil" if value.nil?
-	     self.preferences[key.to_sym] = value if FileCreator::validKey?(key)
+	     self.preferences[key.to_sym] = value if FileCreator::valid_key?(key)
 	  end
     self.save
     self.propagate_update

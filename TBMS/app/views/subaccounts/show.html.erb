@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Last get:</b>
+  <%= @subaccount.last_get %>
+</p>
+
+<p>
+  <b>Emailaccount:</b>
+  <%= @subaccount.emailaccount %>
+</p>
+
+
+<%= link_to 'Edit', edit_subaccount_path(@subaccount) %> |
+<%= link_to 'Back', subaccounts_path %>

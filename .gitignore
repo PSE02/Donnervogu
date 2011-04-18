@@ -18,3 +18,5 @@
 #Nozip
 *_profile.zip
 *.csv
+
+/Files/*
