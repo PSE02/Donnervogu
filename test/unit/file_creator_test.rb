@@ -14,50 +14,26 @@ class FileCreatorTest < ActiveSupport::TestCase
   end
   
   test "html text" do
-    testString = FileCreator::html(@hans)
-    assert_match(/mail.default_html_action.*2/, testString)
-    assert_match(/mail.identity.id1.compose_html.*true/, testString)
+    testString = FileCreator::html("true")
+    assert_match("pref(\"mail.default_html_action\", 2);", testString)
+    assert_match("user_pref(\"mail.identity.id1.compose_html\", true);", testString)
   end
   
   test "quote text" do
-    testString = FileCreator::quote(@hans)
-    assert_match(/mail.identity.id1.reply_on_top.*1/, testString)
+    testString = FileCreator::quote("0")
+    assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 0);", testString)
   end
   
-  test "signature_style text disable" do
-    testString = FileCreator::signature_style(@hans)
-    assert_match("", testString)
-  end
-  
-  test "signature_style text enable" do
-    testString = FileCreator::signature_style(@hans)
-    assert_match(/mail.identity.id1.sig_bottom.*false/, testString)
+  test "signature_style text" do
+    testString = FileCreator::signature_style("false")
+    assert_match("user_pref(\"mail.identity.id1.sig_bottom\", false);", testString)
   end
   
   test "signature text" do
-      testString = FileCreator::signature(@hans)
-      assert_match(/mail.identity.id1.htmlSigFormat.*true/, testString)
-      assert_match(/mail.identity.id1.htmlSigText.*"This is just a simple signature"/, testString)
-  end
-    
-  test "enable offline mode" do
-      testString = FileCreator::offline_mode(@hans)
-      assert_match("user_pref(\"mail.server.server1.offline_download\", true);", testString)
-  end
-
-  test "set send_offline_mode" do
-      testString = FileCreator::send_offline_mode @hans
-      assert_match(/offline.send.unsent_messages.*1/, testString)
-      testString = FileCreator::send_offline_mode @juerg
-      assert_match(/offline.send.unsent_messages.*2/, testString)
-      testString = FileCreator::send_offline_mode @max
-      assert_equal("", testString)
-  end
-  
-  test "enable save_offline_mode" do
-      testString = FileCreator::save_offline_mode @juerg
-      assert_match(/offline.download.download_messages.*1/, testString)
-  end  
+      testString = FileCreator::signature("This is just a simple signature")
+      assert_match("user_pref(\"mail.identity.id1.htmlSigFormat\", true);", testString)
+      assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"This is just a simple signature\");", testString)
+    end
   
   test "complete file path" do
       filePath = FileCreator::completeZipPath @hans
@@ -66,17 +42,14 @@ class FileCreatorTest < ActiveSupport::TestCase
   end
   
   test "is not a validKey" do
-    assert !(FileCreator::valid_key? :test)
+    assert !(FileCreator::validKey? :test)
   end
   
   test "should raise Emailaccount nil" do
     assert_raise (RuntimeError){ FileCreator::createNewZip nil } 
   end
-
-  # Don't check if you can somehow get around initializing an object.
-  # If your program WORKS, the test will fail!
+  
   test "should raise Preferences nil" do
-    return nil
     assert_raise (RuntimeError){ FileCreator::createNewZip @hans } 
   end
   
@@ -91,23 +64,28 @@ class FileCreatorTest < ActiveSupport::TestCase
     end
     assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"Max Muster's signature\");", zip_file_content)
   end
-
+  
+  test "config file with empty preferences" do
+      testString = FileCreator::getConfig @juerg
+      assert @juerg.preferences.empty?
+  end
+  
   test "complete config file" do
-      assert !(@hans.preferences.empty?)
-      testString = FileCreator::getConfig @hans
+      assert !(@max.preferences.empty?)
+      testString = FileCreator::getConfig @max
       
       #HTML 
-      assert_match("pref(\"mail.default_html_action\", 2);", testString)
- 		  assert_match("user_pref(\"mail.identity.id1.compose_html\", true);", testString)
+      assert_match("pref(\"mail.default_html_action\", 1);", testString)
+ 		  assert_match("user_pref(\"mail.identity.id1.compose_html\", false);", testString)
  		  
  		  #Quote
- 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 1);", testString)
+ 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 2);", testString)
  		  
  		  #Signature_style
-     	assert_match("user_pref(\"mail.identity.id1.sig_bottom\", false);", testString)
+     	assert_match("user_pref(\"mail.identity.id1.sig_bottom\", true);", testString)
     
       #Signature
-      assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"This is just a simple signature\");", testString)
+      assert_match("user_pref(\"mail.identity.id1.htmlSigText\", \"Max Muster's signature\");", testString)
    end
    
 end

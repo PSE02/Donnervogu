@@ -1,39 +1,18 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# Do not delete the top three emailaccounts, they are needed for the file_creator_test and emailccounts_controller_test
+# Do not delete the top three emailaccounts, they are needed for the file_creator_test
 hans:
   email: hans@example.com
-  name: Hans Mustermann
+  name: Hans
   preferences: 
-    :html: "true"
-    :quote: :above
-    :offline_mode: "true"
-    :send_offline_mode: "true"
-    :save_offline_mode: "false"
-    :signature_style: "false"
-    :signature: "This is just a simple signature"
-
-wicki:
-  email: wicky@wikinger.il
-  name: Wicki
-  preferences: 
-    :html: false
-    :quote: :above
 
 juerg:
   email: juerg@example.com
   name: Juerg
-  preferences:
-    :offline_mode: "true"
-    :send_offline_mode: "false"
-    :save_offline_mode: "true"
+  preferences: {  } 
 
 max:
   email: max@example.com
   name: Max
-  preferences:
-    :html: "false"
-    :quoting_style: :above
-    :signature_style: "true"
-    :signature: "Max Muster's signature"
+  preferences: { !ruby/symbol html: "false", !ruby/symbol quote: "2", !ruby/symbol signature_style: "true",  !ruby/symbol signature: "Max Muster's signature" } 
 
