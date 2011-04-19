@@ -1,51 +1,35 @@
-= flash[:notice]
+%notice
+  = flash[:notice]
+= javascript_include_tag 'http://code.jquery.com/jquery-1.5.2.min.js'
 %table
   %tr
     %td
       %b Email:
     %td
-      = @emailaccount.email
+      = @profile.email
   %tr
     %td
       %b Name:
     %td
-      = @emailaccount.name
+      = @profile.name
   %tr
+    %td
+      %b Group
+    %td= @profile.group.to_s
+  %tr
+-if not @profile.subaccounts.empty?
+  %h2 Profiles
+  %table
+    %tr
+      %th ID
+      %th Last downloaded
+    - @profile.subaccounts.each do |each|
+      %tr
+        %td= each.id
+        %td= time_ago_in_words each.last_get
 %br
 %hr
+= render "shared/preferences"
 %br 
-= form_tag(:action => "setParams") do
-  %fieldset
-    %legend Send all Mails in HTML
-    %table
-      %tr
-        %td
-          = label_tag("ON")
-        %td
-          = radio_button_tag(:html, true, checked = @emailaccount.preferences[:html] == "true")
-      %tr
-        %td
-          = label_tag("OFF")
-        %td
-          = radio_button_tag(:html, false, checked = @emailaccount.preferences[:html] == "false")
-  %fieldset
-    %legend Quote
-    %table
-      %tr
-        %td
-          = select_tag(:quote, options_for_select([['reply above the quote', 1], ['reply below the quote', 0], ['select the quote', 2]], @emailaccount.preferences[:quote]))
-  %fieldset
-    %legend Configure the Signature
-    %table
-      %tr
-        %td
-          = text_area_tag(:signature, content = @emailaccount.preferences[:signature], :rows => 10, :cols => 70 )
-      %tr
-        %td
-          %label Position of the signature (if "reply above the quote" is selected)
-      %tr
-        %td
-          = select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]],  @emailaccount.preferences[:signature_style]))
-  %br
-  = submit_tag("Save")
   = link_to 'Back', emailaccounts_path
+  
