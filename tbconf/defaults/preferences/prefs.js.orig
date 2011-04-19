@@ -1,5 +1,11 @@
 /* https://developer.mozilla.org/En/A_Brief_Guide_to_Mozilla_Preferences */
 
+<<<<<<< HEAD
+pref("extensions.tbconf.source", "http://pse2.iam.unibe.ch");
+pref("extensions.tbconf.profile.id", "dominique.rahm@gmx.ch");
+pref("extensions.tbconf.profile.basename", "profile.zip");
+pref("extensions.tbconf.profile.lastupdate", "0");
+=======
 /* path to the server where the profile configuration is stored*/
 pref("extensions.tbconf.source", "http://pse2.iam.unibe.ch/profile/");
 
@@ -14,3 +20,4 @@ pref("extensions.tbconf.update.last", "0");
 
 /* update waiting period in minutes*/
 pref("extensions.tbconf.update.interval", 15);
+>>>>>>> b7e5ee1c59f9e9897ad13fc513a2c5c4d6e4d01c
