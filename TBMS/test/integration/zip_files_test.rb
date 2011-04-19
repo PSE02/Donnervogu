@@ -2,10 +2,17 @@ require 'test_helper'
 require 'stringio'
 require 'zip/zip'
 
-# This test can't work at this stage, because:
-#     * There are no Profiles at the moment
-#     * Therefore there are no fixtures for hans
-#     * 
+# This test checks that the sending of the configuration zip works
+# for the standard protocol:
+#     /profile/:email:
+#         Returns a zip and in the X-TBMS-Profile-ID Header a new ID
+#     /profile/:id:
+#         Gives a zip only
+#     /profile/:id:/ok
+#         Signifies that the transaction was successful and updates the
+#         status for that id.
+#
+# Author:: Aaron Karper <akarper@students.unibe.ch>
 class ZipFilesTest < ActionDispatch::IntegrationTest
   fixtures :all
   
@@ -14,8 +21,6 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
     @hans_id = get_hans
   end
 
-  #once this works, it will be awesome. However, zip/zip is buggy
-  #and wont allow it. 
   def get_zip_file
     string = response.body
     pseudo_file = Tempfile.new "received.zip"
@@ -41,8 +46,8 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
   end
 
   test "get hanses zip" do
-    @hans_id
     is_valid_zip( get_zip_file)
+    assert_match /\d+/, @response["X-TBMS-Profile-ID"]
   end
 
   test "get hanses zip by id" do
