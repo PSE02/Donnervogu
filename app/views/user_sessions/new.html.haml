@@ -1,4 +1,6 @@
-= render "shared/error_messages", :target => @user_session
+=if @user_session.errors.any?
+  #error_explanation
+    = render "shared/error_messages", :target => @user_session
 %br
 = form_for @user_session, :as => :user_session, :url => { :action => "create" } do |f|
   %fieldset

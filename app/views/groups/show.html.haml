@@ -1,5 +1,6 @@
 %notice
   = flash[:notice]
+= javascript_include_tag 'jquery-1.5.2.min.js'
 %br
 %table
   %tr
@@ -12,7 +13,9 @@
       %b Group
     %td= @profile.group.to_s
   %tr
-%table
+%a#showMem(href="#")See all Members
+
+%table.users#show
   %tr
     %th Name
     %th Email
@@ -38,7 +41,23 @@
 %hr
 %br
 = render "shared/preferences"
-
+%br
 = link_to 'Edit', edit_group_path(@profile)
 |
 = link_to 'Back', groups_path
+
+:javascript
+
+  $("#show").hide();
+  var show = true;
+  $("#showMem").click(function () {
+        if(show){ 
+          $("#show").show();
+          show = false;
+        }
+        else {
+           $("#show").hide();
+           show = true;
+        }
+        return true;
+      });

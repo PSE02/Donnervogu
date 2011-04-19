@@ -100,3 +100,4 @@ class Emailaccount < ActiveRecord::Base
     assure_created_zip
   end
 end
+

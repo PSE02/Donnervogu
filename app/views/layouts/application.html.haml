@@ -2,7 +2,7 @@
 !!!
 %html
   %head
-    %title= TBMS
+    %title= "TBMS - Thunderbird Control Center"
     = stylesheet_link_tag 'style', :media => 'screen'
     = javascript_include_tag 'markdown'
     = javascript_include_tag 'textarea'
@@ -10,8 +10,10 @@
   %body
     .global
       .header
-        %h1 Thunderbird Control Center
-        ver. 2.0
+        .img
+          %img{:src => "/images/logo.png", :alt => "Logo"}
+        .title
+          %h1 Thunderbird Control Center
       .navigation
         = link_to "Email Accounts", emailaccounts_path
         |
@@ -26,7 +28,7 @@
         .contentTwo
           = render :template => 'overview/show'
       .footer
-        ver 2.0
+        ver 3.0
 
 
 

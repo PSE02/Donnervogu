@@ -1,37 +1,42 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 /*********************** 
 basic page style
 ************************/
-body {
+body, html {
 	background: #000;
 	font-family: Helvetica, Veranda, Arial, sans-serif;
-	color: #fff;
+	color: #AAA;
 }
 /*********************** 
 headings
 ************************/
 h1 {
-	color: #fff;
+	color: #AAA;
 	font-size: 1.8em;
 }
 h2 {
-	color: #fff;
+	color: #AAA;
 	margin: 0;
 	font-size: 1.3em;
 }
 h3 {
-	color: #ff8400;
+	color: #82b6d2;
 	font-size: 12pt;
 }
 /*********************** 
 links
 ************************/
 a {
-	color: #ff8400;
+	color: #82b6d2;
 	text-decoration: none;
 	font-weight: bold;
 }
 a:hover {
-	color: #c71c1c;
+	color: #bb8636;
 }
 /*********************** 
 lines
@@ -43,32 +48,60 @@ hr {
 notice
 ************************/
 notice {
-        color: #339900;
-        font-weight: bold;
+    color: #339900;
+    font-weight: bold;
+	height:25px;
+	font-size: 13pt;
 }
+#error_explanation, #error_explanation h2 {
+	background:#b92130;
+    color: #fff;
+	font-size: 13pt;
+    font-weight: bold;
+	padding: 5px;
+}
+#error_explanation ul {
+	list-style-type:square;
+	font-size: 13pt;
+	font-weight:bold;
+	padding-left: 20px;
+}
+
 /*---------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------*/
 /*********************** 
 global
 ************************/
 div.global {
-	min-width: 900px;
+	min-width: 950px;
 	max-width: 1024px;
 	border: #666 1px solid;
 	margin: 0 auto;
+	overflow:auto;
+	margin-top:2px;
+	margin-bottom:2px;
 }
 /*********************** 
 header
 ************************/
 div.header {
 	margin: 20px;
+	min-height:75px;
+}
+div.header div.img {
+	float:right;
+}
+div.header div.title {
+	float:right;
+	margin-right:20px;
+	margin-top:10px;
 }
 /*********************** 
 navigation
 ************************/
 div.navigation {
 	padding: 10px;
-	color: #fff;
+	color: #888;
 	background: #555;
 	border-top: #666 1px solid;
 	border-bottom: #666 1px solid;
@@ -76,7 +109,7 @@ div.navigation {
 
 div.navigation div.login {
 	padding-right: 10px;
-	color: #fff;
+	color: #888;
 	background: #555;
 	float:right;
 }
@@ -85,107 +118,54 @@ div.navigation div.login {
 main
 ************************/
 div.main {
-	color: #fff;
-	min-height: 850px;
+	min-height:600px;
+	overflow:auto;
 }
 /*********************** 
 content
-************************/	
+************************/
 div.contentOne {
 	width:72%;
 	padding: 20px;
-	min-height: 810px;
 	border-right: 1px #666 solid;
 	float:left;
+	min-height:600px;
 }
-
-table.users tr td, table.users tr th{
-	border:1px #fff solid;
-}
-
 div.contentTwo {
 	width:20%;
 	padding: 20px;
-	min-height: 640px;
 	float:right;
 }
+
+/************************/
+input {
+	background: #DDD;
+	border: 1px solid #666;
+	padding: 2px;
+}
+table.users {
+	width:100%;
+}
+table.users td, table.users tr th{
+	border:1px #666 solid;
+	padding: 2px;
+}
+fieldset {
+	padding: 8px;
+	border:1px #666 solid;
+}
+textarea {
+	background:#DDD;
+}
+
 /*********************** 
 footer
 ************************/
 div.footer {
 	text-align: right;
-	font-size: 0.7em;
+	font-size: 9pt;
 	border-top: #666 1px solid;
 	color: #fff;
 	padding: 5px;
 	background:#222;
 }
-
-
-/*************************************
- * Markdown
- ************************************/
-#markdown_example {  
-    width:100%;  
-    height:200px;  
-} 
- 
-#markdown_toolbar {  
-    position:relative;  
-    list-style:none;  
-    border:1px solid #d7d7d7;  
-    background-color:#F6F6F6;  
-    margin:0;  
-    padding:0;  
-    height:18px;  
-    margin-bottom:2px;  
-} 
- 
-#markdown_toolbar li {  
-    list-style:none;  
-    margin:0;  
-    padding:0;  
-    float:left;  
-} 
- 
-#markdown_toolbar li a {  
-    width:24px;  
-    height:16px;  
-    float:left;  
-    display:block;  
-    background-image:url("/stylesheets/markdown_icons.gif");  
-    border:1px solid #fff;  
-    border-right-color:#d7d7d7;  
-} 
- 
-#markdown_toolbar li a:hover {  
-    border-color:#900;  
-} 
- 
-#markdown_toolbar li span {  
-    display:none;  
-} 
- 
-#markdown_toolbar li a#markdown_help_button {  
-    position:absolute;  
-    top:0;  
-    rightright:0;  
-    border-left-color:#d7d7d7;  
-    border-right-color:#fff;  
-} 
- 
-#markdown_toolbar li a#markdown_help_button:hover {  
-    border-left-color:#900;  
-    border-right-color:#900;  
-} 
- 
-#markdown_italics_button { background-position: 0 -119px; } 
-#markdown_bold_button { background-position: 0 -102px; } 
-#markdown_link_button { background-position: 0 0; } 
-#markdown_image_button { background-position: 0 -170px; } 
-#markdown_unordered_list_button { background-position: 0 -34px; } 
-#markdown_ordered_list_button { background-position: 0 -51px; } 
-#markdown_quote_button { background-position: 0 -68px; } 
-#markdown_code_button { background-position: 0 -136px; } 
-#markdown_help_button { background-position: 0 -153px; } 
-#markdown_heading_button { background-position: 0 -85px; } 

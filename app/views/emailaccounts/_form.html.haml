@@ -1,6 +1,7 @@
 %notice
   = flash[:notice]
 %br
+%br
 = form_for @emailaccount do |f| 
   - if @emailaccount.errors.any?
     #error_explanation
@@ -11,7 +12,7 @@
         - @emailaccount.errors.full_messages.each do |msg|
           %li
             = msg
-  
+  %br
   %fieldset
     %legend Create E-Mail Account        
     %table

@@ -1,49 +1,11 @@
-%h2 User Information
-
-=form_for :upload, :url => {:action=>:upload}, :html=>{:multipart=>true} do |f|
-  =f.file_field :file 
-  =f.submit 'Upload'
-
+%h2 Upload CSV
 %br
 %br
-%table
-  %tr
-    %td
-      %b Login count:
-    %td
-      = @user.login_count
-    %td
-  %tr
-    %td
-      %b Last request at:
-    %td
-      = @user.last_request_at
-    %td
-  %tr
-    %td
-      %b Last login at:
-    %td
-      %b 
-      = @user.last_login_at
-    %td
-  %tr
-    %td
-      %b Current login at:
-    %td
-      %b
-        = @user.current_login_at
-    %td
-  %tr
-    %td
-      %b
-        Last login ip:
-    %td
-      %b
-        = @user.last_login_ip
-    %td
-  %tr
-    %td
-      %b
-        Current login ip:
-    %td
-      = @user.current_login_ip
+
+%fieldset
+  %legend File Upload
+  =form_for :upload, :url => {:action=>:upload}, :html=>{:multipart=>true} do |f|
+    =f.file_field :file
+    %br
+    %br
+    =f.submit 'Upload'

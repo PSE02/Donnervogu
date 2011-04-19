@@ -1,5 +1,9 @@
 %notice
   = flash[:notice]
+%br
+= link_to 'New Account', new_emailaccount_path
+%br
+%br
 %h2 Listing Accounts
 %br
 %table.users
@@ -7,6 +11,9 @@
     %th Email
     %th Name
     %th Group
+    %th
+    %th
+    %th
   - @emailaccounts.each do |emailaccount|
     %tr
       %td
@@ -17,10 +24,10 @@
         = emailaccount.group.to_s
       %td
         = link_to 'Show', emailaccount
-        |
+      %td
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete #{emailaccount.email}?", :method => :delete
-        |
-        = link_to 'Get the zip file' , "/profile/#{emailaccount.email}"
+      %td
+        = link_to 'zip' , "/profile/#{emailaccount.email}"
 %br
-= link_to 'New Account', new_emailaccount_path
+= will_paginate @emailaccounts
 
