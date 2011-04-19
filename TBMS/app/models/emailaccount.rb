@@ -91,12 +91,10 @@ class Emailaccount < ActiveRecord::Base
 		self.group.final_preferences.merge self.preferences
 	end
 
-	# Overwrite the subgroups preferences if necessary
-	def up_merge
-		self.preferences.merge self.group.final_preferences
-  end
-
+  # Part of the Composite Pattern that can update the whole dependency tree if necessary.
   def propagate_update
+    self.preferences = self.final_preferences
     assure_created_zip
   end
+
 end

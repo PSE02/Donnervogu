@@ -47,7 +47,6 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
 
   test "get hanses zip" do
     is_valid_zip( get_zip_file)
-    assert_match /\d+/, @response["X-TBMS-Profile-ID"]
   end
 
   test "get hanses zip by id" do

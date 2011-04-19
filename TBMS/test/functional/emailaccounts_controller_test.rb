@@ -21,14 +21,14 @@ class EmailaccountsControllerTest < ActionController::TestCase
     assert_difference('Emailaccount.count') do
       post :create, :emailaccount => { :name => "Fredi", :email => "fredi.fredi@fredi.com"}
     end
-    assert_equal "Fredi", assigns(:emailaccount).name
-    assert_equal "fredi.fredi@fredi.com", assigns(:emailaccount).email
-    assert_redirected_to emailaccount_path(assigns(:emailaccount))
+    assert_equal "Fredi", assigns(:profile).name
+    assert_equal "fredi.fredi@fredi.com", assigns(:profile).email
+    assert_redirected_to emailaccount_path(assigns(:profile))
   end
    
   test "should show emailaccount" do
     post :create, :emailaccount => { :name => "Fredi1", :email => "fredi.fredi@fredi.com"}    
-    get :show, :id => assigns(:emailaccount).id
+    get :show, :id => assigns(:profile).id
     assert_response :success
   end
 
@@ -41,7 +41,7 @@ class EmailaccountsControllerTest < ActionController::TestCase
   	#Use max account in fixtures because he has preferences defined
   	@emailaccount1 = emailaccounts(:max)
   	put :set_params, :id => @emailaccount1.to_param, :emailaccount => @emailaccount1.attributes
-  	assert_redirected_to emailaccount_path(assigns(:emailaccount))
+  	assert_redirected_to emailaccount_path(assigns(:profile))
   end
 
   test "should destroy emailaccount" do

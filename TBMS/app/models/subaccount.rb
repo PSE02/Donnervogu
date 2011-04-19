@@ -21,4 +21,15 @@ class Subaccount < ActiveRecord::Base
   def assure_zip_path
     self.emailaccount.assure_zip_path
   end
+
+  # Is this account outdated?
+  def outdated?
+    (Time.now - oldest_subaccount_config) > threshold_for_oldest_get
+  end
+
+  # generic threshold for how long an account can be inactive until
+  # it is considered out of date.
+  def threshold_for_oldest_get
+    4.days
+  end
 end
