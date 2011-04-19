@@ -93,8 +93,8 @@ class Emailaccount < ActiveRecord::Base
 
   # Part of the Composite Pattern that can update the whole dependency tree if necessary.
   def propagate_update
-    self.preferences = self.final_preferences
+    self.preferences = self.group.preferences
+    raise "Couldn't save" unless self.save
     assure_created_zip
   end
-
 end

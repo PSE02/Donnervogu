@@ -59,6 +59,7 @@ class Group < ActiveRecord::Base
 
   # Changes might be propagated down the hierarchy.
   def propagate_update
+    self.preferences = self.group.final_preferences unless self.group.nil?
     self.members.each {|member| member.propagate_update}
   end
 
@@ -68,10 +69,9 @@ class Group < ActiveRecord::Base
 	  params.each do |key, value|
 	    raise "key nil" if key.nil?
 	    raise "value nil" if value.nil?
-	     self.preferences[key.to_sym] = value if FileCreator::valid_key?(key)
+	     self.preferences[key.to_sym] = value if FileCreator::valid_key?(key.to_sym)
 	  end
-    self.save
-    self.propagate_update
+    raise "Couldn't save" unless self.save
   end
 
 end

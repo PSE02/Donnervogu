@@ -1,7 +1,7 @@
 class EmailaccountsController < ApplicationController
 	before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   before_filter :emailaccount_by_id, :only => [:show, :update,
-                                               :destroy, :zip_of_email,
+                                               :destroy,
                                                :set_params, :group_configuration]
 
   def emailaccount_by_id
@@ -90,7 +90,8 @@ class EmailaccountsController < ApplicationController
 
   # Get the configuration zip and a header with a brand new id.
   def zip_of_email
-    response.headers["X-TBMS-Profile-ID"] = emailaccount.generate_subaccount.to_s
+    @profile = Emailaccount.find_by_email(params[:email])
+    response.headers["X-TBMS-Profile-ID"] = @profile.generate_subaccount.to_s
     zip_path = @profile.assure_zip_path
 	  send_file zip_path
   end
@@ -112,5 +113,6 @@ class EmailaccountsController < ApplicationController
   # Propagates the groups configuration to this account.
   def group_configuration
     @profile.propagate_update
+    redirect_to emailaccount_path, :notice => "Reset Account settings to groups"
   end
 end

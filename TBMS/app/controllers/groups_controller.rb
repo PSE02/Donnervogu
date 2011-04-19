@@ -82,12 +82,16 @@ class GroupsController < ApplicationController
   end
 
   def set_params
+    @profile.group = Group.find(params[:group])
     @profile.set_params(params)
+    raise "save error" unless @profile.save
     redirect_to group_path, :notice => 'Settings for this group were successfully saved.'
   end
 
   def overwrite_member_configs
-
+    raise "updated!"
+    @profile.propagate_update
+    redirect_to group_path, :notice => 'Settings propagated for all members'
   end
 
   def group_by_id

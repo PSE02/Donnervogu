@@ -68,6 +68,8 @@ TBMS::Application.routes.draw do
       :constraints => { :id => /\d+/ }
   match "/profile/:email" => "emailaccounts#zip_of_email",
 	  :constraints => { :email => /.*@.*/ }
+  match 'groups/:id/propagate' => 'groups#overwrite_member_configs', :as => :override_members
+  match 'emailaccounts/:id/groupsettings' => "emailaccounts#group_configuration", :as => :reset_account
 
   #routes for login/logout
   resources :users  # give us our some normal resource routes for users

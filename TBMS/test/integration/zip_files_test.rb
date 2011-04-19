@@ -22,7 +22,7 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
   end
 
   def get_zip_file
-    string = response.body
+    string = @response.body
     pseudo_file = Tempfile.new "received.zip"
     string.force_encoding("UTF-8")
     pseudo_file.write string
