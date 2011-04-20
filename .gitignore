@@ -1,22 +1,19 @@
-# do not commit the zip file created by confChanger.rb
-/TBMS/public/profiles/profile.zip
-
-# do not commit the stuff from mac users
-.DS_Store
-
-# do not commit files that are created while merging
-*.orig
-
-#do not commit temp files
-*~
-*.*~
-*.log
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+hpricot/
+public/rcov
 
 #do not commit eclipse stuff
 .metadata/
+.idea/
 
-#Nozip
-*_profile.zip
+#do not commit code coverage stuff
+coverage/
+coverage.data
+
+#do not commit netbeans stuff
+nbproject/
+
 *.csv
-
-/Files/*

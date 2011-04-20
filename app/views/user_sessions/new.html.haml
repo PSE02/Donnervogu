@@ -1,0 +1,27 @@
+=if @user_session.errors.any?
+  #error_explanation
+    = render "shared/error_messages", :target => @user_session
+%br
+= form_for @user_session, :as => :user_session, :url => { :action => "create" } do |f|
+  %fieldset
+    %legend Login
+    %table
+      %tr
+        %td 
+          = f.label "Username:"
+      %tr
+        %td
+          = f.text_field :login
+      %tr
+        %td
+      %tr
+        %td
+          = f.label "Password:"
+      %tr
+        %td
+          = f.password_field :password
+      %tr
+        %td
+      %tr
+        %td
+          = f.submit "Login"

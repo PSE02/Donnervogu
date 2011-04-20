@@ -1,0 +1,171 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/*********************** 
+basic page style
+************************/
+body, html {
+	background: #000;
+	font-family: Helvetica, Veranda, Arial, sans-serif;
+	color: #AAA;
+}
+/*********************** 
+headings
+************************/
+h1 {
+	color: #AAA;
+	font-size: 1.8em;
+}
+h2 {
+	color: #AAA;
+	margin: 0;
+	font-size: 1.3em;
+}
+h3 {
+	color: #82b6d2;
+	font-size: 12pt;
+}
+/*********************** 
+links
+************************/
+a {
+	color: #82b6d2;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:hover {
+	color: #bb8636;
+}
+/*********************** 
+lines
+************************/
+hr {
+	color: #000;	
+}
+/***********************
+notice
+************************/
+notice {
+    color: #339900;
+    font-weight: bold;
+	height:25px;
+	font-size: 13pt;
+}
+#error_explanation, #error_explanation h2 {
+	background:#b92130;
+    color: #fff;
+	font-size: 13pt;
+    font-weight: bold;
+	padding: 5px;
+}
+#error_explanation ul {
+	list-style-type:square;
+	font-size: 13pt;
+	font-weight:bold;
+	padding-left: 20px;
+}
+
+/*---------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------*/
+/*********************** 
+global
+************************/
+div.global {
+	min-width: 950px;
+	max-width: 1024px;
+	border: #666 1px solid;
+	margin: 0 auto;
+	overflow:auto;
+	margin-top:2px;
+	margin-bottom:2px;
+}
+/*********************** 
+header
+************************/
+div.header {
+	margin: 20px;
+	min-height:75px;
+}
+div.header div.img {
+	float:right;
+}
+div.header div.title {
+	float:right;
+	margin-right:20px;
+	margin-top:10px;
+}
+/*********************** 
+navigation
+************************/
+div.navigation {
+	padding: 10px;
+	color: #888;
+	background: #555;
+	border-top: #666 1px solid;
+	border-bottom: #666 1px solid;
+}
+
+div.navigation div.login {
+	padding-right: 10px;
+	color: #888;
+	background: #555;
+	float:right;
+}
+
+/*********************** 
+main
+************************/
+div.main {
+	min-height:600px;
+	overflow:auto;
+}
+/*********************** 
+content
+************************/
+div.contentOne {
+	width:72%;
+	padding: 20px;
+	border-right: 1px #666 solid;
+	float:left;
+	min-height:600px;
+}
+div.contentTwo {
+	width:20%;
+	padding: 20px;
+	float:right;
+}
+
+/************************/
+input {
+	background: #DDD;
+	border: 1px solid #666;
+	padding: 2px;
+}
+table.users {
+	width:100%;
+}
+table.users td, table.users tr th{
+	border:1px #666 solid;
+	padding: 2px;
+}
+fieldset {
+	padding: 8px;
+	border:1px #666 solid;
+}
+textarea {
+	background:#DDD;
+}
+
+/*********************** 
+footer
+************************/
+div.footer {
+	text-align: right;
+	font-size: 9pt;
+	border-top: #666 1px solid;
+	color: #fff;
+	padding: 5px;
+	background:#222;
+}
