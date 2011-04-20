@@ -121,6 +121,16 @@ div.footer {
 	background:#222;
 }
 
+/***********************
+ user notification
+ ***********************/
+.uptodate {
+    background-color: #010;
+}
+.outdated {
+    background-color: #520;
+}
+
 
 /*************************************
  * Markdown

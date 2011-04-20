@@ -1,6 +1,5 @@
 TBMS::Application.routes.draw do
 
-  resources :subaccounts
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -57,29 +56,31 @@ TBMS::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests
+  match "profile/:id" => "emailaccounts#zip_of_id",  :as => :zip_by_id,
+        :constraints => { :id => /\d+/ }
+  match "profile/:id/ok" => "emailaccounts#was_successfully_updated",
+        :constraints => { :id => /\d+/ }
+  match "profile/:email" => "emailaccounts#zip_of_email",:as => :generate_id,
+        :constraints => { :email => /.*@.*/ }
 
-  match "/emailaccounts/:id/edit/set_params" => "emailaccounts#set_params"
   match "/groups/:id/edit/set_params" => "groups#set_params"
   match "/user.current/upload" => "users#upload"
 
-  match "/profile/:id" => "emailaccounts#zip_of_id",
-      :constraints => { :id => /\d+/ }
-  match "/profile/:id/ok" => "emailaccounts#was_successfully_updated",
-      :constraints => { :id => /\d+/ }
-  match "/profile/:email" => "emailaccounts#zip_of_email",
-	  :constraints => { :email => /.*@.*/ }
+  match '/subaccounts/:id/delete' => 'emailaccounts#delete_subaccount', :as => :delete_subaccount
   match 'groups/:id/propagate' => 'groups#overwrite_member_configs', :as => :override_members
-  match 'emailaccounts/:id/groupsettings' => "emailaccounts#group_configuration", :as => :reset_account
+
 
   #routes for login/logout
   resources :users  # give us our some normal resource routes for users
   resource :user, :as => 'account'  # a convenience route
   resources :user_sessions 
   resources :emailaccounts
+  match "emailaccounts/:id/edit/set_params" => "emailaccounts#set_params"
+  match 'emailaccounts/:id/groupsettings' => "emailaccounts#group_configuration", :as => :reset_account
   resources :groups
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
-  
+
   root :to => "emailaccounts#index"
 end

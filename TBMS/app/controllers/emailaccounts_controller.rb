@@ -115,4 +115,15 @@ class EmailaccountsController < ApplicationController
     @profile.propagate_update
     redirect_to emailaccount_path, :notice => "Reset Account settings to groups"
   end
+
+  def delete_subaccount
+    subaccount = Subaccount.find(params[:id])
+    raise "No such subaccount" if subaccount.nil?
+    emailaccount = subaccount.emailaccount
+    subaccount.destroy
+    respond_to do |format|
+      format.html { redirect_to(emailaccount_path(emailaccount), :notice => "Deleted Subaccount") }
+      format.xml  { head :ok }
+    end
+  end
 end

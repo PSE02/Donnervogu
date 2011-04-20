@@ -11,11 +11,20 @@ class Emailaccount < ActiveRecord::Base
 	belongs_to :group
   has_many :subaccounts
 	
-  def initialize panda={}
+  def initialize panda={} # panda = param
 	  super panda
     self.preferences = Hash.new
     self.load_init_preferences
-	end
+    generate_subaccount
+  end
+
+  def standard_subaccount
+    self.subaccounts.first
+  end
+
+  def real_subaccounts
+    self.subaccounts.drop(1)
+  end
 
   def generate_subaccount
     sub = Subaccount.new
@@ -96,5 +105,9 @@ class Emailaccount < ActiveRecord::Base
     self.preferences = self.group.preferences
     raise "Couldn't save" unless self.save
     assure_created_zip
+  end
+
+  def outdated?
+    self.subaccounts.any? {|sub| sub.outdated?}
   end
 end

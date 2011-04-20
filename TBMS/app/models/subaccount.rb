@@ -24,7 +24,7 @@ class Subaccount < ActiveRecord::Base
 
   # Is this account outdated?
   def outdated?
-    (Time.now - oldest_subaccount_config) > threshold_for_oldest_get
+    (Time.now - self.last_get) > threshold_for_oldest_get
   end
 
   # generic threshold for how long an account can be inactive until

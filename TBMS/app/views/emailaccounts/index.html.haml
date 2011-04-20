@@ -8,7 +8,7 @@
     %th Name
     %th Group
   - @profiles.each do |emailaccount|
-    %tr
+    %tr{:class => emailaccount.outdated? ?  "outdated" : "uptodate" }
       %td
         = emailaccount.email
       %td
@@ -20,7 +20,7 @@
         |
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete #{emailaccount.email}?", :method => :delete
         |
-        = link_to 'Get the zip file' , "/profile/#{emailaccount.email}"
+        = link_to 'Get the zip file' , zip_by_id_path(emailaccount.standard_subaccount)
 %br
 = link_to 'New Account', new_emailaccount_path
 
