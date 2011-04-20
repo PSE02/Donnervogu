@@ -3,7 +3,7 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
-    @emailaccounts = Emailaccount.paginate(:page => params[:page], :order => 'created_at ASC')
+    @emailaccounts = Emailaccount.order("email").page(params[:page]).per(20)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @emailaccounts }
