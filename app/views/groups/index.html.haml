@@ -1,4 +1,10 @@
-%h1 Listing groups
+%notice
+  = flash[:notice]
+%br
+= link_to 'New Group', new_group_path
+%br
+%br
+%h2 Listing groups
 %br
 %table.users
   %tr
@@ -14,6 +20,3 @@
       %td= link_to 'Show', group
       %td= link_to 'Edit', edit_group_path(group)
       %td= link_to 'Delete', group, :confirm => 'Are you sure?', :method => :delete
-%br
-
-= link_to 'New Group', new_group_path 
