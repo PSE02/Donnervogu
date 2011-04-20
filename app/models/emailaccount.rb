@@ -107,13 +107,8 @@ class Emailaccount < ActiveRecord::Base
     assure_created_zip
   end
 
-<<<<<<< HEAD
   def outdated?
     self.subaccounts.any? {|sub| sub.outdated?}
-=======
-  def propagate_update
-    assure_created_zip
->>>>>>> master
   end
 end
 

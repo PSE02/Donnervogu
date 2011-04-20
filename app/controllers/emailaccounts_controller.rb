@@ -11,7 +11,7 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
-    @emailaccounts = Emailaccount.order("email").page(params[:page]).per(20)
+    @profiles = Emailaccount.order(:email).page(params[:page]).per(20)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @profiles }
@@ -85,7 +85,6 @@ class EmailaccountsController < ApplicationController
   end
 
   def set_params
-<<<<<<< HEAD
     @profile.set_group params[:group]
     @profile.set_params(params)
     redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
@@ -128,38 +127,5 @@ class EmailaccountsController < ApplicationController
       format.html { redirect_to(emailaccount_path(emailaccount), :notice => "Deleted Subaccount") }
       format.xml  { head :ok }
     end
-=======
-    @emailaccount = Emailaccount.find(params[:id])
-    raise "No Account found" if @emailaccount.nil?
-    @emailaccount.set_group params[:group]
-    @emailaccount.set_params(params)
-    redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
-  end
-
-  def zip_of_email
-	  emailaccount = Emailaccount.find_by_email params[:email]
-	  raise "No such account" if emailaccount.nil?
-    response.headers["X-TBMS-Profile-ID"] = emailaccount.generate_subaccount.to_s
-    zip_path = emailaccount.assure_zip_path
-	  send_file zip_path
-  end
-
-  def zip_of_id
-    cacheTime = Time.rfc2822(@request.env["HTTP_IF_MODIFIED_SINCE"]) rescue nil
-    emailaccount = Subaccount.find(params[:id]).emailaccount
-    raise "No such account" if emailaccount.nil?
-    if cacheTime and emailaccount.updated_at <= cacheTime
-      return render :nothing => true, :status => 304
-    else
-      @response.headers['Last-Modified'] = emailaccount.updated_at.httpdate
-      zip_path = emailaccount.assure_zip_path
-      send_file zip_path
-    end
-  end
-
-  def was_successfully_updated
-    subaccount = Subaccount.find(params[:id])
-    subaccount.downloaded
->>>>>>> master
   end
 end

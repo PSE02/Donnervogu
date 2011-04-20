@@ -51,20 +51,17 @@ GEM
     hashie (1.0.0)
     highline (1.6.1)
     i18n (0.5.0)
-<<<<<<< HEAD
-    linecache19 (0.5.12)
-      ruby_core_source (>= 0.1.4)
-=======
     kaminari (0.11.0)
       kaminari
->>>>>>> master
+    linecache19 (0.5.12)
+      ruby_core_source (>= 0.1.4)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-<<<<<<< HEAD
+    mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -72,9 +69,6 @@ GEM
     net-ssh (2.1.4)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
-=======
-    mysql2 (0.2.7)
->>>>>>> master
     nokogiri (1.4.4)
     nokogiri (1.4.4-x86-mingw32)
     polyglot (0.3.1)
@@ -130,13 +124,8 @@ DEPENDENCIES
   capistrano
   cover_me (>= 1.0.0.rc6)
   haml
-<<<<<<< HEAD
-=======
-  hpricot
   kaminari
   mysql2
-  nokogiri
->>>>>>> master
   rails (= 3.0.5)
   ruby-debug19
   rubyzip

@@ -26,8 +26,8 @@
         = link_to 'Show', emailaccount
       %td
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete #{emailaccount.email}?", :method => :delete
-        |
-        = link_to 'Get the zip file' , zip_by_id_path(emailaccount.standard_subaccount)
+      %td
+        = link_to 'Zip' , zip_by_id_path(emailaccount.standard_subaccount)
 %br
-= paginate @emailaccounts
+= paginate @profiles
 
