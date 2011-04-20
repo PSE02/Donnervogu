@@ -1,0 +1,36 @@
+%notice
+  = flash[:notice]
+%table
+  %tr
+    %td
+      %b Email:
+    %td
+      = @profile.email
+  %tr
+    %td
+      %b Name:
+    %td
+      = @profile.name
+  %tr
+    %td
+      %b Group
+    %td= link_to @profile.group.to_s, group_path(@profile.group)
+    %td= link_to "Copy groups settings", reset_account_path(@profile), :confirm => "Do you really want to reset the settings?"
+  %tr
+-if not @profile.real_subaccounts.empty?
+  %h2 Profiles
+  %table
+    %tr
+      %th ID
+      %th Last downloaded
+    - @profile.real_subaccounts.each do |each|
+      %tr{:class => each.outdated? ? "outdated" : "uptodate"}
+        %td= each.id
+        %td= time_ago_in_words each.last_get
+        %td= link_to "Delete", delete_subaccount_path(each),:confirm => 'Are you sure?'
+%br
+%hr
+= render "shared/preferences"
+%br 
+  = link_to 'Back', emailaccounts_path
+

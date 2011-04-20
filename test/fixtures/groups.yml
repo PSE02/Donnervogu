@@ -1,0 +1,18 @@
+#encoding:utf-8
+fantasticthree:
+  name: Fantastic Three
+  preferences: 
+    :html_mail: false
+fantasticfour:
+  name: Fantastic Four
+  preferences: 
+    :quoting_style: :below
+trampolin:
+  name: Trampoline Inc.
+  preferences:
+     :html_mail: false
+     :quoting_style: :below
+trampolinsued:
+  name: Trampoline Inc. Süd
+  preferences:
+     :html_mail: true
