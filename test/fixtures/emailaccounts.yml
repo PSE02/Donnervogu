@@ -32,6 +32,7 @@ max:
   email: max@example.com
   name: Max
   preferences:
+    :offline_mode: "false"
     :html: "false"
     :quoting_style: :above
     :signature_style: "true"

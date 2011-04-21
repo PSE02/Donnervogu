@@ -59,6 +59,11 @@ class FileCreatorTest < ActiveSupport::TestCase
       assert_match(/offline.download.download_messages.*1/, testString)
   end  
   
+  test "disable save_offline_mode" do
+      testString = FileCreator::save_offline_mode @max
+      assert_match("", testString)
+  end  
+  
   test "complete file path" do
       filePath = FileCreator::completeZipPath @hans
       id = @hans.id
