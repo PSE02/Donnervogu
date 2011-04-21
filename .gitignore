@@ -17,3 +17,4 @@ coverage.data
 nbproject/
 
 *.csv
+/test/public/profile/*.zip
