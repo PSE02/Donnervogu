@@ -34,11 +34,16 @@ class UsersController < ApplicationController
   
   def upload
     old = Emailaccount.all.count
-    file_param = params[:upload][:file]
-    filedata = file_param.read
-    raise "data nil" if filedata.nil?
-    CSVImport::import(filedata) 
-    redirect_to(emailaccounts_url, :notice => "#{Emailaccount.all.count - old} new Emailaccounts created from #{file_param.original_filename}")
+    if !params[:upload].nil?
+      file_param = params[:upload][:file]
+      filedata = file_param.read
+      raise "data nil" if filedata.nil?
+      CSVImport::import(filedata)
+      redirect_to(emailaccounts_url, :notice => "#{Emailaccount.all.count - old} new Emailaccounts created from #{file_param.original_filename}")
+    else
+      flash[:error] = "No file selected"
+      redirect_to(account_url)
+    end
   end
   
 end
