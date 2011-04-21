@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110412202725) do
+ActiveRecord::Schema.define(:version => 20110421124138) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110412202725) do
     t.datetime "updated_at"
     t.integer  "group_id"
     t.text     "informations"
+    t.integer  "standard_subaccount_id"
   end
 
   create_table "groups", :force => true do |t|

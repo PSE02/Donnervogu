@@ -1,6 +1,7 @@
 include EmailaccountHelper
+include TemplateHelper
 class Emailaccount < ActiveRecord::Base
-  
+
 	validates_presence_of :email
 	validates_presence_of :name
   validates_format_of :email,
@@ -8,22 +9,18 @@ class Emailaccount < ActiveRecord::Base
   validates_uniqueness_of :email
 
 	serialize :preferences
+  serialize :informations
 	belongs_to :group
   has_many :subaccounts
+  has_one :standard_subaccount,
+      :class_name => "Subaccount"
 	
   def initialize panda={} # panda = param
 	  super panda
     self.preferences = Hash.new
+    self.informations = Hash.new
     self.load_init_preferences
-    generate_subaccount
-  end
-
-  def standard_subaccount
-    self.subaccounts.first
-  end
-
-  def real_subaccounts
-    self.subaccounts.drop(1)
+    self.standard_subaccount = Subaccount.new
   end
 
   def generate_subaccount
@@ -57,7 +54,6 @@ class Emailaccount < ActiveRecord::Base
 	     self.preferences[key.to_sym] = value if valid_key?(key)
 	  end 
     raise "save failed: #{errors}" unless self.save
-    FileCreator::createNewZip(self)
     assure_created_zip
   end
   
@@ -83,6 +79,8 @@ class Emailaccount < ActiveRecord::Base
 	def load_init_preferences
     self.group = Group.null_group
     self.preferences = self.group.final_preferences unless group.nil?
+    self.informations[:email] = email
+    self.informations[:name] = name
 	end
 
 
@@ -109,6 +107,12 @@ class Emailaccount < ActiveRecord::Base
 
   def outdated?
     self.subaccounts.any? {|sub| sub.outdated?}
+  end
+
+  def signature
+    template = preferences[:signature] or ""
+    dict = TemplateHelper::make_dict self.informations
+    TemplateHelper::instanciate_template template, dict
   end
 end
 

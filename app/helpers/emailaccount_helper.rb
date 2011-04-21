@@ -16,9 +16,9 @@ module EmailaccountHelper
     # Use:: make_dict :name => "Mr. Smith"
     # Use:: make_dict {:name => "Mr. Smith"}
     def make_dict dict={}, *optional
-      dict = optional unless optional.nil?
+      dict = optional unless optional.empty?
       newDict = {}
-      dict.each_key do |key|
+      dict.each_key do |key, val|
         newkey = key.to_s.downcase.to_sym
         newDict[newkey] = dict[key]
       end

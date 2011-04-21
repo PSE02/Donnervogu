@@ -83,7 +83,7 @@ module ApplicationHelper
 
     #DR we have to care about the signature it should not contain newlines from the form instead newlines should be html <br></br>
     def self.signature account
-      signature = account.preferences[:signature]
+      signature = account.signature
       "\n/************************** Signature Text ***********************/  \n" +
       "// true=allow html in signature false=don't allow html in signature \n" +
       "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +
