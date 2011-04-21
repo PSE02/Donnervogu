@@ -21,7 +21,10 @@
         |
         = link_to "Import", account_url(:current)
         .login
-          = link_to "Logout", logout_path
+          - if current_user_session
+            = link_to "Logout", logout_path
+          - else
+            = link_to "Login", login_path
       .main
         .contentOne
           = yield
