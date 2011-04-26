@@ -12,23 +12,19 @@ gem 'sqlite3'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'
- gem 'nokogiri'
+# gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 gem 'rubyzip'
-gem 'hpricot'
+# gem 'hpricot'
 gem 'haml'
 gem 'authlogic'
-gem 'cover_me', '>= 1.0.0.rc6', :group => :test
-gem 'test-unit'
+gem 'capistrano'
 gem 'kaminari'
 
 # Bundle gems for the local environment. Make sure to
@@ -36,5 +32,9 @@ gem 'kaminari'
 # and rake tasks are available in development mode:
 group :development, :test do
    gem 'webrat'
-   gem 'rcov'
+   gem 'cover_me', '>= 1.0.0.rc6'
+   gem 'test-unit'
+   # gem 'rcov'
+   # gem 'ruby-debug'
+   gem 'ruby-debug19', :require => 'ruby-debug'
  end

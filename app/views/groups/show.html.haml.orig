@@ -31,11 +31,16 @@
     %tr
       %td= email.name
       %td= email.email
+<<<<<<< HEAD
+      %td= link_to 'Show', email
+      %td= link_to 'Delete', email, :confirm => "Do you really want to delete #{email.name}?", :method => :delete
+=======
       %td
         = link_to 'Show', email
         |
         = link_to 'Delete', email, :confirm => "Do you really want to delete #{email.name}?", :method => :delete
 #reset= link_to "Set all members back", override_members_path(@profile), :confirm => "Do you really want to reset all the members settings?"
+>>>>>>> c95e74affd288c3e78a35063dcbbedc036a15b36
 
 %br
 %hr

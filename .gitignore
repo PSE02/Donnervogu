@@ -9,10 +9,14 @@ public/rcov
 .metadata/
 .idea/
 
+#Nozip
+*_profile.zip
+*.csv
 #do not commit code coverage stuff
 coverage/
 coverage.data
 
+/Files/*
 #do not commit netbeans stuff
 nbproject/
 

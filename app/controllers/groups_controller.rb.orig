@@ -73,8 +73,15 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.xml
   def destroy
+<<<<<<< HEAD
+    @group = Group.find(params[:id])
+    @group.destroy if @group.name != "No Group"
+    flash[:error] = "You can not delete \"No Group\"" if @group.name == "No Group"
+  
+=======
     @profile.destroy
 
+>>>>>>> c95e74affd288c3e78a35063dcbbedc036a15b36
     respond_to do |format|
       format.html { redirect_to(groups_url) }
       format.xml  { head :ok }

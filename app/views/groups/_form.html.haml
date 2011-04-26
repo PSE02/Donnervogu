@@ -1,14 +1,14 @@
 %notice
   = flash[:notice]
 %br
-= form_for @group do |f| 
-  - if @group.errors.any?
+= form_for @profile do |f|
+  - if @profile.errors.any?
     #error_explanation
       %h2
-        = pluralize(@group.errors.count, "error")
+        = pluralize(@profile.errors.count, "error")
         prohibited this account from being saved:
       %ul
-        - @group.errors.full_messages.each do |msg|
+        - @profile.errors.full_messages.each do |msg|
           %li
             = msg
   

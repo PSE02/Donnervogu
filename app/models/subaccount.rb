@@ -1,6 +1,6 @@
 # Distinct Ids and the information, when a Profile whas last downloaded.
 class Subaccount < ActiveRecord::Base
-  belongs_to :emailaccount
+    belongs_to :emailaccount
   def initialize params={}
     super params
     self.last_get = Time.now
@@ -21,4 +21,16 @@ class Subaccount < ActiveRecord::Base
   def assure_zip_path
     self.emailaccount.assure_zip_path
   end
+
+  # Is this account outdated?
+  def outdated?
+    (Time.now - self.last_get) > threshold_for_oldest_get
+  end
+
+  # generic threshold for how long an account can be inactive until
+  # it is considered out of date.
+  def threshold_for_oldest_get
+    4.days
+  end
+
 end
