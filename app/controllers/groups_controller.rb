@@ -1,10 +1,20 @@
+# Groups are a collection of emailaccounts that belong and are
+# handled together. They have preferences and can overwrite
+# the preferences of the users.
+# This controller can only be used when logged in as admin.
 class GroupsController < ApplicationController
   
   # Restricts access for every method in this controller to logged in user only.
   before_filter :require_user
   before_filter :group_by_id, :only => [:show, :edit, :set_params, :update,
                                         :destroy, :overwrite_member_configs]
-  
+
+  # helper that provides a group for the commands.
+  def group_by_id
+    @profile = Group.find(params[:id])
+    raise "No Group found" if @profile.nil?
+  end
+
   # GET /groups
   # GET /groups.xml
   def index
@@ -88,14 +98,9 @@ class GroupsController < ApplicationController
     redirect_to group_path, :notice => 'Settings for this group were successfully saved.'
   end
 
+  # Overwrite the users configuration with the own preferences.
   def overwrite_member_configs
-    raise "updated!"
     @profile.propagate_update
     redirect_to group_path, :notice => 'Settings propagated for all members'
-  end
-
-  def group_by_id
-    @profile = Group.find(params[:id])
-    raise "No Group found" if @profile.nil?
   end
 end

@@ -1,13 +1,22 @@
+# Handles the interaction with the emailaccounts.
+# This includes
+#     * CRUD
+#     * Providing the zips
+#     * Handing out identifying ids
+#     * Management of the user's configuration
+# All actions except for getting the zip require the admin to be logged in.
 class EmailaccountsController < ApplicationController
 	before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   before_filter :emailaccount_by_id, :only => [:show, :update,
                                                :destroy,
                                                :set_params, :group_configuration]
 
+  # helper that provides all methods with an emailaccount
   def emailaccount_by_id
     @profile = Emailaccount.find(params[:id])
     raise "No such Emailaccount #{id}!" if @profile.nil?
   end
+  # Paginates and shows the emailaccounts.
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
@@ -21,17 +30,17 @@ class EmailaccountsController < ApplicationController
   def not_modified
   end
 
+  # Shows a single emailaccount
   # GET /emailaccounts/1
   # GET /emailaccounts/1.xml
   def show
-    @profile = Emailaccount.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @profile }
     end
   end
 
+  # Shows the interface for new Emailaccounts
   # GET /emailaccounts/new
   # GET /emailaccounts/new.xml
   def new
@@ -93,22 +102,22 @@ class EmailaccountsController < ApplicationController
   # Get the configuration zip and a header with a brand new id.
   def zip_of_email
     @profile = Emailaccount.find_by_email(params[:email])
-    response.headers["X-TBMS-Profile-ID"] = @profile.generate_subaccount.to_s
+    response.headers["X-TBMS-Profile-ID"] = @profile.generate_profile_id.to_s
     zip_path = @profile.assure_zip_path
 	  send_file zip_path
   end
 
   # Get the configuration zip.
   def zip_of_id
-    emailaccount = Subaccount.find(params[:id]).emailaccount
+    emailaccount = ProfileId.find(params[:id]).emailaccount
 	  raise "No such account" if emailaccount.nil?
     zip_path = emailaccount.assure_zip_path
     send_file zip_path
   end
 
-  # tells the server, that the configuration was successfully got.
+  # tells the server, that the configuration was successfully received.
   def was_successfully_updated
-    subaccount = Subaccount.find(params[:id])
+    subaccount = ProfileId.find(params[:id])
     subaccount.downloaded
   end
 
@@ -118,13 +127,14 @@ class EmailaccountsController < ApplicationController
     redirect_to emailaccount_path, :notice => "Reset Account settings to groups"
   end
 
+  # What it says on the tin
   def delete_subaccount
-    subaccount = Subaccount.find(params[:id])
+    subaccount = ProfileId.find(params[:id])
     raise "No such subaccount" if subaccount.nil?
     emailaccount = subaccount.emailaccount
     subaccount.destroy
     respond_to do |format|
-      format.html { redirect_to(emailaccount_path(emailaccount), :notice => "Deleted Subaccount") }
+      format.html { redirect_to(emailaccount_path(emailaccount), :notice => "Deleted ProfileId") }
       format.xml  { head :ok }
     end
   end

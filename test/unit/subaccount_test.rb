@@ -6,7 +6,7 @@ class SubaccountTest < ActiveSupport::TestCase
      @account.name = "test2"
      @account.email = "test2@example.ch"
      @account.save
-     @subaccount = Subaccount.new
+     @subaccount = ProfileId.new
      @subaccount.emailaccount = @account
      @subaccount.save
   end

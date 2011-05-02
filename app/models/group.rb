@@ -1,14 +1,15 @@
 # Emailaccounts can belong to groups and merge their preferences
-# with the group's. This merge is done once on the creation
+# with the groups. This merge is done once on the creation
 # of the account and then on request.
 # Author:: Aaron Karper <akarper@students.unibe.ch>
 include GroupsHelper
 class Group < ActiveRecord::Base
+  # This is somewhat suboptimal, but inheritance in databases and
+  # rails is really hard work.
+
 	validates_presence_of :name
   validates_uniqueness_of :name
 	has_many :emailaccounts
-	# This is somewhat suboptimal, but inheritance in databases and
-	# rails is really hard work.
 	belongs_to :group
 	has_many :groups
 	serialize :preferences
@@ -19,14 +20,14 @@ class Group < ActiveRecord::Base
   end
 
   # Every User belongs to a group, which might be the null_group
-  def self.null_group
-    if @null_group.nil?
-      @null_group = Group.new
-      @null_group.name = "No Group"
-      @null_group.preferences={:html => "true", :signature => "This is just a template signature"}
-      @null_group.save
+  def self.default_group
+    if @default_group.nil?
+      @default_group = Group.new
+      @default_group.name = "No Group"
+      @default_group.preferences={:html => "true", :signature => "This is just a template signature"}
+      @default_group.save
     end
-    @null_group
+    @default_group
   end
 
 	# a list of all members (groups and emailaccounts)
@@ -38,26 +39,21 @@ class Group < ActiveRecord::Base
 		self.name
 	end
 
-	# the preferences in the hierarchy this far.
+	# the preferences in the hierarchy down to this point.
 	def final_preferences
 		if not self.group.nil?
-			down_merge
+			merge_down
 		else
 			self.preferences
 		end
 	end
 
 	# Overwrite the supergroups preferences if necessary
-	def down_merge
+	def merge_down
 		self.group.final_preferences.merge self.preferences
 	end
 
-	# Overwrite the subgroups preferences if necessary
-	def up_merge
-		self.preferences.merge self.group.final_preferences
-  end
-
-  # Changes might be propagated down the hierarchy.
+  # Changes are propagated down the hierarchy.
   def propagate_update
     self.preferences = self.group.final_preferences unless self.group.nil?
     self.members.each {|member| member.propagate_update}

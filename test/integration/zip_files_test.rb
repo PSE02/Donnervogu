@@ -60,7 +60,7 @@ class ZipFilesTest < ActionDispatch::IntegrationTest
 
   test "send ok" do
     get "profile/#{@hans_id}/ok"
-    hans_sub = Subaccount.find(@hans_id.to_i)
+    hans_sub = ProfileId.find(@hans_id.to_i)
     assert_in_delta(Time.now, hans_sub.last_get, 0.5)
   end
 

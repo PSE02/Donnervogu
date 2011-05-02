@@ -1,33 +1,39 @@
 include EmailaccountHelper
 include TemplateHelper
+# Emailaccounts store their configuration (in the <code>preferences</code>
+# map) and provide users with the corresponding zip files. It starts without
+# a group, but it can be provided later, if need be. It has serveral
+# profile ids, that represent the different clients with the same configuration.
 class Emailaccount < ActiveRecord::Base
 
 	validates_presence_of :email
 	validates_presence_of :name
   validates_format_of :email,
       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  # We identify an account by its email on the first request.
   validates_uniqueness_of :email
 
 	serialize :preferences
   serialize :informations
 	belongs_to :group
-  has_many :subaccounts
+  has_many :profile_ids
   has_one :standard_subaccount,
-      :class_name => "Subaccount"
+      :class_name => "ProfileId"
 	
   def initialize panda={} # panda = param
 	  super panda
     self.preferences = Hash.new
     self.informations = Hash.new
     self.load_init_preferences
-    self.standard_subaccount = Subaccount.new
+    self.standard_subaccount = ProfileId.new
   end
 
-  def generate_subaccount
-    sub = Subaccount.new
-    sub.emailaccount = self
-    raise "Couldn't save new Subaccount" unless sub.save
-    sub.id
+  # makes a new profile id to track the up-to-date-ness of another client.
+  def generate_profile_id
+    profile_id = ProfileId.new
+    profile_id.emailaccount = self
+    raise "Couldn't save new ProfileId" unless profile_id.save
+    profile_id.id
   end
 
   def set_group param
@@ -42,10 +48,11 @@ class Emailaccount < ActiveRecord::Base
 
   # Checks what the oldest configuration in the wild is of this account.
   # Author:: Aaron Karper <akarper@student.unibe.ch>
-  def oldest_subaccount_config
-    Subaccount.oldest_subaccount_config self.id
+  def oldest_config
+    ProfileId.oldest_profile_config self.id
   end
 
+  # Sets the configuration of the emailaccount
 	def set_params params
 	  raise "No Params" if params.nil?
     params.each do |key, value|
@@ -56,16 +63,19 @@ class Emailaccount < ActiveRecord::Base
     raise "save failed: #{errors}" unless self.save
     assure_created_zip
   end
-  
+
+  # Checks if the provided key can be handled by the FileCreator
 	def valid_key? key
 	    (not key.nil?) and (FileCreator::valid_key?(key.to_sym))
 	end
-	
+
+  # Ensures that the zip file is up to date.
 	def assure_created_zip
 	    FileCreator::createNewZip(self)
 	    raise "No file created" unless File.exists? zip_path
 	end
 
+  # ensures that the zip file exists and gives the path to it
 	def assure_zip_path
 		assure_created_zip
 		zip_path
@@ -75,9 +85,8 @@ class Emailaccount < ActiveRecord::Base
 		FileCreator::completeZipPath self
 	end
 	
-	#DR we have to load group or template stuff here from a file or what ever
 	def load_init_preferences
-    self.group = Group.null_group
+    self.group = Group.default_group
     self.preferences = self.group.final_preferences unless group.nil?
     self.informations[:email] = email
     self.informations[:name] = name
@@ -87,14 +96,14 @@ class Emailaccount < ActiveRecord::Base
 	# the preferences merged with the group's
 	def final_preferences
 		if not self.group.nil?
-			down_merge
+			merge_down
 		else
 			self.preferences
 		end
 	end
 
 	# Overwrite the supergroups preferences if necessary
-	def down_merge
+	def merge_down
 		self.group.final_preferences.merge self.preferences
 	end
 
@@ -106,9 +115,10 @@ class Emailaccount < ActiveRecord::Base
   end
 
   def outdated?
-    self.subaccounts.any? {|sub| sub.outdated?}
+    self.profile_ids.any? {|p| p.outdated?}
   end
 
+  # gives the fully instanciated template of the signature (@see EmailaccountHelper)
   def signature
     template = preferences[:signature] or ""
     dict = TemplateHelper::make_dict self.informations

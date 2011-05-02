@@ -1,3 +1,6 @@
+# Basic controller for the application.
+# Provides the standard view of the application and allows the user to login/logout.
+# It also provides some methods used by all controllers.
 class ApplicationController < ActionController::Base
 	protect_from_forgery
 
@@ -9,7 +12,7 @@ class ApplicationController < ActionController::Base
 
 	def overview
 		@emailaccount_size = Emailaccount.count
-		@email_oldest_get = Subaccount.oldest_get
+		@email_oldest_get = ProfileId.oldest_get
 	end
 
 	def index
