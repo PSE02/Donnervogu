@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
 	#JR Returns current user session, if somebody is logged in
 	def current_user_session
     unless @current_user_session
-      #Validates that user is in database.
       @current_user_session = UserSession.find
     end
     @current_user_session
@@ -31,7 +30,7 @@ class ApplicationController < ActionController::Base
 	#JR Returns current logged in user
 	def current_user
    unless @current_user
-      #Is true when there is a current user session and it has a user.
+      #JR Is true when there is a current user session and it has a user.
       @current_user = current_user_session && current_user_session.user
    end
    @current_user
