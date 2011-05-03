@@ -1,6 +1,6 @@
 # Author:: Jonas Ruef
 class UserSession < Authlogic::Session::Base
-  #Reset persistence token, to make sure all sessions of user will be logged out.
+  #Reset persistence token when destroy a session, to make sure all sessions of that user will be logged out.
   before_destroy :reset_persistence_token
 
   # Login via username

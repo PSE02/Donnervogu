@@ -4,9 +4,9 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-	test "should create a new user" do
+	test "should check if new page exists" do
     get :new
-		assert_nil assigns(:new)
+    assert_response :success
 	end
 	
 	test "should prevent access if you are not a logged in user" do

@@ -27,7 +27,6 @@ class UsersController < ApplicationController
     
   end
   
-  # Show the user and his statistics
   def show
     @user = current_user
   end
