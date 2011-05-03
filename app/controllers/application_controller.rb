@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
 
 	#JR Returns current logged in user
 	def current_user
+   # Prevent simultaneous logins
+   unless @current_user
+    @current_user = current_user_session && current_user_session.user
+   end
+   if @current_user && @current_user.session_key != session[:session_id]
+    flash[:notice] = 'Access denied. Simultaneous logins detected.'
+    current_user_session.destroy
+   end
    unless @current_user
       #JR Is true when there is a current user session and it has a user.
       @current_user = current_user_session && current_user_session.user

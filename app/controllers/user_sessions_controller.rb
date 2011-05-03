@@ -15,7 +15,12 @@ class UserSessionsController < ApplicationController
 	def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-			redirect_back_or_default 'index#show'
+
+      # Save the session ID to detect simultaneous login attempts
+      @user_session.record.session_key = session[:session_id]
+      @user_session.record.save!
+      
+      redirect_back_or_default 'index#show'
 		else
 			render :action => :new
 		end
