@@ -13,8 +13,8 @@ class UserSessionsController < ApplicationController
 
 	# Setting up the user session
 	def create
-		@user_session = UserSession.new(params[:user_session])
-		if @user_session.save
+    @user_session = UserSession.new(params[:user_session])
+    if @user_session.save
 			redirect_back_or_default 'index#show'
 		else
 			render :action => :new
@@ -23,7 +23,7 @@ class UserSessionsController < ApplicationController
 
 	# Destroys the user session object when logging out
 	def destroy
-		current_user_session.destroy
+    current_user_session.destroy
 		redirect_to root_url
 	end
 end

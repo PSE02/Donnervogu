@@ -16,19 +16,25 @@ class ApplicationController < ActionController::Base
 	end
 
 	def logged_in?
-		@current_user
+    current_user
 	end
 
 	#JR Returns current user session, if somebody is logged in
 	def current_user_session
-		return @current_user_session if defined?(@current_user_session)
-		@current_user_session = UserSession.find
+    unless @current_user_session
+      #Validates that user is in database.
+      @current_user_session = UserSession.find
+    end
+    @current_user_session
 	end
 
 	#JR Returns current logged in user
 	def current_user
-		return @current_user if defined?(@current_user)
-		@current_user = current_user_session && current_user_session.user
+   unless @current_user
+      #Is true when there is a current user session and it has a user.
+      @current_user = current_user_session && current_user_session.user
+   end
+   @current_user
 	end
 
 	#JR Makes a view only accessible if you are a logged in user
