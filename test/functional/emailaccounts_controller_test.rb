@@ -17,10 +17,10 @@ class EmailaccountsControllerTest < ActionController::TestCase
     assert_not_nil(@emailaccount.id)
   end
   
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
+#  test "should get index" do
+#    get :index
+#    assert_response :success
+#  end
   
   test "should get new" do
     get :new

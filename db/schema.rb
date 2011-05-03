@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427115309) do
+ActiveRecord::Schema.define(:version => 20110503114019) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20110427115309) do
 
   create_table "profile_ids", :force => true do |t|
     t.datetime "time_of_last_ok"
+    t.integer  "emailaccount_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "time_of_last_connection"
+  end
+
+  create_table "subaccounts", :force => true do |t|
+    t.datetime "last_get"
     t.integer  "emailaccount_id"
     t.datetime "created_at"
     t.datetime "updated_at"

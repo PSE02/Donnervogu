@@ -7,6 +7,7 @@ class ProfileId < ActiveRecord::Base
   def initialize params={}
     super params
     self.time_of_last_ok = Time.now
+    self.time_of_last_connection = Time.now
   end
 
   def self.oldest_profile_config id
@@ -34,6 +35,16 @@ class ProfileId < ActiveRecord::Base
   # it is considered out of date.
   def threshold_for_oldest_ok
     4.days
+  end
+  
+  # generic threshold for how long an account can be inactive until
+  # it is considered offline
+  def threshold_for_offline
+    4.days
+  end
+  
+  def online?
+    return (Time.now - self.time_of_last_connection) > threshold_for_offline
   end
 
 end
