@@ -3,9 +3,18 @@
 require 'test_helper'
 
 class EmailaccountsControllerTest < ActionController::TestCase
+  fixtures :emailaccounts, :profile_ids
   setup do
     @emailaccount = emailaccounts(:hans)
+    @emailaccount.setup_members
     login_as_admin
+  end
+
+  test "fixture valid" do
+    assert_not_nil(@emailaccount.standard_subaccount)
+    assert_not_nil(@emailaccount.standard_subaccount.id)
+    assert_equal(@emailaccount, @emailaccount.standard_subaccount.emailaccount)
+    assert_not_nil(@emailaccount.id)
   end
   
   test "should get index" do

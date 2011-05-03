@@ -1,0 +1,6 @@
+newer:
+  time_of_last_ok: 2011-04-12 22:27:25
+  emailaccount: <% Emailaccount.find(:first).to_param %>
+older:
+  time_of_last_ok: 2011-03-12 22:27:25
+  emailaccount: <% Emailaccount.find(:first).to_param %>

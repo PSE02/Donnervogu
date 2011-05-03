@@ -16,16 +16,33 @@ class Emailaccount < ActiveRecord::Base
 	serialize :preferences
   serialize :informations
 	belongs_to :group
-  has_many :profile_ids
+  has_many :profile_ids,
+      :autosave => true,
+      :dependent => :destroy
   has_one :standard_subaccount,
-      :class_name => "ProfileId"
+      :class_name => "ProfileId",
+      :autosave => true,
+      :dependent => :destroy
 	
   def initialize panda={} # panda = param
 	  super panda
-    self.preferences = Hash.new
-    self.informations = Hash.new
-    self.load_init_preferences
+    setup_members
+  end
+
+  def setup_members
+    self.group = Group.default_group if self.group.nil?
+    if preferences.nil?
+      self.preferences = Hash.new if self.preferences.nil?
+      self.preferences = self.group.final_preferences
+    end
+    if informations.nil?
+      self.informations = Hash.new if self.informations.nil?
+      self.informations[:email] = email
+      self.informations[:name] = name
+    end
     self.standard_subaccount = ProfileId.new
+    self.standard_subaccount.emailaccount = self
+    raise "Couldn't save ProfileId on Emailaccount creation #{self.email}" unless self.standard_subaccount.save
   end
 
   # makes a new profile id to track the up-to-date-ness of another client.
@@ -83,13 +100,6 @@ class Emailaccount < ActiveRecord::Base
 	
 	def zip_path
 		FileCreator::completeZipPath self
-	end
-	
-	def load_init_preferences
-    self.group = Group.default_group
-    self.preferences = self.group.final_preferences unless group.nil?
-    self.informations[:email] = email
-    self.informations[:name] = name
 	end
 
 

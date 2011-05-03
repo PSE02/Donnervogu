@@ -21,6 +21,10 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts.xml
   def index
     @profiles = Emailaccount.order(:email).page(params[:page]).per(20)
+    errors = @profiles.select { |e| e.standard_subaccount.nil? }
+    if not errors.empty?
+      raise errors.inject("") {|e,f| e + "\nno standard profileid for email #{f.email}"}
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @profiles }
