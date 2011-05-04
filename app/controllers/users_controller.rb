@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def forgery_error(exception); render :text => exception.message;  end
 
   #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
-  protect_from_forgery :secret => '2kaienna9ea90djnaLI8', :digest => 'MD5'
+  protect_from_forgery :secret => '2kaienna9ea90djnaLI8'
 
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :show
@@ -22,9 +22,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
-    # Saving without session maintenance to skip
-    # auto-login which can't happen here because
-    # the User has not yet been activated
     if @user.save
       redirect_to root_path
     else

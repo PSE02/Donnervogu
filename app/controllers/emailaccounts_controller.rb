@@ -4,7 +4,7 @@ class EmailaccountsController < ApplicationController
   def forgery_error(exception); render :text => exception.message;  end
 
   #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
-  protect_from_forgery :secret => '2kaienna9ea90djnaLI8', :digest => 'MD5'
+  protect_from_forgery :secret => '2kaienna9ea90djnaLI8'
 
   before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   before_filter :emailaccount_by_id, :only => [:show, :update,

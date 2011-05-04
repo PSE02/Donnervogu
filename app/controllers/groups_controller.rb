@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   def forgery_error(exception); render :text => exception.message;  end
 
   #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
-  protect_from_forgery :secret => '2kaienna9ea90djnaLI8', :digest => 'MD5'
+  protect_from_forgery :secret => '2kaienna9ea90djnaLI8'
 
   # Restricts access for every method in this controller to logged in user only.
   before_filter :require_user

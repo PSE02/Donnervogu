@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   def forgery_error(exception); render :text => exception.message;  end
 
   #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
-  protect_from_forgery :secret => '2kaienna9ea90djnaLI8', :digest => 'MD5'
+  protect_from_forgery :secret => '2kaienna9ea90djnaLI8'
 
 	before_filter :require_user
 	before_filter :overview
@@ -34,14 +34,6 @@ class ApplicationController < ActionController::Base
 
 	#JR Returns current logged in user
 	def current_user
-   # Prevent simultaneous logins
-   unless @current_user
-    @current_user = current_user_session && current_user_session.user
-   end
-   if @current_user && @current_user.session_key != session[:session_id]
-    flash[:notice] = 'Access denied. Simultaneous logins detected.'
-    current_user_session.destroy
-   end
    unless @current_user
       #JR Is true when there is a current user session and it has a user.
       @current_user = current_user_session && current_user_session.user
