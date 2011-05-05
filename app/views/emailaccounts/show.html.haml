@@ -26,11 +26,11 @@
       %th online
       %th up to date
     - @profile.profile_ids.each do |each|
-      %tr{:class => each.outdated? ? "outdated" : "uptodate"}
+      %tr
         %td= each.id
         %td= time_ago_in_words each.time_of_last_ok
-        %td= "Green"
-        %td= "Red"
+        %td{:class => each.online? ? "outdated" : "uptodate"}
+        %td{:class => each.outdated? ? "outdated" : "uptodate"}
         %td= link_to "Delete", delete_subaccount_path(each),:confirm => 'Are you sure?'
 %br
 %hr

@@ -58,7 +58,9 @@ class CSVImportTest < ActiveSupport::TestCase
   end
   
   test "import" do
-    CSVImport::import(File.read("/home/d3orn/Documents/PSE/Donnervogu/test/test.csv"))
+    test_file_path = File.join(Rails.root,"resources",
+             "test.csv",)
+    CSVImport::import(File.read(test_file_path))
     assert_false(Emailaccount.find_by_email("hans@example.ch").nil?)
     assert_false(Emailaccount.find_by_email("max.test@another.email.ch").nil?)
     assert_match("another.email",Emailaccount.find_by_email("max.test@another.email.ch").group.name) 

@@ -10,7 +10,7 @@ hans:
     :offline_mode: "true"
     :send_offline_mode: "true"
     :save_offline_mode: "false"
-    :signature_style: "false"
+    :signature_style: "false"  
     :signature: "This is just a simple signature"
   informations:
     :name:  Hans Mustermann

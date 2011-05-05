@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 	before_filter :require_user
 	before_filter :overview
 
-	filter_parameter_logging :password, :password_confirmation # there are underscores :-|
+	filter_parameter_logging :password, :password_confirmation 
 	helper_method :current_user_session, :current_user
 
 	def overview

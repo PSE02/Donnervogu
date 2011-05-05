@@ -4,7 +4,8 @@
 #
 # If you need to add more settings please make sure to add the key (:html for example) 
 # to the @validKeys list and add a method (self.html for example) with the same name as the key
-# Else our FileCreator will not use your new key!
+# Else our FileCreator will not use your new key! To go on with you should add at least one 
+# new test to file_creator_test.rb testing the new setting
 #
 # Author::    Sascha Schwaerzler, Dominique Rahm
 # License::   Distributes under the same terms as Ruby
@@ -46,8 +47,6 @@ module ApplicationHelper
 	    @validKeys.include?(key)
     end
 
-  	#DR I love string interpolation! we don't need the XML anymore!
-  	#DR I think all this stuff will need some refactoring sooner or later!
   	def self.html account
       html = account.preferences[:html].to_s
   		"/************************** HTML *********************************/ \n" +

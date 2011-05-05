@@ -4,6 +4,8 @@ include TemplateHelper
 # map) and provide users with the corresponding zip files. It starts without
 # a group, but it can be provided later, if need be. It has serveral
 # profile ids, that represent the different clients with the same configuration.
+#
+# Author: 
 class Emailaccount < ActiveRecord::Base
 
 	validates_presence_of :email
@@ -24,7 +26,7 @@ class Emailaccount < ActiveRecord::Base
       :autosave => true,
       :dependent => :destroy
 	
-  def initialize panda={} # panda = param
+  def initialize panda={} # panda = param, this was actually a typo but we liked it so much that we kept it in here :-)
 	  super panda
     setup_members
   end

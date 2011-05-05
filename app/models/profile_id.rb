@@ -43,6 +43,7 @@ class ProfileId < ActiveRecord::Base
     4.days
   end
   
+  # Is this account outdated?
   def online?
     return (Time.now - self.time_of_last_connection) > threshold_for_offline
   end
