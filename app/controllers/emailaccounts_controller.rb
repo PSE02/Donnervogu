@@ -11,6 +11,7 @@ class EmailaccountsController < ApplicationController
                                                :destroy,
                                                :set_params, :group_configuration]
 
+
   # helper that provides all methods with an emailaccount
   def emailaccount_by_id
     @profile = Emailaccount.find(params[:id])
@@ -113,6 +114,9 @@ class EmailaccountsController < ApplicationController
 
   # Get the configuration zip.
   def zip_of_id
+    if request.headers['X-TBMS-Status'] == "false"
+      redirect_to status_path(params[:id])
+    end
     emailaccount = ProfileId.find(params[:id]).emailaccount
 	  raise "No such account" if emailaccount.nil?
     zip_path = emailaccount.assure_zip_path
