@@ -146,4 +146,8 @@ class EmailaccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def change_information
+     raise params.to_s
+  end
 end

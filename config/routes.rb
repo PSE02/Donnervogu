@@ -82,6 +82,7 @@ TBMS::Application.routes.draw do
   resources :log_messages, :path => "/log"
 
   match "emailaccounts/:id/edit/set_params" => "emailaccounts#set_params"
+  match "emailaccounts/:id/edit/information" => "emailaccounts#change_information"
   match 'emailaccounts/:id/groupsettings' => "emailaccounts#group_configuration", :as => :reset_account
   resources :groups
   
