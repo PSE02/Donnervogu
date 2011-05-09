@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
 	def overview
 		@emailaccount_size = Emailaccount.count
-		@email_oldest_get = ProfileId.oldest_get
+		@total_outdated    = ProfileId.count_outdated
 	end
 
 	def index

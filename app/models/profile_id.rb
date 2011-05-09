@@ -10,6 +10,10 @@ class ProfileId < ActiveRecord::Base
     self.time_of_last_connection = Time.now
   end
 
+  def self.count_outdated id = nil
+    self.where("time_of_last_ok <= ?", (Time.now - self.threshold_for_oldest_ok)).count
+  end
+
   def self.oldest_profile_config id
     self.where(:emailaccount_id => id).minimum(:time_of_last_ok)
   end
@@ -33,8 +37,11 @@ class ProfileId < ActiveRecord::Base
 
   # generic threshold for how long an account can be inactive until
   # it is considered out of date.
-  def threshold_for_oldest_ok
+  def self.threshold_for_oldest_ok
     4.days
+  end
+  def threshold_for_oldest_ok
+    self.class.threshold_for_oldest_ok
   end
   
   # generic threshold for how long an account can be inactive until

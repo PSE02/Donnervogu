@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503114019) do
+ActiveRecord::Schema.define(:version => 20110509052315) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
@@ -31,19 +31,19 @@ ActiveRecord::Schema.define(:version => 20110503114019) do
     t.integer  "group_id"
   end
 
+  create_table "log_messages", :force => true do |t|
+    t.text     "message"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "profile_ids", :force => true do |t|
     t.datetime "time_of_last_ok"
     t.integer  "emailaccount_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "time_of_last_connection"
-  end
-
-  create_table "subaccounts", :force => true do |t|
-    t.datetime "last_get"
-    t.integer  "emailaccount_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "user_sessions", :force => true do |t|

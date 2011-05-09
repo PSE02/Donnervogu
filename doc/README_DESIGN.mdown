@@ -1,0 +1,18 @@
+# The Design #
+
+## The Model and Helper Classes ##
+
+### Emailaccount ###
+The Emailaccount class represents a profile of an user. It saves the
+configuration and provides a configuration zip to the plugin (see also
+README_REQUEST). To accomplish that, it uses the helper FileCreator.
+
+### FileCreator ###
+The FileCreator is basically a builder for the configuration. It takes an
+emailaccount and translates its `@preferences` by calling the method named
+like the keys in the preferences with the emailaccount. This makes it rather
+easy to add new configuration options:
+
+   1) add option to @validKeys.
+   2) add a method with the option name.
+   3) add option to the views/shared/_preferences.haml form.

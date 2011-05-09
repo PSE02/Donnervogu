@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
     @profiles = Group.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @profiles }
     end
   end
@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.xml
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @profile }
     end
   end

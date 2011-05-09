@@ -4,13 +4,13 @@
 hans:
   email: "hans@example.com"
   name: "Hans Mustermann"
-  preferences: 
+  preferences:
     :html: "true"
     :quote: :above
     :offline_mode: "true"
     :send_offline_mode: "true"
     :save_offline_mode: "false"
-    :signature_style: "false"  
+    :signature_style: "false"
     :signature: "This is just a simple signature"
   informations:
     :name:  Hans Mustermann
@@ -20,7 +20,7 @@ hans:
 wicki:
   email: wicky@wikinger.il
   name: Wicki
-  preferences: 
+  preferences:
     :html: false
     :quote: :above
   standard_subaccount_id: <% pid = ProfileId.new; pid.save; pid.id %>
@@ -47,4 +47,3 @@ max:
     :email: max@example.com
     :name: Max
   standard_subaccount_id: <% pid = ProfileId.new; pid.save; pid.id %>
-

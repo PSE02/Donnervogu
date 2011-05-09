@@ -26,7 +26,7 @@ class EmailaccountsController < ApplicationController
       raise errors.inject("") {|e,f| e + "\nno standard profileid for email #{f.email}"}
     end
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @profiles }
     end
   end
@@ -39,7 +39,7 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts/1.xml
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @profile }
     end
   end
