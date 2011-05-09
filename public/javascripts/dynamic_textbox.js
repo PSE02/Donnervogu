@@ -9,7 +9,13 @@
  */
 
 $(document).ready(function(){
-    var counter = 2;
+     var counter;
+    for (counter = 1; counter < 20; counter++) {
+        var node = $("#TextBoxDiv"+counter);
+        if ( !node.is(":visible")) {
+            break;
+        }
+    }
 
     $("#addInfo").click(function () {
 

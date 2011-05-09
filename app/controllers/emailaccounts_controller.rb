@@ -9,7 +9,8 @@ class EmailaccountsController < ApplicationController
 	before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   before_filter :emailaccount_by_id, :only => [:show, :update,
                                                :destroy,
-                                               :set_params, :group_configuration]
+                                               :set_params, :group_configuration,
+                                                :change_information]
 
 
   # helper that provides all methods with an emailaccount
@@ -148,6 +149,19 @@ class EmailaccountsController < ApplicationController
   end
 
   def change_information
-     raise params.to_s
+    keys = params\
+                    .select {|key,val| /key_\d+/.match(key) and val.present?}\
+                    .collect {|key,val| [(/key_\d+/.match(key))[1].to_i, val.to_sym]}\
+                    .sort_by {|key,val| key}\
+                    .collect {|key,val| val}
+    values = params\
+                    .select {|key,val| /value_\d+/.match(key) and val.present?}\
+                    .collect {|key,val| [(/value_\d+/.match(key))[1].to_i, val]}\
+                    .sort_by {|key,val| key}\
+                    .collect {|key,val| val}
+    key_values = keys.zip(values).to_hash
+    @profile.informations= key_values
+    raise "Couldn't save profile #{@profile.email}:\n* #{@profile.errors[:base].join '\n* '}" unless @profile.save
+    redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
   end
 end
