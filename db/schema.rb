@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.integer  "group_id"
     t.text     "informations"
     t.integer  "standard_subaccount_id"
+    t.string   "outdated"
   end
 
   create_table "groups", :force => true do |t|
