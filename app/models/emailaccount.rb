@@ -34,7 +34,11 @@ class Emailaccount < ActiveRecord::Base
   end
 
   def too_many_ids
-     ProfileId.where(:emailaccount_id => self.id).count >= 10
+     ProfileId.where(:emailaccount_id => self.id).count >= max_id_count
+  end
+
+  def max_id_count
+    10
   end
 
 

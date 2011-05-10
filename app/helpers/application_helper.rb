@@ -133,4 +133,8 @@ module ApplicationHelper
 
   end
 
+  def max_information_lines
+    20
+  end
+
 end

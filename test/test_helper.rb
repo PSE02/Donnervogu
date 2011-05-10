@@ -27,3 +27,9 @@ end
 class ActionController::TestCase
   setup :activate_authlogic
 end
+
+class ActionDispatch::Request
+  def set_header(name, value)
+    @env[name] = value
+  end
+end

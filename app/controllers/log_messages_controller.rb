@@ -59,5 +59,4 @@ class LogMessagesController < ApplicationController
     end
   end
 
-
 end

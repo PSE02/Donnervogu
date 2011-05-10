@@ -9,7 +9,7 @@
           %div{:id=>"TextBoxDiv#{i}", :style => "display: block"}
             = text_field_tag("key_#{i}".to_sym, content = info[0])
             = text_field_tag("value_#{i}".to_sym, content = info[1])
-        - for i in (@profile.informations.size..(21-@profile.informations.size)) # I'm so sorry, so very, very sorry...
+        - for i in (@profile.informations.size..((max_information_lines+1)-@profile.informations.size)) # I'm so sorry, so very, very sorry...
           %div{:id => "TextBoxDiv#{i}", :style => "display: none"}
             = text_field_tag("key_#{i}".to_sym, content = "")                    # the approach of creating the text fields didn't work, as the form fileds were not sent back.
             = text_field_tag("value_#{i}".to_sym, content = "")

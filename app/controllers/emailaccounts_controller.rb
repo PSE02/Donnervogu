@@ -115,14 +115,30 @@ class EmailaccountsController < ApplicationController
 
   # Get the configuration zip.
   def zip_of_id
+    cacheTime = Time.rfc2822(request.env["HTTP_IF_MODIFIED_SINCE"]) rescue nil
     if request.headers['X-TBMS-Status'] == "false"
       redirect_to status_path(params[:id])
     end
     emailaccount = ProfileId.find(params[:id]).emailaccount
-	  raise "No such account" if emailaccount.nil?
-    zip_path = emailaccount.assure_zip_path
-    send_file zip_path
+
+    if not modified(emailaccount)
+      render :nothing => true, :status => 304
+    else
+      response.headers['Last-Modified'] = emailaccount.updated_at.httpdate
+      zip_path = emailaccount.assure_zip_path
+      send_file zip_path
+    end
   end
+
+    def modified(emailaccount)
+      return true unless request.headers.include? 'If-Modified-Since'
+      since_date = Time.parse request.headers['If-Modified-Since']
+
+      last_modification = emailaccount.updated_at
+      return true if last_modification.nil?
+
+      since_date < last_modification
+    end
 
   # tells the server, that the configuration was successfully received.
   def was_successfully_updated
@@ -164,4 +180,5 @@ class EmailaccountsController < ApplicationController
     raise "Couldn't save profile #{@profile.email}:\n* #{@profile.errors[:base].join '\n* '}" unless @profile.save
     redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
   end
+
 end

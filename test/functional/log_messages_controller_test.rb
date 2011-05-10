@@ -56,6 +56,7 @@ class LogMessagesControllerTest < ActionController::TestCase
     get :handle, :id => @hanspid.to_param
     assert_response :ok
   end
+
   test "should log non ok response" do
     assert_difference "LogMessage.count", 1 do
       request.env.update({

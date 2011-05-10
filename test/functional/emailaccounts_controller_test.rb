@@ -67,4 +67,15 @@ class EmailaccountsControllerTest < ActionController::TestCase
       (1..20).collect {|e| email.generate_profile_id}
     end
   end
+
+
+  test "should use if_modified_since header" do
+    email = Emailaccount.first
+    id = email.generate_profile_id
+    email.updated_at = 4.days.ago
+    email.save
+    request.set_header('If-Modified-Since', Time.now.rfc2822)
+    get :zip_of_id, :id => id
+    assert_response 304
+  end
 end
