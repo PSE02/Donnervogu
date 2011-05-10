@@ -18,7 +18,11 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
-    @profiles = Emailaccount.order(:email).page(params[:page]).per(20)
+    #@search = Emailaccount.search(params[:search])
+    @search = Emailaccount.search(params[:search])
+    @profiles = @search.page(params[:page]).per(20)
+    #@profiles = page(params[:page]).per(20)
+    #@profiles = Emailaccount.order(:email).page(params[:page]).per(20)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @profiles }

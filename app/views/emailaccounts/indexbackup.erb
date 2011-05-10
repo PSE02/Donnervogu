@@ -1,0 +1,10 @@
+
+
+<p>
+  Sort by:
+  <%= sort_link @search, :name %> |
+</p>
+
+  <%= @profiles.each do |emailaccount| %>
+        <%= emailaccount.email %>
+  <% end %>
