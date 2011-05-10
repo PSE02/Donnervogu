@@ -157,6 +157,7 @@ table.users td, table.users tr th{
 	border:1px #666 solid;
 	padding: 2px;
 }
+
 fieldset {
 	padding: 8px;
 	border:1px #666 solid;
@@ -181,10 +182,10 @@ div.footer {
  user notification
  ***********************/
 .uptodate {
-    background-color: #010;
+    background-color: #090;
 }
 .outdated {
-    background-color: #520;
+    background-color: #CD0000;
 }
 
 

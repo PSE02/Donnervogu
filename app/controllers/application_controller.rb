@@ -1,3 +1,6 @@
+# Basic controller for the application.
+# Provides the standard view of the application and allows the user to login/logout.
+# It also provides some methods used by all controllers.
 class ApplicationController < ActionController::Base
   #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
   protect_from_forgery :secret => @secret_key
@@ -11,12 +14,12 @@ class ApplicationController < ActionController::Base
 	before_filter :require_user
 	before_filter :overview
 
-	filter_parameter_logging :password, :password_confirmation # there are underscores :-|
+	filter_parameter_logging :password, :password_confirmation 
 	helper_method :current_user_session, :current_user
 
 	def overview
 		@emailaccount_size = Emailaccount.count
-		@email_oldest_get = Subaccount.oldest_get
+		@total_outdated    = ProfileId.count_outdated
 	end
 
 	def index

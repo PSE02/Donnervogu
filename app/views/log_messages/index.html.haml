@@ -1,0 +1,14 @@
+%h1 Reported Errors
+
+%table
+  %tr
+    %th Time
+    %th Profile
+    %th Message
+  - @log_messages.each do |log_message|
+    %tr
+      %td= log_message.created_at
+      %td= log_message.profile.emailaccount.email rescue ""
+      %td= log_message.message.size > 40 ? log_message.message.take(40)+"..." : log_message.message
+      %td= link_to 'Show', log_message
+      %td= link_to 'Delete', log_message, :confirm => 'Are you sure?', :method => :delete

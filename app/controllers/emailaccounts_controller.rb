@@ -1,3 +1,10 @@
+# Handles the interaction with the emailaccounts.
+# This includes
+#     * CRUD
+#     * Providing the zips
+#     * Handing out identifying ids
+#     * Management of the user's configuration
+# All actions except for getting the zip require the admin to be logged in.
 class EmailaccountsController < ApplicationController
 	#Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
   protect_from_forgery :secret => @secret_key
@@ -11,22 +18,27 @@ class EmailaccountsController < ApplicationController
   before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   before_filter :emailaccount_by_id, :only => [:show, :update,
                                                :destroy,
-                                               :set_params, :group_configuration]
+                                               :set_params, :group_configuration,
+                                                :change_information]
 
+
+  # helper that provides all methods with an emailaccount
   def emailaccount_by_id
     @profile = Emailaccount.find(params[:id])
     raise "No such Emailaccount #{id}!" if @profile.nil?
   end
+  # Paginates and shows the emailaccounts.
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
-    #@search = Emailaccount.search(params[:search])
     @search = Emailaccount.search(params[:search])
     @profiles = @search.page(params[:page]).per(20)
-    #@profiles = page(params[:page]).per(20)
-    #@profiles = Emailaccount.order(:email).page(params[:page]).per(20)
+    errors = @profiles.select { |e| e.standard_subaccount.nil? }
+    if not errors.empty?
+      raise errors.inject("") {|e,f| e + "\nno standard profileid for email #{f.email}"}
+    end
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @profiles }
     end
   end
@@ -34,17 +46,17 @@ class EmailaccountsController < ApplicationController
   def not_modified
   end
 
+  # Shows a single emailaccount
   # GET /emailaccounts/1
   # GET /emailaccounts/1.xml
   def show
-    @profile = Emailaccount.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @profile }
     end
   end
 
+  # Shows the interface for new Emailaccounts
   # GET /emailaccounts/new
   # GET /emailaccounts/new.xml
   def new
@@ -106,22 +118,25 @@ class EmailaccountsController < ApplicationController
   # Get the configuration zip and a header with a brand new id.
   def zip_of_email
     @profile = Emailaccount.find_by_email(params[:email])
-    response.headers["X-TBMS-Profile-ID"] = @profile.generate_subaccount.to_s
+    response.headers["X-TBMS-Profile-ID"] = @profile.generate_profile_id.to_s
     zip_path = @profile.assure_zip_path
 	  send_file zip_path
   end
 
   # Get the configuration zip.
   def zip_of_id
-    emailaccount = Subaccount.find(params[:id]).emailaccount
+    if request.headers['X-TBMS-Status'] == "false"
+      redirect_to status_path(params[:id])
+    end
+    emailaccount = ProfileId.find(params[:id]).emailaccount
 	  raise "No such account" if emailaccount.nil?
     zip_path = emailaccount.assure_zip_path
     send_file zip_path
   end
 
-  # tells the server, that the configuration was successfully got.
+  # tells the server, that the configuration was successfully received.
   def was_successfully_updated
-    subaccount = Subaccount.find(params[:id])
+    subaccount = ProfileId.find(params[:id])
     subaccount.downloaded
   end
 
@@ -131,14 +146,32 @@ class EmailaccountsController < ApplicationController
     redirect_to emailaccount_path, :notice => "Reset Account settings to groups"
   end
 
+  # What it says on the tin
   def delete_subaccount
-    subaccount = Subaccount.find(params[:id])
+    subaccount = ProfileId.find(params[:id])
     raise "No such subaccount" if subaccount.nil?
     emailaccount = subaccount.emailaccount
     subaccount.destroy
     respond_to do |format|
-      format.html { redirect_to(emailaccount_path(emailaccount), :notice => "Deleted Subaccount") }
+      format.html { redirect_to(emailaccount_path(emailaccount), :notice => "Deleted ProfileId") }
       format.xml  { head :ok }
     end
+  end
+
+  def change_information
+    keys = params\
+                    .select {|key,val| /key_\d+/.match(key) and val.present?}\
+                    .collect {|key,val| [(/key_\d+/.match(key))[1].to_i, val.to_sym]}\
+                    .sort_by {|key,val| key}\
+                    .collect {|key,val| val}
+    values = params\
+                    .select {|key,val| /value_\d+/.match(key) and val.present?}\
+                    .collect {|key,val| [(/value_\d+/.match(key))[1].to_i, val]}\
+                    .sort_by {|key,val| key}\
+                    .collect {|key,val| val}
+    key_values = keys.zip(values).to_hash
+    @profile.informations= key_values
+    raise "Couldn't save profile #{@profile.email}:\n* #{@profile.errors[:base].join '\n* '}" unless @profile.save
+    redirect_to emailaccount_path, :notice => "Settings for this account were successfully saved."
   end
 end

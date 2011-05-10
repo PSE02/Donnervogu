@@ -21,6 +21,8 @@
         = link_to "Groups", groups_path
         |
         = link_to "Import", account_url(:current)
+        |
+        = link_to "Log", log_messages_path
         .login
           - if current_user_session
             = link_to "Logout", logout_path

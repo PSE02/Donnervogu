@@ -6,13 +6,13 @@ class SubaccountTest < ActiveSupport::TestCase
      @account.name = "test2"
      @account.email = "test2@example.ch"
      @account.save
-     @subaccount = Subaccount.new
+     @subaccount = ProfileId.new
      @subaccount.emailaccount = @account
      @subaccount.save
   end
   test "test download" do
-    lastget = @subaccount.last_get
+    lastget = @subaccount.time_of_last_ok
     @subaccount.downloaded
-    assert lastget < @subaccount.last_get
+    assert lastget < @subaccount.time_of_last_ok
   end
 end

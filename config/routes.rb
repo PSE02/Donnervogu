@@ -1,6 +1,9 @@
 TBMS::Application.routes.draw do
 
 
+  match '/status/:id' => 'log_messages#handle', :as => "status"
+  match '/log/handle/:id' => 'log_messages#handle'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -63,6 +66,7 @@ TBMS::Application.routes.draw do
   match "profile/:email" => "emailaccounts#zip_of_email",:as => :generate_id,
         :constraints => { :email => /.*@.*/ }
 
+
   match "/groups/:id/edit/set_params" => "groups#set_params"
   match "/user.current/upload" => "users#upload"
 
@@ -73,7 +77,10 @@ TBMS::Application.routes.draw do
   resource :user, :as => 'account'
   resources :user_sessions 
   resources :emailaccounts
+  resources :log_messages, :path => "/log"
+
   match "emailaccounts/:id/edit/set_params" => "emailaccounts#set_params"
+  match "emailaccounts/:id/edit/information" => "emailaccounts#change_information"
   match 'emailaccounts/:id/groupsettings' => "emailaccounts#group_configuration", :as => :reset_account
   resources :groups
   
