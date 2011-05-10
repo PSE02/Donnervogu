@@ -1,5 +1,17 @@
 %notice
   = flash[:notice]
+  %br
+  %br
+%h2 Account
+%br
+= link_to 'Back', emailaccounts_path
+|
+- @profile.profile_ids.each do |each|
+  = link_to "Delete", delete_subaccount_path(each),:confirm => 'Are you sure?'
+|
+= link_to "Copy groups settings", reset_account_path(@profile), :confirm => "Do you really want to reset the settings?"
+%hr
+%br
 %table
   %tr
     %td
@@ -13,27 +25,23 @@
       = @profile.name
   %tr
     %td
-      %b Group
+      %b Group:
     %td= link_to @profile.group.to_s, group_path(@profile.group)
-    %td= link_to "Copy groups settings", reset_account_path(@profile), :confirm => "Do you really want to reset the settings?"
-  %tr
+%br
 -if not @profile.profile_ids.empty?
-  %h2 Profiles
-  %table
+  %table.users
     %tr
       %th ID
       %th Last downloaded
-      %th online
-      %th up to date
+      %th Outdated
     - @profile.profile_ids.each do |each|
       %tr
-        %td= each.id
-        %td= time_ago_in_words each.time_of_last_ok
-        %td{:class => each.online? ? "outdated" : "uptodate"}
-        %td{:class => each.outdated? ? "outdated" : "uptodate"}
-        %td= link_to "Delete", delete_subaccount_path(each),:confirm => 'Are you sure?'
+        %td{:class => each.online? ? "outdated" : "uptodate"}= each.id
+        %td{:class => each.online? ? "outdated" : "uptodate"}= time_ago_in_words each.time_of_last_ok
+        %td{:class => each.online? ? "outdated" : "uptodate"}= each.outdated?
 %br
 %hr
+%br
 = render "shared/preferences"
 %hr
 = render 'shared/general_information'
