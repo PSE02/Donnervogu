@@ -1,6 +1,8 @@
 module SecretkeyHelper
-  @secret_key = '2kaienna9ea90djnaLI8'
   def get_secretkey
-    @secret_key
+    file = File.new("config/forgery_secret_key", "r")
+    @secretkey = file.gets
+  file.close
+    @secretkey
   end
 end

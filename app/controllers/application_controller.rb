@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
- #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+  #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
   protect_from_forgery :secret => @secret_key
 
   #Catch and render ActionController::InvalidAuthenticityToken exception
