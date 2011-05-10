@@ -27,6 +27,8 @@ gem 'authlogic'
 gem 'capistrano'
 gem 'kaminari'
 
+gem "meta_search"  # Last officially released gem
+
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:

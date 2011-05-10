@@ -73,10 +73,8 @@ TBMS::Application.routes.draw do
   match '/subaccounts/:id/delete' => 'emailaccounts#delete_subaccount', :as => :delete_subaccount
   match 'groups/:id/propagate' => 'groups#overwrite_member_configs', :as => :override_members
 
-
-  #routes for login/logout
-  resources :users  # give us our some normal resource routes for users
-  resource :user, :as => 'account'  # a convenience route
+  resources :users
+  resource :user, :as => 'account'
   resources :user_sessions 
   resources :emailaccounts
   resources :log_messages, :path => "/log"

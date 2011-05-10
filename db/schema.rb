@@ -46,15 +46,22 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.datetime "time_of_last_connection"
   end
 
-  create_table "user_sessions", :force => true do |t|
+  create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "user_sessions", ["session_id"], :name => "index_user_sessions_on_session_id"
-  add_index "user_sessions", ["updated_at"], :name => "index_user_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "subaccounts", :force => true do |t|
+    t.datetime "last_get"
+    t.integer  "emailaccount_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                               :null => false
@@ -73,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.string   "name",                :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "session_key"
   end
 
 end

@@ -3,7 +3,15 @@
 # the preferences of the users.
 # This controller can only be used when logged in as admin.
 class GroupsController < ApplicationController
-  
+  #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+  protect_from_forgery :secret => @secret_key
+
+  #Catch and render ActionController::InvalidAuthenticityToken exception
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :forgery_error
+  def
+    forgery_error(exception); render :text => exception.message;
+  end
+
   # Restricts access for every method in this controller to logged in user only.
   before_filter :require_user
   before_filter :group_by_id, :only => [:show, :edit, :set_params, :update,

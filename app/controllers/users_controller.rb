@@ -3,6 +3,14 @@ require 'csv'
 # Author:: Jonas Ruef, Dominique Rahm
 # Manages the users
 class UsersController < ApplicationController
+  #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+  protect_from_forgery :secret => @secret_key
+
+  #Catch and render ActionController::InvalidAuthenticityToken exception
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :forgery_error
+  def
+    forgery_error(exception); render :text => exception.message;
+  end
 
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :show
@@ -16,9 +24,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
-    # Saving without session maintenance to skip
-    # auto-login which can't happen here because
-    # the User has not yet been activated
     if @user.save
       redirect_to root_path
     else
@@ -27,7 +32,6 @@ class UsersController < ApplicationController
     
   end
   
-  # Show the user and his statistics
   def show
     @user = current_user
   end
