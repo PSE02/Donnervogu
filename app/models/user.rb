@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   # Automatic logout after 15 Minutes Account inactivity
 	acts_as_authentic do |c|
-    c.logged_in_timeout(15.minutes)
+    c.logged_in_timeout(1.minutes)
   end
 
 	# Authenticate user via username

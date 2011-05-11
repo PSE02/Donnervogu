@@ -19,12 +19,14 @@
     %th
       = sort_link @search, :outdated
     %th
+    %th
   - @profiles.each do |emailaccount|
     %tr{:class => emailaccount.outdated? ?  "outdated" : "uptodate" }
       %td
         = link_to emailaccount.email, emailaccount
       %td
         = link_to emailaccount.name, emailaccount
+      %td
         = link_to emailaccount.group.to_s, emailaccount.group
       %td
         = emailaccount.outdated?
