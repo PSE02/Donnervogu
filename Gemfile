@@ -12,7 +12,7 @@ gem 'rubyzip'
 # Support for haml (used in view instead of erb)
 gem 'haml'
 
-# User authentication, session management.
+# User authentication, session management
 gem 'authlogic'
 
 # Deploy on server
@@ -21,7 +21,7 @@ gem 'capistrano'
 # Pagination
 gem 'kaminari'
 
-# Sorting list in view
+# Sorting lists in view
 gem "meta_search"
 gem "meta_where"
 
