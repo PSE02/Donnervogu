@@ -21,14 +21,14 @@
     %th
     %th
   - @profiles.each do |emailaccount|
-    %tr{:class => emailaccount.outdated? ?  "outdated" : "uptodate" }
+    %tr
       %td
         = link_to emailaccount.email, emailaccount
       %td
         = link_to emailaccount.name, emailaccount
       %td
         = link_to emailaccount.group.to_s, emailaccount.group
-      %td
+      %td{:class => emailaccount.outdated? ?  "outdated" : "uptodate" }
         = emailaccount.outdated?
       %td
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete \"#{emailaccount.email}\"?", :method => :delete

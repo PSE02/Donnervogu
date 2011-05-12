@@ -1,5 +1,9 @@
 %notice
   = flash[:notice]
+- if flash[:error]
+  %error
+  =flash[:error]
+  
   %br
   %br
 %h2 Group List
@@ -19,4 +23,7 @@
       %td= link_to  group.name, group
       %td= group.members.size
       %td= link_to 'Edit Name', edit_group_path(group)
-      %td= link_to 'Delete', group, :confirm => "Are you sure you want to delete \"#{group.name}\"?", :method => :delete
+      - if group.name != "No Group"
+        %td= link_to 'Delete', group, :confirm => "Are you sure you want to delete \"#{group.name}\"?", :method => :delete
+      -else 
+        %td

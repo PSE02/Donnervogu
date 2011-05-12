@@ -1,5 +1,6 @@
-%notice
-  = flash[:notice]
+- if flash[:error]
+  %error
+    =flash[:error]
   %br
   %br
 %h2 Import CSV
