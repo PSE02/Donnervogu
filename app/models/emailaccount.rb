@@ -26,6 +26,7 @@ class Emailaccount < ActiveRecord::Base
           :autosave => true,
           :dependent => :destroy
   validate :not_too_many_ids
+  validate :outdated
 
   def preferences
     if read_attribute(:preferences).nil?
@@ -158,7 +159,9 @@ class Emailaccount < ActiveRecord::Base
   end
 
   def outdated?
-    self.profile_ids.any? { |p| p.outdated? }
+    self.outdated = self.profile_ids.any? { |p| p.outdated? }
+    raise "Couldn't save" unless self.save
+    outdated
   end
 
   # gives the fully instanciated template of the signature (@see EmailaccountHelper)
