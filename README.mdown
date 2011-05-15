@@ -5,7 +5,7 @@ TBMS (Thunderbird Management Server) is a server to manage a Thunderbird plugin 
 Installation and Handling
 ------------
 
-All information to install the server, you can find in the folder doc. Have a look there. 
+You can find all information on how to install the server in the folder "doc".
 
 Authors
 ------------
@@ -24,7 +24,7 @@ Coach
 Plugin
 ------------
 
-If you want use this server, it is strongly recommended to use the tbconf. (more infos)
+If you would like to use this server, it's strongly recommended to use the tbconf on your Thunderbird clients. (more infos)
 
 License
 ------------
