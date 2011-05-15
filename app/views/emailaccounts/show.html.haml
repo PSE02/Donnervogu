@@ -34,17 +34,10 @@
       %th Last downloaded
       %th Outdated
     - @profile.profile_ids.each do |each|
-<<<<<<< HEAD
-      %tr{:class => each.online? ? "outdated" : "uptodate"}
-        %td= each.id
-        %td= time_ago_in_words each.time_of_last_ok
-        %td= each.outdated? ? "outdated" : "ok"
-=======
       %tr
         %td{:class => each.online? ? "outdated" : "uptodate"}= each.id
         %td{:class => each.online? ? "outdated" : "uptodate"}= time_ago_in_words each.time_of_last_ok
         %td{:class => each.online? ? "outdated" : "uptodate"}= each.outdated?
->>>>>>> cf23bb5ddb4a73dfc9e33b5269afd5ed69fa4943
 %br
 %hr
 %br
@@ -53,4 +46,3 @@
 = render 'shared/general_information'
 %br 
   = link_to 'Back', emailaccounts_path
-
