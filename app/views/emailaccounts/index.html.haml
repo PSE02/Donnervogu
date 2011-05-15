@@ -21,7 +21,7 @@
     %th
     %th
   - @profiles.each do |emailaccount|
-    %tr
+    %tr{:class => emailaccount.outdated? ?  "outdated" : "uptodate" }
       %td
         = link_to emailaccount.email, emailaccount
       %td

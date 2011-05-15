@@ -41,6 +41,20 @@ class Emailaccount < ActiveRecord::Base
     read_attribute(:informations)
   end
 
+  def preferences
+    if read_attribute(:preferences).nil?
+      write_attribute(:preferences, {})
+    end
+    read_attribute(:preferences)
+  end
+
+  def informations
+    if read_attribute(:informations).nil?
+      write_attribute(:informations, {})
+    end
+    read_attribute(:informations)
+  end
+
   def not_too_many_ids
     if too_many_ids
       errors.add_to_base ("Too many profile ids")
