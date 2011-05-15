@@ -64,8 +64,6 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
-=======
   create_table "user_sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -73,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.datetime "updated_at"
   end
 
->>>>>>> add744ae6f7769b1aa9071acec9aa345ecab7d38
+
   add_index "user_sessions", ["session_id"], :name => "index_user_sessions_on_session_id"
   add_index "user_sessions", ["updated_at"], :name => "index_user_sessions_on_updated_at"
 
