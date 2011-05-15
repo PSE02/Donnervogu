@@ -35,7 +35,7 @@
       %th Offline
       %th Outdated
     - @profile.profile_ids.each do |each|
-      %tr{:class => each.online? ? "outdated" : "uptodate"}
+      %tr{:class => each.offline? ? "outdated" : "uptodate"}
         %td= each.id
         %td= time_ago_in_words each.time_of_last_ok
         %td= each.outdated? ? "outdated" : "ok"
