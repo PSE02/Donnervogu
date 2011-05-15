@@ -26,6 +26,7 @@ gem 'haml'
 gem 'authlogic'
 gem 'capistrano'
 gem 'kaminari'
+gem 'tzinfo'
 
 gem "meta_search"  # Last officially released gem
 

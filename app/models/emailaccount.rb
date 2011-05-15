@@ -26,7 +26,20 @@ class Emailaccount < ActiveRecord::Base
           :autosave => true,
           :dependent => :destroy
   validate :not_too_many_ids
-  validate :outdated
+
+  def preferences
+    if read_attribute(:preferences).nil?
+      write_attribute(:preferences, {})
+    end
+    read_attribute(:preferences)
+  end
+
+  def informations
+    if read_attribute(:informations).nil?
+      write_attribute(:informations, {})
+    end
+    read_attribute(:informations)
+  end
 
   def not_too_many_ids
     if too_many_ids
@@ -51,7 +64,7 @@ class Emailaccount < ActiveRecord::Base
   def setup_members
     self.group = Group.default_group if self.group.nil?
     if preferences.nil?
-      self.preferences = Hash.new if self.preferences.nil?
+      self.preferences = Hash.new
       self.preferences = self.group.final_preferences
     end
     if informations.nil?
@@ -61,7 +74,6 @@ class Emailaccount < ActiveRecord::Base
     end
     self.standard_subaccount = ProfileId.new
     self.standard_subaccount.emailaccount = self
-    raise "Couldn't save ProfileId on Emailaccount creation #{self.email}" unless self.standard_subaccount.save
   end
 
   # makes a new profile id to track the up-to-date-ness of another client.
@@ -140,7 +152,7 @@ class Emailaccount < ActiveRecord::Base
 
   # Part of the Composite Pattern that can update the whole dependency tree if necessary.
   def propagate_update
-    self.preferences = self.group.preferences
+    self.preferences = self.group.preferences if self.group
     raise "Couldn't save" unless self.save
     assure_created_zip
   end
