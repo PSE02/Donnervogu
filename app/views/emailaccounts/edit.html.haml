@@ -46,4 +46,3 @@
         %td
           = select_tag(:signature_style, options_for_select([['below the quote', true], ['below my reply', false]],  @emailaccount.preferences[:signature_style]))
   %br
-  = submit_tag("Save")

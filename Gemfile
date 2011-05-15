@@ -26,6 +26,9 @@ gem 'haml'
 gem 'authlogic'
 gem 'capistrano'
 gem 'kaminari'
+gem 'tzinfo'
+
+gem "meta_search"  # Last officially released gem
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

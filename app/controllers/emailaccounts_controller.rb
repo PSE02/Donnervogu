@@ -6,7 +6,16 @@
 #     * Management of the user's configuration
 # All actions except for getting the zip require the admin to be logged in.
 class EmailaccountsController < ApplicationController
-	before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
+	#Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+  protect_from_forgery :secret => @secret_key
+
+  #Catch and render ActionController::InvalidAuthenticityToken exception
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :forgery_error
+  def
+    forgery_error(exception); render :text => exception.message;
+  end
+  
+  before_filter :require_user, :except => [ :zip_of_id, :zip_of_email ]
   before_filter :emailaccount_by_id, :only => [:show, :update,
                                                :destroy,
                                                :set_params, :group_configuration,
@@ -22,7 +31,8 @@ class EmailaccountsController < ApplicationController
   # GET /emailaccounts
   # GET /emailaccounts.xml
   def index
-    @profiles = Emailaccount.order(:email).page(params[:page]).per(20)
+    @search = Emailaccount.search(params[:search])
+    @profiles = @search.page(params[:page]).per(20)
     errors = @profiles.select { |e| e.standard_subaccount.nil? }
     if not errors.empty?
       raise errors.inject("") {|e,f| e + "\nno standard profileid for email #{f.email}"}

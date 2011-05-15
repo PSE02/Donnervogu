@@ -1,6 +1,17 @@
 %notice
   = flash[:notice]
+  %br
 = javascript_include_tag 'jquery-1.5.2.min.js'
+%br
+%h2= Group
+%br
+%br
+= link_to "Set all Members back", override_members_path(@profile), :confirm => "Do you really want to reset all the members settings?"
+|
+= link_to 'Edit Name', edit_group_path(@profile)
+|
+= link_to 'Back', groups_path
+%hr
 %br
 %table
   %tr
@@ -10,16 +21,16 @@
       = @profile.name
   %tr
     %td
-      %b Group
+      %b Group:
     %td= @profile.group.to_s
   %tr
-%a#showMem(href="#")See all Members
+%br
+%a#showMem(href="#")Show all Members
 
 %table.users#show
   %tr
     %th Name
     %th Email
-    %th
     %th
   - @profile.groups.each do |group|
     %tr
@@ -28,22 +39,16 @@
       %td= link_to 'Show', group
       %td= link_to 'Delete', group, :confirm => "Do you really want to delete #{group.name}?", :method => :delete
   - @profile.emailaccounts.each do |email|
-    %tr
-      %td= email.name
-      %td= email.email
+    %tr{:class => email.outdated? ?  "outdated" : "uptodate" }
+      %td= link_to email.name, email
+      %td= link_to email.name, email
       %td
-        = link_to 'Show', email
-        |
         = link_to 'Delete', email, :confirm => "Do you really want to delete #{email.name}?", :method => :delete
-#reset= link_to "Set all members back", override_members_path(@profile), :confirm => "Do you really want to reset all the members settings?"
 
 %br
-%hr
 %br
 = render "shared/preferences"
 %br
-= link_to 'Edit', edit_group_path(@profile)
-|
 = link_to 'Back', groups_path
 
 :javascript

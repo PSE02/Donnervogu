@@ -4,6 +4,15 @@
 #
 # Author:: Aaron Karper <akarper@students.unibe.ch>
 class LogMessagesController < ApplicationController
+  #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+  protect_from_forgery :secret => @secret_key
+
+  #Catch and render ActionController::InvalidAuthenticityToken exception
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :forgery_error
+  def
+    forgery_error(exception); render :text => exception.message;
+  end
+  
   before_filter :require_user, :except => [:handle]
   # GET /log
   # GET /log.xml

@@ -13,7 +13,7 @@ class UserSessionsControllerTest < ActionController::TestCase
 		post :create, :user_session => { :login => "admin", :password => "admin" }
 		assert user_session = UserSession.find
 		assert_equal users(:admin), user_session.user
-		assert_redirected_to 'index#show'
+		assert_redirected_to root_url
 	end
 
 	test "should destroy user session" do

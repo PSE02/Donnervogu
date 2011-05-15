@@ -43,7 +43,6 @@
     %legend Oflline mode
     %table
       %tr
-        %label if this is enabled the two on the bottom should be enabled too!
         %td
           = label_tag("Enable")
         %td
@@ -54,6 +53,7 @@
         %td
           = radio_button_tag(:offline_mode, false, checked = @profile.preferences[:offline_mode] == "false")
     #offlineMode
+      %br
       %table
         %tr
           %label Save all messages when working offline
@@ -66,6 +66,7 @@
             = label_tag("No")
           %td
             = radio_button_tag(:save_offline_mode, "2", checked = @profile.preferences[:save_offline_mode] == "2")
+      %br      
       %table
         %tr
           %label Send all messages when going back online
@@ -78,8 +79,6 @@
             = label_tag("No")
           %td
             = radio_button_tag(:send_offline_mode, "2", checked = @profile.preferences[:send_offline_mode] == "2")
-
-    %br
       :javascript
         jQuery(function(){
         	function disable(){
@@ -108,5 +107,5 @@
         });
   %br
   = submit_tag("Save")
-
+%br
 

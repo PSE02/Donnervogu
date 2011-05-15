@@ -2,7 +2,14 @@
 # Provides the standard view of the application and allows the user to login/logout.
 # It also provides some methods used by all controllers.
 class ApplicationController < ActionController::Base
-	protect_from_forgery
+  #Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+  protect_from_forgery :secret => @secret_key
+
+  #Catch and render ActionController::InvalidAuthenticityToken exception
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :forgery_error
+  def
+    forgery_error(exception); render :text => exception.message;
+  end
 
 	before_filter :require_user
 	before_filter :overview
@@ -19,19 +26,24 @@ class ApplicationController < ActionController::Base
 	end
 
 	def logged_in?
-		@current_user
+    current_user
 	end
 
 	#JR Returns current user session, if somebody is logged in
 	def current_user_session
-		return @current_user_session if defined?(@current_user_session)
-		@current_user_session = UserSession.find
+    unless @current_user_session
+      @current_user_session = UserSession.find
+    end
+    @current_user_session
 	end
 
 	#JR Returns current logged in user
 	def current_user
-		return @current_user if defined?(@current_user)
-		@current_user = current_user_session && current_user_session.user
+   unless @current_user
+      #JR Is true when there is a current user session and it has a user.
+      @current_user = current_user_session && current_user_session.user
+   end
+   @current_user
 	end
 
 	#JR Makes a view only accessible if you are a logged in user

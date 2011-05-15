@@ -13,9 +13,9 @@ class EmailaccountTest < ActiveSupport::TestCase
   setup do
     @hans = emailaccounts(:hans)
     @account = Emailaccount.new
+    @account.setup_members
     @account.name = "test2"
     @account.email = "test2@example.ch"
-    @account.save
   end
     
   test "there are some users.." do
@@ -26,9 +26,8 @@ class EmailaccountTest < ActiveSupport::TestCase
     @newaccount = Emailaccount.new
     @newaccount.name = "test"
     @newaccount.email = "test@example.ch"
-    @newaccount.save
-    
-    assert_equal @newaccount.preferences, {:html => "true", :signature => "This is just a template signature"}
+
+    assert_equal(Hash.new({:html => "true", :signature => "This is just a template signature"}), @newaccount.preferences)
   end
 
   test "set_params with nil" do
@@ -36,8 +35,9 @@ class EmailaccountTest < ActiveSupport::TestCase
   end
   
   test "set_params for real" do
+    assert_equal @account.preferences, {:html => "true", :signature => "This is just a template signature"}
     @account.set_params ({:html => "false", :quote => "0"})
-    assert (@account.preferences == {:html => "false", :quote => "0", :signature => "This is just a template signature"})
+    assert_equal @account.preferences, Hash.new({:html => "false", :quote => "0", :signature => "This is just a template signature"})
   end
 
   test "set_params set group" do
@@ -45,7 +45,6 @@ class EmailaccountTest < ActiveSupport::TestCase
     assert_equal(Group.first, @account.group )
   end
   
-
 
   # what the heck? It's an assertion!
   test "assure zip path fail" do
