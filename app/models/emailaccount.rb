@@ -158,9 +158,7 @@ class Emailaccount < ActiveRecord::Base
   end
 
   def outdated?
-    self.outdated = self.profile_ids.any? { |p| p.outdated? }
-    raise "Couldn't save" unless self.save
-    outdated
+    self.profile_ids.any? { |p| p.outdated? }
   end
 
   # gives the fully instanciated template of the signature (@see EmailaccountHelper)

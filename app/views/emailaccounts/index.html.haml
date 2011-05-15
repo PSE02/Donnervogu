@@ -29,7 +29,7 @@
       %td
         = link_to emailaccount.group.to_s, emailaccount.group
       %td
-        = emailaccount.outdated?
+        = emailaccount.outdated? ? "outdated!" : "ok"
       %td
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete \"#{emailaccount.email}\"?", :method => :delete
       %td

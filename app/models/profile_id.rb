@@ -11,7 +11,7 @@ class ProfileId < ActiveRecord::Base
   end
 
   def self.count_outdated id = nil
-    self.where("time_of_last_ok <= ?", (Time.now - self.threshold_for_oldest_ok)).count
+    self.where("time_of_last_ok <= ?", (Time.now - self.threshold_for_oldest_ok)).group(:emailaccount_id).count.size # outdated email accounts, not outdated profile ids
   end
 
   def self.oldest_profile_config id
