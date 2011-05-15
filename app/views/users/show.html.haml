@@ -1,10 +1,12 @@
-%h2 Upload CSV
+%notice
+  = flash[:notice]
+  %br
+  %br
+%h2 Import CSV
 %br
-- if flash[:error]
-  %error
-    =flash[:error]
+
 %fieldset
-  %legend File Upload
+  %legend Upload File
   =form_for :upload, :url => {:action=>:upload}, :html=>{:multipart=>true} do |f|
     =f.file_field :file
     %br

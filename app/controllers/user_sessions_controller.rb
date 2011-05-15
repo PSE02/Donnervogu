@@ -25,7 +25,7 @@ class UserSessionsController < ApplicationController
 	def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      redirect_back_or_default 'index#show'
+      redirect_back_or_default root_url
 		else
 			render :action => :new
 		end

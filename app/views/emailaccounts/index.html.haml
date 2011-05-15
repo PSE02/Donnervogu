@@ -1,10 +1,12 @@
 %notice
   = flash[:notice]
+  %br
+  %br
+%h2 Account List
+%br
 %br
 = link_to 'New Account', new_emailaccount_path
-%br
-%br
-%h2 Listing Accounts
+%hr
 %br
 %table.users
   %tr
@@ -15,18 +17,19 @@
     %th
       = sort_link @search, :group_id
     %th
+      = sort_link @search, :outdated
     %th
     %th
   - @profiles.each do |emailaccount|
     %tr{:class => emailaccount.outdated? ?  "outdated" : "uptodate" }
       %td
-        = emailaccount.email
+        = link_to emailaccount.email, emailaccount
       %td
-        = emailaccount.name
+        = link_to emailaccount.name, emailaccount
       %td
-        = emailaccount.group.to_s
+        = link_to emailaccount.group.to_s, emailaccount.group
       %td
-        = link_to 'Show', emailaccount
+        = emailaccount.outdated? ? "outdated!" : "ok"
       %td
         = link_to 'Delete', emailaccount, :confirm => "Do you really want to delete \"#{emailaccount.email}\"?", :method => :delete
       %td

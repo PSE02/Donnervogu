@@ -1,0 +1,32 @@
+Welcome to TBMS.
+==============
+TBMS (Thunderbird Management Server) is a server to manage a Thunderbird plugin called tbconf. This project was realized by some students of the University of Bern in the scope of the praticum PSE (Praktikum Software Engineering).
+
+Installation and Handling
+------------
+
+All information to install the server, you can find in the folder doc. Have a look there. 
+
+Authors
+------------
+
+* Aaron Karper
+* Dominique Rahm
+* Felix Langenegger
+* Jonas Ruef
+* Sascha Schwärzler
+
+Coach
+------------
+
+* Max Leske
+
+Plugin
+------------
+
+If you want use this server, it is strongly recommended to use the tbconf. (more infos)
+
+License
+------------
+(more infos)
+

@@ -7,55 +7,63 @@ require 'test_helper'
 # License::   Distributes under the same terms as Ruby
 
 class EmailaccountTest < ActiveSupport::TestCase
-  
+
   fixtures :emailaccounts
-  
+
   setup do
     @hans = emailaccounts(:hans)
     @account = Emailaccount.new
+    @account.setup_members
     @account.name = "test2"
     @account.email = "test2@example.ch"
-    @account.save
   end
-    
+
   test "there are some users.." do
-	  assert User.count > 0
+    assert User.count > 0
   end
-  
-  test "create new emailaccount" do
+
+  def create
     @newaccount = Emailaccount.new
     @newaccount.name = "test"
     @newaccount.email = "test@example.ch"
-    @newaccount.save
-    
-    assert_equal @newaccount.preferences, {:html => "true", :signature => "This is just a template signature"}
+  end
+
+  test "create new emailaccount" do
+    create
+
+    assert_equal(Hash.new({:html => "true", :signature => "This is just a template signature"}), @newaccount.preferences)
   end
 
   test "set_params with nil" do
-    assert_raise (RuntimeError){@hans.set_params nil}
+    assert_raise(RuntimeError) { @hans.set_params nil }
   end
-  
+
   test "set_params for real" do
-    @account.set_params ({:html => "false", :quote => "0"})
-    assert (@account.preferences == {:html => "false", :quote => "0", :signature => "This is just a template signature"})
+    @hans.set_params ({:html => "false", :quote => "0"})
+    assert_equal @hans.preferences, {:html=>"false",
+                                     :offline_mode=>"true",
+                                     :quote=>"0",
+                                     :save_offline_mode=>"false",
+                                     :send_offline_mode=>"true",
+                                     :signature=>"This is just a simple signature",
+                                     :signature_style=>"false"}
   end
 
   test "set_params set group" do
     @account.set_group Group.first.to_param
-    assert_equal(Group.first, @account.group )
+    assert_equal(Group.first, @account.group)
   end
-  
 
 
   # what the heck? It's an assertion!
   test "assure zip path fail" do
     return nil
-    assert_raise(RuntimeError) {@hans.assure_zip_path}
-  end  
-  
+    assert_raise(RuntimeError) { @hans.assure_zip_path }
+  end
+
   test "assure zip path" do
     path = @account.assure_zip_path
     assert_match(/\.zip$/, path)
-  end 
-  
+  end
+
 end
