@@ -24,8 +24,6 @@ module ApplicationHelper
   module FileCreator
 
     @validKeys = [:html, :quote, :signature_style, :signature, :offline_mode, :send_offline_mode, :save_offline_mode]
-    @offlineMode
-    @quote
 
     def self.completeZipPath emailaccount
       File.join(Dir.pwd, "public",
@@ -55,6 +53,9 @@ module ApplicationHelper
       @validKeys.include?(key)
     end
 
+    # All the methods below are used to write the actual config file
+    # for each new config you have to add a method (the name of the method should be
+    # self.:key)
     def self.html account
       html = account.preferences[:html].to_s
       "/************************** HTML *********************************/ \n" +
@@ -89,7 +90,6 @@ module ApplicationHelper
       end
     end
 
-    #DR we have to care about the signature it should not contain newlines from the form instead newlines should be html <br></br>
     def self.signature account
       signature = account.signature
       "\n/************************** Signature Text ***********************/  \n" +

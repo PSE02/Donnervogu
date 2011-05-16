@@ -38,7 +38,7 @@
       %tr{:class => each.offline? ? "outdated" : "uptodate"}
         %td= each.id
         %td= time_ago_in_words each.time_of_last_ok
-        %td= each.outdated? ? "outdated" : "ok"
+        %td= each.outdated? ? "yes" : "no"
         %td{:class => each.offline? ? "outdated" : "uptodate"}= each.offline? ? "yes" : "no"
 %br
 %hr

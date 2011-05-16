@@ -31,7 +31,7 @@ class EmailaccountTest < ActiveSupport::TestCase
   test "create new emailaccount" do
     create
 
-    assert_equal(Hash.new({:html => "true", :signature => "This is just a template signature"}), @newaccount.preferences)
+    assert_equal(Hash[{:html => "true", :signature => "This is just a template signature"}], @newaccount.preferences)
   end
 
   test "set_params with nil" do

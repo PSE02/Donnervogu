@@ -91,6 +91,8 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.xml
   def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
       respond_to do |format|
       format.html { redirect_to(groups_url) }
       format.xml  { head :ok }

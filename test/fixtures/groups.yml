@@ -2,17 +2,17 @@
 fantasticthree:
   name: Fantastic Three
   preferences: 
-    :html_mail: false
+    :html: false
 fantasticfour:
   name: Fantastic Four
   preferences: 
-    :quoting_style: :below
+    :quote: :below
 trampolin:
   name: Trampoline Inc.
   preferences:
-     :html_mail: false
-     :quoting_style: :below
+     :html: false
+     :quote: :below
 trampolinsued:
   name: Trampoline Inc. Süd
   preferences:
-     :html_mail: true
+     :html: true

@@ -11,13 +11,22 @@ class GroupTest < ActiveSupport::TestCase
   end
   test "should merge non-conflicting" do
 	  assert_equal(
-		  {:html_mail => false, :quoting_style => :below},
+		  {:html=> false, :quote => :below},
 		  @ft.final_preferences)
   end
 
   test "should merge conflicting" do
 	  assert_equal(
-		  {:html_mail => true, :quoting_style => :below},
+		  {:html => true, :quote => :below},
 		  @trampos.final_preferences)
   end
+  
+  test "should raise error if params nil" do
+    assert_raise(RuntimeError) { @ft.set_params nil }
+  end
+  
+  test "should set params" do
+     @ft.set_params (Hash[:html => true, :quote => :above])
+     assert_equal(Hash[:html => true, :quote => :above], @ft.preferences)
+   end
 end
