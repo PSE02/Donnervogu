@@ -5,23 +5,48 @@ TBMS Installation Guide
 
 *Author: Felix Langenegger - felix.langenegger@gmail.com*
 
-*Last modified: 05-11-2011*
+*Last modified: 05-15-2011*
+
 
 ------------------------------------ 
 
-This should be a simple guide to configure your TBMS (Thunderbird Management Server). Before you start with this guide, you must have a server environment with a running Apacheserver, ruby on rails and a database server.
+This should be a simple guide to configure your TBMS (Thunderbird Management Server). Before you start with this guide, you need a server environment with a running Apacheserver, ruby on rails and a database server.
+
+Used Version
+-------------------
+
+<table>
+  <tr>
+    <td>Rails:</td><td>ver. 3.0.4</td>
+  </tr>
+  <tr>
+    <td>Ruby:</td><td>ver. 1.9.2p136</td>
+  </tr>
+  <tr>
+    <td>Capistrano: </td><td>ver. 2.6.0</td>
+  </tr>
+</table>
+
+Source
+--------
+
+- https://github.com/fadendaten/Donnervogu/zipball/installation
+
 
 Configure your computer for first use
 -----------------------------------------------------
 1. Install the following apps on your pc:
       
-        ssh-client, ruby on rails, capistrano
+        - ssh-client
+        - ruby on rails
+        - capistrano
 
-2. Use capistrano:
+2. Use capistrano in your terminal:
 
         $ mkdir nile
         $ cd nile
         $ capify .
+
 3. Download the install zip:
 
         https://github.com/fadendaten/Donnervogu/zipball/installation
@@ -34,47 +59,51 @@ Configure your computer for first use
 
 Setup your server
 --------------------------
-1. Now its time to bring TBMS on your server, for that open your terminal change to directory nile/config/ and run:
+1. Now its time to bring TBMS on your server. Open your terminal, change to directory nile/config/ and run:
 
         $ cap deploy:setup
-2. Now you have to login to your server for example with sftp.
+
+2. Now you have to login to your server (for example with sftp).
 3. Verify that all your files are on the server and in right place.
 
 Setup security related files
 ---------------------------------------
-On your server there should be three files which handle the TBMS security. Make sure only admins have knowledge about those files, keep them secret! Don't make them public visible, readable or writable in any way! 
+There should be three files which handle the TBMS security on your server. Make sure only administrators know about those files, so keep them secret! Especially don't make them public visible, readable or writable in any way! 
 
 A short explanation of those files:
 
 1. **config/database.yml**
-This file is responsible to connect to your database. A prototype of such a file you can find in the install package on the github repository. (https://github.com/fadendaten/Donnervogu/zipball/installation)
+This file is responsible for connecting to your database. A prototype of such a file is available in the install package on the github repository. (https://github.com/fadendaten/Donnervogu/zipball/installation)
 
 2. **config/initializers/secret_token.rb**
-In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. Modify the file by inserting a random token. Please make sure, that your token's lenght is over 20 signs.
+In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. Modify the file by inserting a random token. Please make sure that your token's lenght is over 20 signs.
 
 3. **config/forgery_secret_key**
 This secret key is needed for protection of controllers against forgery (phishing) attacks. Insert a random key only at the first line of the file, because only this line will be read by other files. The key should be at minimum 20 signs long.
 
 4. **db/seeds.rb**
-Here you can add or change the admin user's username or password, with which you can log in to your TBMS.
+Here you can add or change the administrators username or password, with which you can log into your TBMS.
 
 5. Upload all your modified files to the right place in the shared folder on your server.
 
 
 Deploy your server
 ----------------------------
-1. Now its time to deploy your server. Run in your terminal:
+1. Now its time to deploy your server. Run the following in your terminal:
 
       $ cap deploy
-2. Seed your DB, this has the effect that all users specified in db/seeds.rb will be loaded in the database. To seed run in your terminal:
+
+2. Seed your DB, this has the effect that all users specified in db/seeds.rb will be loaded in the database. For seeding simply run the following in your terminal:
+
       $ cap db:seed
-3. Go to your browser type the URL. Yeeeeiiii! everything works, congrats! Have fun!
+
+3. Go to your browser type the Server-URL. Yay! everything works, congrats and have fun!
 
 Miscellaneous
 ---------------------
 Useful deploy commands:
 
-Our deploy.rb knows a handful of useful commands to manage with your server.
+Our deploy.rb knows a handful of useful commands to manage your server.
 
 1. **cap db:seed**
 Run this if you want to seed your db. This command is like:
@@ -83,13 +112,15 @@ Run this if you want to seed your db. This command is like:
 
 2. **cap db:reset**
 You can reset the db with this command, like:
+
         $ rake db:reset
 
 3. **cap db:setup**
-If you want you can setup your db, like 
+If you want to, you can setup your db, like
+
         $ rake db:setup
 
-4. **$ cap deploy:symlink_shared***
+4. **$ cap deploy:symlink_shared**
 This command links all the security files from the shared folder to your current release.
 
 
@@ -97,7 +128,7 @@ Change TBMS user password
 -------------------------------------------
 1. Connect to your server
 
-2. Go to the share/db
+2. Go to the folder share/db
 
 3. Open the file seed.rb
 
@@ -105,15 +136,27 @@ Change TBMS user password
 
 5. Save the file
 
-6. On  your Computer go to your capistrano folder
+6. Go to your capistrano folder on your Computer
 
-7. run 
+7. Run the following command in your terminal
 
         $ cap db:seed
-8. The new password is set. Try log in with it, to verify it works.
+
+8. The new password is set. Try logging in to verify.
 
 Setup a Testserver
 ----------------------------
 
+
 If you want to test new thunderbird settings or developments you made in plugin or server, setup your own testserver. You can install a new testserver by following this guide(TBMS installation guide) again. Make sure all the security related files are different from the files on your productiv server! Furthermore you should change all password of users in sb/seeds.rb!
+
+Literature
+--------------
+
+- https://github.com/capistrano/capistrano/wiki
+
+- http://kris.me.uk/2010/08/30/rails3-hosting-all-in-one.html
+
+- http://www.zorched.net/2008/06/17/capistrano-deploy-with-git-and-passenger/
+
 

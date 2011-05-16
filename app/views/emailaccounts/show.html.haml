@@ -6,8 +6,7 @@
 %br
 = link_to 'Back', emailaccounts_path
 |
-- @profile.profile_ids.each do |each|
-  = link_to "Delete", delete_subaccount_path(each),:confirm => 'Are you sure?'
+= link_to 'Delete', @profile, :method => :delete ,:confirm => "Do you really want to delete \"#{@profile.email}\"?"
 |
 = link_to "Copy groups settings", reset_account_path(@profile), :confirm => "Do you really want to reset the settings?"
 %hr
@@ -34,11 +33,13 @@
       %th ID
       %th Last downloaded
       %th Outdated
+      %th Offline
     - @profile.profile_ids.each do |each|
-      %tr
-        %td{:class => each.online? ? "outdated" : "uptodate"}= each.id
-        %td{:class => each.online? ? "outdated" : "uptodate"}= time_ago_in_words each.time_of_last_ok
-        %td{:class => each.online? ? "outdated" : "uptodate"}= each.outdated?
+      %tr{:class => each.offline? ? "outdated" : "uptodate"}
+        %td= each.id
+        %td= time_ago_in_words each.time_of_last_ok
+        %td= each.outdated? ? "outdated" : "ok"
+        %td{:class => each.offline? ? "outdated" : "uptodate"}= each.offline? ? "yes" : "no"
 %br
 %hr
 %br
@@ -47,4 +48,3 @@
 = render 'shared/general_information'
 %br 
   = link_to 'Back', emailaccounts_path
-

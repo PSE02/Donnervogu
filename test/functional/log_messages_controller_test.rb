@@ -38,32 +38,30 @@ class LogMessagesControllerTest < ActionController::TestCase
   end
 
   test "should handle log" do
-    assert_routing '/status/1', {:controller => "log_messages", :action => "handle", :id => "1"}
+    assert_routing '/status/1', {:controller => "log_messages", :action => "handle_url", :id => "1"}
   end
 
   test "should handle error report" do
     assert_difference 'LogMessage.count', 1 do
-      request.env['X-TBMS-Status'] = 'false'
-      request.env['X-TBMS-Status-Mesg'] = 'bla'
-      get :handle, :id => @hanspid
+      request.env['X-TBMS-Status'] = 'bla'
+      get :handle_url, :id => @hanspid
       assert_response :ok
     end
   end
 
   # No Log should be created.
   test "should handle ok response" do
-    request.env['X-TBMS-Status'] = "true"
-    get :handle, :id => @hanspid.to_param
+    request.env['X-TBMS-Status'] = ""
+    get :handle_url, :id => @hanspid.to_param
     assert_response :ok
   end
 
   test "should log non ok response" do
     assert_difference "LogMessage.count", 1 do
       request.env.update({
-                             'X-TBMS-Status' => "false",
-                             'X-TBMS-Status-Mesg' => 'OMG STUFF BROKE'
+                             'X-TBMS-Status' => 'OMG STUFF BROKE'
                          })
-      get :handle, :id => @hanspid
+      get :handle_url, :id => @hanspid
       assert_response :ok
     end
   end

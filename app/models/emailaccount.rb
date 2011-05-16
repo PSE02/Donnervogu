@@ -51,7 +51,7 @@ class Emailaccount < ActiveRecord::Base
   def setup_members
     self.group = Group.default_group if self.group.nil?
     if preferences.nil?
-      self.preferences = Hash.new if self.preferences.nil?
+      self.preferences = Hash.new
       self.preferences = self.group.final_preferences
     end
     if informations.nil?
@@ -61,7 +61,6 @@ class Emailaccount < ActiveRecord::Base
     end
     self.standard_subaccount = ProfileId.new
     self.standard_subaccount.emailaccount = self
-    raise "Couldn't save ProfileId on Emailaccount creation #{self.email}" unless self.standard_subaccount.save
   end
 
   # makes a new profile id to track the up-to-date-ness of another client.
@@ -140,16 +139,16 @@ class Emailaccount < ActiveRecord::Base
 
   # Part of the Composite Pattern that can update the whole dependency tree if necessary.
   def propagate_update
-    self.preferences = self.group.preferences
+    self.preferences = self.group.preferences if self.group
     raise "Couldn't save" unless self.save
     assure_created_zip
   end
 
-  def outdated?
-    self.outdated = self.profile_ids.any? { |p| p.outdated? }
-    raise "Couldn't save" unless self.save
-    outdated
-  end
+ def outdated?
+   self.outdated = self.profile_ids.any? { |p| p.outdated? }
+   raise "Couldn't save" unless self.save
+   outdated
+ end
 
   # gives the fully instanciated template of the signature (@see EmailaccountHelper)
   def signature

@@ -19,7 +19,7 @@ class Group < ActiveRecord::Base
 		self.preferences = Hash.new
   end
 
-  # Every User belongs to a group, which might be the null_group
+  # Every User belongs to a group, which might be the default_group
   def self.default_group
     if @default_group.nil?
       @default_group = Group.new

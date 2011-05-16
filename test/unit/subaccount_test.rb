@@ -8,7 +8,6 @@ class SubaccountTest < ActiveSupport::TestCase
      @account.save
      @subaccount = ProfileId.new
      @subaccount.emailaccount = @account
-     @subaccount.save
   end
   test "test download" do
     lastget = @subaccount.time_of_last_ok
