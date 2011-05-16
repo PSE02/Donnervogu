@@ -70,7 +70,6 @@ TBMS::Application.routes.draw do
 
   match "/groups/:id/edit/set_params" => "groups#set_params"
   match "/user.current/upload" => "users#upload"
-  match "/user.current/" => "users#upload"
 
   match '/subaccounts/:id/delete' => 'emailaccounts#delete_subaccount', :as => :delete_subaccount
   match 'groups/:id/propagate' => 'groups#overwrite_member_configs', :as => :override_members
