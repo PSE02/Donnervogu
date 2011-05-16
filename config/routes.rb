@@ -2,7 +2,7 @@ TBMS::Application.routes.draw do
 
 
   match '/status/:id' => 'log_messages#handle_url', :as => "status"
-  match '/status/id' => 'log_messages#handle_header', :as => 'plain_status'
+  match '/status' => 'log_messages#handle_header', :as => 'plain_status'
   match '/log/handle/:id' => 'log_messages#handle_url'
 
   # The priority is based upon order of creation:
