@@ -24,6 +24,8 @@
         |
         = link_to "Log", log_messages_path
         .login
+          %a(href="https://github.com/fadendaten/Donnervogu/blob/tbconf-install/tbconf/tbconf.xpi?raw=true")Get Plugin
+          |
           - if current_user_session
             = link_to "Logout", logout_path
           - else
