@@ -34,7 +34,6 @@ module UsersHelper
     end 
     
     def self.initGroup domain
-      domain = domain[0..domain.rindex(".")-1]
       group = Group.find_by_name(domain)
       if group.nil? 
         group = Group.new

@@ -38,7 +38,7 @@ class ProfileId < ActiveRecord::Base
   # generic threshold for how long an account can be inactive until
   # it is considered out of date.
   def self.threshold_for_oldest_ok
-    4.days
+    8.days
   end
   def threshold_for_oldest_ok
     self.class.threshold_for_oldest_ok
@@ -47,7 +47,7 @@ class ProfileId < ActiveRecord::Base
   # generic threshold for how long an account can be inactive until
   # it is considered offline
   def threshold_for_offline
-    4.days
+    8.days
   end
   
   # Is this account offline?
