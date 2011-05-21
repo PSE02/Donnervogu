@@ -148,7 +148,7 @@ class Emailaccount < ActiveRecord::Base
   end
 
  def outdated?
-   self.outdated = self.profile_ids.any? { |p| p.outdated? }
+   outdated = self.profile_ids.any? { |p| p.outdated? }
    raise "Couldn't save" unless self.save
    outdated
  end
