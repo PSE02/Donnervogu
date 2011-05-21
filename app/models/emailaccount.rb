@@ -10,6 +10,7 @@ class Emailaccount < ActiveRecord::Base
 
   validates_presence_of :email
   validates_presence_of :name
+  validates_presence_of :standard_subaccount
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   # We identify an account by its email on the first request.
@@ -20,13 +21,14 @@ class Emailaccount < ActiveRecord::Base
   belongs_to :group
   has_many :profile_ids,
            :autosave => true,
-           :dependent => :destroy
+           :dependent => :destroy,
+           :conditions => 'emailaccount_type = "listed"'
   has_one :standard_subaccount,
           :class_name => "ProfileId",
           :autosave => true,
-          :dependent => :destroy
+          :dependent => :destroy,
+           :conditions => 'emailaccount_type = "standard"'
   validate :not_too_many_ids
-  validate :outdated
 
   def not_too_many_ids
     if too_many_ids
@@ -61,6 +63,7 @@ class Emailaccount < ActiveRecord::Base
     end
     self.standard_subaccount = ProfileId.new
     self.standard_subaccount.emailaccount = self
+    self.standard_subaccount.emailaccount_type="standard"
   end
 
   # makes a new profile id to track the up-to-date-ness of another client.
@@ -69,6 +72,7 @@ class Emailaccount < ActiveRecord::Base
       profile_id = ProfileId.new
       profile_id.emailaccount = self
       self.profile_ids << profile_id
+      self.standard_subaccount.emailaccount_type="listed"
       profile_id.id
     end
   end
