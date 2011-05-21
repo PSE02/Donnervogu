@@ -10,7 +10,6 @@ class Emailaccount < ActiveRecord::Base
 
   validates_presence_of :email
   validates_presence_of :name
-  validates_presence_of :standard_subaccount
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   # We identify an account by its email on the first request.
@@ -72,8 +71,8 @@ class Emailaccount < ActiveRecord::Base
       profile_id = ProfileId.new
       profile_id.emailaccount = self
       self.profile_ids << profile_id
-      self.standard_subaccount.emailaccount_type="listed"
-      profile_id.id
+      profile_id.emailaccount_type="listed"
+      profile_id
     end
   end
 

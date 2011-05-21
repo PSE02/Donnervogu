@@ -10,12 +10,13 @@ class LogMessagesControllerTest < ActionController::TestCase
     hans.name = "hans wurst"
     hans.save
     @hanspid = hans.generate_profile_id
+    @hanspid.save
     @hans = Emailaccount.find_by_email(hans.email)
   end
 
   test "fixture is good" do
     assert_equal "hans wurst", @hans.name
-    assert_true @hans.profile_ids.collect(&:id).include? @hanspid
+    assert @hans.profile_ids.include?(@hanspid), "#{@hans.profile_ids} didn't include #{@hanspid}, complete list is:\n"+ProfileId.all.collect(&:inspect).join("\n")
   end
 
   test "should get index" do

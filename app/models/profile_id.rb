@@ -40,6 +40,7 @@ class ProfileId < ActiveRecord::Base
   def self.threshold_for_oldest_ok
     8.days
   end
+
   def threshold_for_oldest_ok
     self.class.threshold_for_oldest_ok
   end
@@ -53,6 +54,10 @@ class ProfileId < ActiveRecord::Base
   # Is this account offline?
   def offline?
     return (Time.now - self.time_of_last_connection) > threshold_for_offline
+  end
+
+  def to_s
+    self.id.to_s
   end
 
 end
