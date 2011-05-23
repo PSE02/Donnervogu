@@ -70,7 +70,7 @@ module ApplicationHelper
       quote = emailaccount.preferences[:quote]
       "\n/************************** Quotes *******************************/ \n"+
           "// 0=reply below 1=reply above 2=select the quote \n" +
-          "user_pref(\"mail.identity.id1.reply_on_top\", #{quote == :above ? 1 : 0}); \n" +
+          "user_pref(\"mail.identity.id1.reply_on_top\", #{quote}); \n" +
 
           "// enable quoting for replies \n" +
           "user_pref(\"mail.identity.id1.auto_quote\", true); \n"
@@ -91,7 +91,8 @@ module ApplicationHelper
     end
 
     def self.signature account
-      signature = account.signature
+      html = account.preferences[:html].to_s
+      signature = (html == "true" ? account.signature.gsub("\n", "<br>\n") : account.signature)
       "\n/************************** Signature Text ***********************/  \n" +
           "// true=allow html in signature false=don't allow html in signature \n" +
           "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +

@@ -157,7 +157,7 @@ class Emailaccount < ActiveRecord::Base
   def signature
     template = preferences[:signature] or ""
     dict = TemplateHelper::make_dict self.informations
-    TemplateHelper::instanciate_template template, dict
+    sig = TemplateHelper::instanciate_template template, dict
   end
 end
 
