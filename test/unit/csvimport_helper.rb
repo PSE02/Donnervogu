@@ -23,10 +23,10 @@ class CSVImportTest < ActiveSupport::TestCase
   test "initGroup" do
     count = Group.all.count
     @testGroup = CSVImport::initGroup("this.is.a.test.domain.ch")
-    assert_false(Group.find_by_name("this.is.a.test.domain").nil?)
+    assert_false(Group.find_by_name("this.is.a.test.domain.ch").nil?)
     assert(count < Group.all.count)
     assert(Group.all.count == count + 1)
-    assert_match("this.is.a.test.domain",@testGroup.name)
+    assert_match("this.is.a.test.domain.ch",@testGroup.name)
   end
   
   test "initGroup again" do
@@ -47,14 +47,14 @@ class CSVImportTest < ActiveSupport::TestCase
   
   test "init" do
     assert(Emailaccount.find_by_email("juerg.test@another.email.domain").nil?)
-    assert(Group.find_by_name("another.email").nil?)
+    assert(Group.find_by_name("another.email.domain").nil?)
     old_group_count = Group.all.count
     old_emailaccount_count = Emailaccount.all.count
     CSVImport::init("juerg.test@another.email.domain", "another.email.domain")
     assert(old_group_count < Group.all.count)
     assert(old_emailaccount_count < Emailaccount.all.count)
     assert_false(Emailaccount.find_by_email("juerg.test@another.email.domain").nil?)
-    assert_false(Group.find_by_name("another.email").nil?)
+    assert_false(Group.find_by_name("another.email.domain").nil?)
   end
   
   test "import" do
@@ -64,8 +64,8 @@ class CSVImportTest < ActiveSupport::TestCase
     assert_false(Emailaccount.find_by_email("hans@example.ch").nil?)
     assert_false(Emailaccount.find_by_email("max.test@another.email.ch").nil?)
     assert_match("another.email",Emailaccount.find_by_email("max.test@another.email.ch").group.name) 
-    assert_false(Group.find_by_name("another.email").nil?)
-    assert_false(Group.find_by_name("example").nil?)
+    assert_false(Group.find_by_name("another.email.ch").nil?)
+    assert_false(Group.find_by_name("example.ch").nil?)
   end
     
 end

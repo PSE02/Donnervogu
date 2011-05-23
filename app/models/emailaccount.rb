@@ -20,13 +20,14 @@ class Emailaccount < ActiveRecord::Base
   belongs_to :group
   has_many :profile_ids,
            :autosave => true,
-           :dependent => :destroy
+           :dependent => :destroy,
+           :conditions => 'emailaccount_type = "listed"'
   has_one :standard_subaccount,
           :class_name => "ProfileId",
           :autosave => true,
-          :dependent => :destroy
+          :dependent => :destroy,
+           :conditions => 'emailaccount_type = "standard"'
   validate :not_too_many_ids
-  validate :outdated
 
   def not_too_many_ids
     if too_many_ids
@@ -61,6 +62,7 @@ class Emailaccount < ActiveRecord::Base
     end
     self.standard_subaccount = ProfileId.new
     self.standard_subaccount.emailaccount = self
+    self.standard_subaccount.emailaccount_type="standard"
   end
 
   # makes a new profile id to track the up-to-date-ness of another client.
@@ -69,7 +71,8 @@ class Emailaccount < ActiveRecord::Base
       profile_id = ProfileId.new
       profile_id.emailaccount = self
       self.profile_ids << profile_id
-      profile_id.id
+      profile_id.emailaccount_type="listed"
+      profile_id
     end
   end
 
@@ -145,7 +148,7 @@ class Emailaccount < ActiveRecord::Base
   end
 
  def outdated?
-   self.outdated = self.profile_ids.any? { |p| p.outdated? }
+   outdated = self.profile_ids.any? { |p| p.outdated? }
    raise "Couldn't save" unless self.save
    outdated
  end
@@ -154,7 +157,7 @@ class Emailaccount < ActiveRecord::Base
   def signature
     template = preferences[:signature] or ""
     dict = TemplateHelper::make_dict self.informations
-    TemplateHelper::instanciate_template template, dict
+    sig = TemplateHelper::instanciate_template template, dict
   end
 end
 

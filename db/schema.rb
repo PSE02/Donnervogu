@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110509052315) do
+ActiveRecord::Schema.define(:version => 20110520235140) do
 
   create_table "emailaccounts", :force => true do |t|
     t.string   "email"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.integer  "group_id"
     t.text     "informations"
     t.integer  "standard_subaccount_id"
-    t.string   "outdated"
   end
 
   create_table "groups", :force => true do |t|
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20110509052315) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "time_of_last_connection"
+    t.string   "emailaccount_type"
   end
 
   create_table "sessions", :force => true do |t|
