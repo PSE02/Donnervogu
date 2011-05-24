@@ -76,7 +76,7 @@ A short explanation of those files:
 This file is responsible for connecting to your database. A prototype of such a file is available in the install package on the github repository. (https://github.com/fadendaten/Donnervogu/zipball/installation)
 
 2. **config/initializers/secret_token.rb**
-In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. Modify the file by inserting a random token. Please make sure that your token's lenght is over 20 signs.
+In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. Modify the file by inserting a random token. Please make sure that your token's length is over 20 signs.
 
 3. **config/forgery_secret_key**
 This secret key is needed for protection of controllers against forgery (phishing) attacks. Insert a random key only at the first line of the file, because only this line will be read by other files. The key should be at minimum 20 signs long.
@@ -144,11 +144,11 @@ Change TBMS user password
 
 8. The new password is set. Try logging in to verify.
 
-Setup a Testserver
+Setup a Test server
 ----------------------------
 
 
-If you want to test new thunderbird settings or developments you made in plugin or server, setup your own testserver. You can install a new testserver by following this guide(TBMS installation guide) again. Make sure all the security related files are different from the files on your productiv server! Furthermore you should change all password of users in sb/seeds.rb!
+If you want to test new thunderbird settings or developments you made in plugin or server, setup your own test server. You can install a new test server by following this guide(TBMS installation guide) again. Make sure all the security related files are different from the files on your productive server! Furthermore you should change all password of users in db/seeds.rb!
 
 Literature
 --------------
