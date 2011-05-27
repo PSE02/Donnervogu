@@ -2,10 +2,10 @@
 # Manages the user session: When logging in create a new session object,
 # when logging out destroy the session object.
 class UserSessionsController < ApplicationController
-	#Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
+	# Throws a ActionController::InvalidAuthenticityToken exception when requests token doesn't match the current secret token.
   protect_from_forgery :secret => @secret_key
 
-  #Catch and render ActionController::InvalidAuthenticityToken exception
+  # Catch and render ActionController::InvalidAuthenticityToken exception
   rescue_from ActionController::InvalidAuthenticityToken, :with => :forgery_error
   def
     forgery_error(exception); render :text => exception.message;
@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
 	
 	# Creates a new empty session object
 	def new
-    #Generate new session id to prevent session fixation attacks.
+    # Generate new session id to prevent session fixation attacks.
     reset_session
 		@user_session = UserSession.new
 	end

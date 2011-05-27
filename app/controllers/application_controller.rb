@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     current_user
 	end
 
-	#JR Returns current user session, if somebody is logged in
+	# Returns current user session, if somebody is logged in
 	def current_user_session
     unless @current_user_session
       @current_user_session = UserSession.find
@@ -37,16 +37,16 @@ class ApplicationController < ActionController::Base
     @current_user_session
 	end
 
-	#JR Returns current logged in user
+	# Returns current logged in user
 	def current_user
    unless @current_user
-      #JR Is true when there is a current user session and it has a user.
+      # Is true when there is a current user session and it has a user.
       @current_user = current_user_session && current_user_session.user
    end
    @current_user
 	end
 
-	#JR Makes a view only accessible if you are a logged in user
+	# Makes a view only accessible if you are a logged in user
 	def require_user
 		unless current_user
 			store_location
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	#JR Makes a view accessable to logged in and not logged in user
+	# Makes a view accessable to logged in and not logged in user
 	def require_no_user
 		if current_user
 			store_location
@@ -64,12 +64,12 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	#JR Store the URI of the current request in session
+	# Store the URI of the current request in session
 	def store_location
 		session[:return_to] = request.request_uri
 	end
 
-	#JR Redirect to the URI stored by the most recent store_location call or to the passed default
+	# Redirect to the URI stored by the most recent store_location call or to the passed default
 	def redirect_back_or_default(default)
 		redirect_to(session[:return_to] || default)
 		session[:return_to] = nil
