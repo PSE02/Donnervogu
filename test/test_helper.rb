@@ -1,3 +1,4 @@
+# Author :: Dominique Rahm, Aaron Karper, Jonas Ruef
 require 'cover_me'
 
 ENV["RAILS_ENV"] = "test"

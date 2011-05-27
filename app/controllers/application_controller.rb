@@ -1,3 +1,4 @@
+# Author :: Dominique Rahm, Aaron Karper, Jonas Ruef
 # Basic controller for the application.
 # Provides the standard view of the application and allows the user to login/logout.
 # It also provides some methods used by all controllers.
@@ -29,12 +30,13 @@ class ApplicationController < ActionController::Base
     current_user
 	end
 
-	# Returns current user session, if somebody is logged in
+	# Returns true if a current user session object exists.
 	def current_user_session
-    unless @current_user_session
-      @current_user_session = UserSession.find
+
+    unless @exists_current_user_session
+      @exists_current_user_session = UserSession.find
     end
-    @current_user_session
+    @exists_current_user_session
 	end
 
 	# Returns current logged in user
