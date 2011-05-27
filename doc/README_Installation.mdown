@@ -68,7 +68,7 @@ Setup your server
 
 Setup security related files
 ---------------------------------------
-There should be three files which handle the TBMS security on your server. Make sure only administrators know about those files, so keep them secret! Especially don't make them public visible, readable or writable in any way! 
+There are four files which handle the TBMS security on your server. Make sure only administrators know about those files, so keep them secret! Especially don't make them public visible, readable or writable in any way!
 
 A short explanation of those files:
 
@@ -79,7 +79,7 @@ This file is responsible for connecting to your database. A prototype of such a 
 In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. See the above mentioned file for specification about key length and type.
 
 3. **config/forgery_secret_key**
-This secret key is needed for protection of controllers against forgery (phishing) attacks. Insert a random key ONLY AT THE FIRST LINE of the file, because only this line will be read by other files. See the above mentioned file for specification about key length and type.
+This secret key is needed for protection of controllers against forgery (phishing) attacks. Insert the key ONLY AT THE FIRST LINE of the file, because only this line will be read by other files. See the above mentioned file for specification about key length and type.
 
 4. **db/seeds.rb**
 Here you can add or change the administrators username or password, with which you can log into your TBMS.
