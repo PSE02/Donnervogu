@@ -76,10 +76,10 @@ A short explanation of those files:
 This file is responsible for connecting to your database. A prototype of such a file is available in the install package on the github repository. (https://github.com/fadendaten/Donnervogu/zipball/installation)
 
 2. **config/initializers/secret_token.rb**
-In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. Modify the file by inserting a random token. Please make sure that your token's length is over 20 signs.
+In this file you will find a secret key which will be used for handling sessions secure. Session management is via database. See the above mentioned file for specification about key length and type.
 
 3. **config/forgery_secret_key**
-This secret key is needed for protection of controllers against forgery (phishing) attacks. Insert a random key only at the first line of the file, because only this line will be read by other files. The key should be at minimum 20 signs long.
+This secret key is needed for protection of controllers against forgery (phishing) attacks. Insert a random key ONLY AT THE FIRST LINE of the file, because only this line will be read by other files. See the above mentioned file for specification about key length and type.
 
 4. **db/seeds.rb**
 Here you can add or change the administrators username or password, with which you can log into your TBMS.
@@ -141,6 +141,8 @@ Change TBMS user password
 7. Run the following command in your terminal
 
         $ cap db:seed
+
+(SEEDING WILL NOT CHANGE NOR DELETE YOUR EXISTING DATABASE)
 
 8. The new password is set. Try logging in to verify.
 
