@@ -63,7 +63,7 @@ class EmailaccountsControllerTest < ActionController::TestCase
 
   test "cannot create too many ids"  do
     email = Emailaccount.first
-    assert_difference("ProfileId.where(:emailaccount_id => #{email.id}).count", 10) do
+    assert_difference("email.profile_ids.size", 10) do
       (1..20).collect {|e| email.generate_profile_id}
     end
   end

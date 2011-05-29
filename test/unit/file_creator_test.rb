@@ -21,7 +21,7 @@ class FileCreatorTest < ActiveSupport::TestCase
   
   test "quote text" do
     testString = FileCreator::quote(@hans)
-    assert_match(/mail.identity.id1.reply_on_top.*1/, testString)
+    assert_match(/mail.identity.id1.reply_on_top.*(1|true)/, testString)
   end
   
   test "signature_style text disable" do
@@ -78,8 +78,6 @@ class FileCreatorTest < ActiveSupport::TestCase
     assert_raise (RuntimeError){ FileCreator::createNewZip nil } 
   end
 
-  # Don't check if you can somehow get around initializing an object.
-  # If your program WORKS, the test will fail!
   test "should raise Preferences nil" do
     return nil
     assert_raise (RuntimeError){ FileCreator::createNewZip @hans } 
@@ -106,7 +104,7 @@ class FileCreatorTest < ActiveSupport::TestCase
  		  assert_match("user_pref(\"mail.identity.id1.compose_html\", true);", testString)
  		  
  		  #Quote
- 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", 1);", testString)
+ 		  assert_match("user_pref(\"mail.identity.id1.reply_on_top\", true);", testString)
  		  
  		  #Signature_style
      	assert_match("user_pref(\"mail.identity.id1.sig_bottom\", false);", testString)

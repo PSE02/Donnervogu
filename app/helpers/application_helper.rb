@@ -67,10 +67,10 @@ module ApplicationHelper
     end
 
     def self.quote emailaccount
-      quote = emailaccount.preferences[:quote]
+      quote = emailaccount.preferences[:quote].to_s
       "\n/************************** Quotes *******************************/ \n"+
           "// 0=reply below 1=reply above 2=select the quote \n" +
-          "user_pref(\"mail.identity.id1.reply_on_top\", #{quote}); \n" +
+          "user_pref(\"mail.identity.id1.reply_on_top\", #{['above', 'true','1'].include?(quote)}); \n" +
 
           "// enable quoting for replies \n" +
           "user_pref(\"mail.identity.id1.auto_quote\", true); \n"
@@ -103,7 +103,7 @@ module ApplicationHelper
     def self.offline_mode account
       mode = account.preferences[:offline_mode]
       "\n/************************** Enable Offline Mode ******************/  \n" +
-          "user_pref(\"mail.server.server1.offline_download\", #{mode==true or mode=="true" ? "true" : "false"}); \n"
+          "user_pref(\"mail.server.server1.offline_download\", #{mode==true or mode=="true"}); \n"
     end
 
     def self.send_offline_mode account

@@ -21,12 +21,7 @@ class Group < ActiveRecord::Base
 
   # Every User belongs to a group, which might be the default_group
   def self.default_group
-    if @default_group.nil?
-      @default_group = Group.new
-      @default_group.name = "No Group"
-      @default_group.preferences={:html => "true", :signature => "This is just a template signature"}
-      @default_group.save
-    end
+    @default_group ||= Group.find_by_name("No Group") || Group.create(:name => "No Group", :preferences => {:html => "true", :signature => "This is just a template signature"})
     @default_group
   end
 

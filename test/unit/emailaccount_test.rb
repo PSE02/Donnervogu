@@ -66,4 +66,8 @@ class EmailaccountTest < ActiveSupport::TestCase
     assert_match(/\.zip$/, path)
   end
 
+  test "no mix up between standard and listed ids" do
+    assert_not_include(@account.profile_ids, @account.standard_subaccount)
+  end
+
 end
