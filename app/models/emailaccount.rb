@@ -29,6 +29,8 @@ class Emailaccount < ActiveRecord::Base
            :conditions => {:emailaccount_type => "standard"}
   validate :not_too_many_ids
 
+  after_initialize :setup_members
+
   def not_too_many_ids
     if too_many_ids
       errors.add_to_base ("Too many profile ids")
@@ -41,11 +43,6 @@ class Emailaccount < ActiveRecord::Base
 
   def max_id_count
     10
-  end
-
-
-  def after_initialize
-    setup_members
   end
 
   def setup_members
