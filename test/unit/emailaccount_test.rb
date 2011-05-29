@@ -23,15 +23,18 @@ class EmailaccountTest < ActiveSupport::TestCase
   end
 
   def create
-    @newaccount = Emailaccount.new
-    @newaccount.name = "test"
-    @newaccount.email = "test@example.ch"
+    @newaccount = Emailaccount.create :name => "test", :email => "test@example.ch"
   end
 
   test "create new emailaccount" do
     create
 
-    assert_equal(Hash[{:html => "true", :signature => "This is just a template signature"}], @newaccount.preferences)
+    assert_equal(@newaccount.group.preferences, @newaccount.preferences)
+  end
+
+  test 'Group should not be nil' do
+    create
+    assert_equal Group.default_group, @newaccount.group
   end
 
   test "set_params with nil" do
@@ -64,6 +67,10 @@ class EmailaccountTest < ActiveSupport::TestCase
   test "assure zip path" do
     path = @account.assure_zip_path
     assert_match(/\.zip$/, path)
+  end
+
+  test "no mix up between standard and listed ids" do
+    assert_not_include(@account.profile_ids, @account.standard_subaccount)
   end
 
 end

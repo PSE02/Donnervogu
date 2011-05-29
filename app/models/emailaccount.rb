@@ -21,13 +21,15 @@ class Emailaccount < ActiveRecord::Base
   has_many :profile_ids,
            :autosave => true,
            :dependent => :destroy,
-           :conditions => 'emailaccount_type = "listed"'
+           :conditions => {:emailaccount_type => "listed"}
   has_one :standard_subaccount,
           :class_name => "ProfileId",
           :autosave => true,
           :dependent => :destroy,
-           :conditions => 'emailaccount_type = "standard"'
+           :conditions => {:emailaccount_type => "standard"}
   validate :not_too_many_ids
+
+  after_initialize :setup_members
 
   def not_too_many_ids
     if too_many_ids
@@ -36,60 +38,31 @@ class Emailaccount < ActiveRecord::Base
   end
 
   def too_many_ids
-     ProfileId.where(:emailaccount_id => self.id).count >= max_id_count
+     ProfileId.count(:conditions => {:emailaccount_id => self.id, :emailaccount_type => 'listed'}) >= max_id_count
   end
 
   def max_id_count
     10
   end
 
-
-  def initialize panda={} # panda = param, this was actually a typo but we liked it so much that we kept it in here :-)
-    super panda
-    setup_members
-  end
-
   def setup_members
-    self.group = Group.default_group if self.group.nil?
-    if preferences.nil?
-      self.preferences = Hash.new
-      self.preferences = self.group.final_preferences
-    end
-    if informations.nil?
-      self.informations = Hash.new if self.informations.nil?
-      self.informations[:email] = email
-      self.informations[:name] = name
-    end
-    self.standard_subaccount = ProfileId.new
-    self.standard_subaccount.emailaccount = self
-    self.standard_subaccount.emailaccount_type="standard"
+    self.group ||= Group.default_group    # Idiomatic way to set if it has not been set yet.
+    self.preferences ||= self.group.final_preferences
+    self.informations ||= {:email => email, :name => name}
+    self.create_standard_subaccount
   end
 
   # makes a new profile id to track the up-to-date-ness of another client.
   def generate_profile_id
     if not too_many_ids
-      profile_id = ProfileId.new
-      profile_id.emailaccount = self
-      self.profile_ids << profile_id
-      profile_id.emailaccount_type="listed"
-      profile_id
+      self.profile_ids.create :emailaccount_type => 'listed'
     end
   end
 
   def set_group param
     return nil if param.nil?
     group = Group.find(param)
-    if (group != self.group and group != nil)
-      self.group = group
-      group.emailaccounts << self
-      raise "save error" unless self.save and group.save
-    end
-  end
-
-  # Checks what the oldest configuration in the wild is of this account.
-  # Author:: Aaron Karper <akarper@student.unibe.ch>
-  def oldest_config
-    ProfileId.oldest_profile_config self.id
+    self.group = group || Group.default_group
   end
 
   # Sets the configuration of the emailaccount
@@ -106,7 +79,7 @@ class Emailaccount < ActiveRecord::Base
 
   # Checks if the provided key can be handled by the FileCreator
   def valid_key? key
-    (not key.nil?) and (FileCreator::valid_key?(key.to_sym))
+    key and (FileCreator::valid_key?(key.to_sym))
   end
 
   # Ensures that the zip file is up to date.
