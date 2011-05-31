@@ -1,6 +1,0 @@
-scaffold
-fix view
-merge test->viewdev
-merge viewdev->dev
-push
-get request grp1

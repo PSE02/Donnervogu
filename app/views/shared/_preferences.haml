@@ -5,7 +5,7 @@
     %table
       %tr
         %td
-          = select_tag(:group, options_for_select(Group.all.collect {|g| [g.to_s, g.id]}, @profile.group_id))
+          = select_tag(:group, options_from_collection_for_select(Group.all, :id, :name))
 
   %fieldset
     %legend Send all Mails in HTML

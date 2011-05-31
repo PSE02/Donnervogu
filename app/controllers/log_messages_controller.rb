@@ -13,7 +13,7 @@ class LogMessagesController < ApplicationController
     forgery_error(exception); render :text => exception.message;
   end
   
-  before_filter :require_user, :except => [:handle]
+  before_filter :require_user, :except => [:handle_header, :handle_url]
   # GET /log
   # GET /log.xml
   def index
@@ -68,10 +68,7 @@ class LogMessagesController < ApplicationController
 
   def handle profile
     if request.headers['X-TBMS-Status'].present?
-      log = LogMessage.new
-      log.message = request.headers['X-TBMS-Status']
-      log.profile = profile
-      log.save
+      log = LogMessage.create :message => request.headers['X-TBMS-Status'], :profile => profile
     end
     render :nothing => true, :status => :ok
   end
