@@ -95,7 +95,7 @@ module ApplicationHelper
       signature = (html == "true" ? account.signature.gsub("\n", "<br>\n") : account.signature)
       "\n/************************** Signature Text ***********************/  \n" +
           "// true=allow html in signature false=don't allow html in signature \n" +
-          "user_pref(\"mail.identity.id1.htmlSigFormat\", true); \n" +
+          "user_pref(\"mail.identity.id1.htmlSigFormat\", \"#{html}\"); \n" +
           "// this is the part where the signature is saved if it's no file \n" +
           "user_pref(\"mail.identity.id1.htmlSigText\", \"#{signature}\"); \n"
     end
